@@ -44,7 +44,7 @@ class ApiManger {
     } else if (response.statusCode == 400) {
       Get.snackbar('Error', 'Invalid username or password');
       throw Exception('Invalid username or password');
-    }else {
+    } else {
       throw Exception('Failed to login');
     }
   }

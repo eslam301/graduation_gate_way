@@ -21,7 +21,6 @@ PreferredSize homeAppBar({required HomeLayoutControllerImp controller}) {
       child: AppBar(
         backgroundColor: Colors.transparent,
         flexibleSpace: Column(
-
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,7 +29,7 @@ PreferredSize homeAppBar({required HomeLayoutControllerImp controller}) {
               height: 20.h,
             ),
             Text(
-              'Hi,42021403 There 👋',
+              'Hi, ${controller.user.firstname} There 👋',
               style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w700,
@@ -49,4 +48,3 @@ PreferredSize homeAppBar({required HomeLayoutControllerImp controller}) {
     ),
   );
 }
-

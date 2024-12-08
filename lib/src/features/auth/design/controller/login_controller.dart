@@ -31,9 +31,11 @@ class LoginControllerImp extends LoginController {
   void login() async {
     if (await connection.hasConnection) {
       User user = await ApiManger.login(
-          userName: userNameController.text, password: passwordController.text
+          //userName: userNameController.text, password: passwordController.text
+          );
+      Routes.home.offAllPage(
+        arguments: user,
       );
-      Routes.home.offAllPage();
     } else {
       Get.snackbar('No Internet', 'Please check your internet connection');
     }
