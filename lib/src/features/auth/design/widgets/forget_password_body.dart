@@ -39,8 +39,8 @@ class ForgetPasswordBody extends StatelessWidget {
                 ),
               ),
             )),
-        CustomTextFormFiled(
-          text: 'Email Address',
+        CustomTextFormField(
+          labelText: 'Email Address',
           controller: controller.emailController,
         ),
         SizedBox(

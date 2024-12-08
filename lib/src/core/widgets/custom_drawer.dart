@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_gate_way/src/core/route/router.dart';
 
+import '../route/routes_name.dart';
 import '../theme/app_color.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -11,7 +13,9 @@ class CustomDrawer extends StatelessWidget {
       DrawerItem(title: 'Home', icon: const Icon(Icons.home)),
       DrawerItem(title: 'Profile', icon: const Icon(Icons.person)),
       DrawerItem(title: 'Settings', icon: const Icon(Icons.settings)),
-      DrawerItem(title: 'Logout', icon: const Icon(Icons.logout)),
+      DrawerItem(title: 'Logout', icon: const Icon(Icons.logout) , onTap: (){
+        Routes.login.offAllPage();
+      }),
     ];
     return Drawer(
       child: ListView(

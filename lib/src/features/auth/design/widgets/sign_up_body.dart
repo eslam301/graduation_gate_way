@@ -37,9 +37,9 @@ class SignUpBody extends StatelessWidget {
                 color: AppColors.grey,
               ),
             )),
-        const CustomTextFormFiled(text: 'Your Name'),
-        const CustomTextFormFiled(text: 'Email Address'),
-        const CustomTextFormFiled.password(),
+        const CustomTextFormField.user(labelText: 'Your Name'),
+        const CustomTextFormField.email(labelText: 'Email Address'),
+        const CustomTextFormField.password(),
         const TermsAndPrivacyCheckbox(),
         SizedBox(
           height: 16.h,

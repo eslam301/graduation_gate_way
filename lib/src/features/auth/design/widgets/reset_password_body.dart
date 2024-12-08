@@ -38,13 +38,13 @@ class ResetPasswordBody extends StatelessWidget {
           ),
         ),
         30.hSpace(),
-        CustomTextFormFiled.password(
-          text: 'Password',
+        CustomTextFormField.password(
+          labelText: 'Password',
           controller: controller.passwordController,
         ),
         30.hSpace(),
-        CustomTextFormFiled.password(
-          text: 'Re-enter password',
+        CustomTextFormField.password(
+          labelText: 'Re-enter password',
           controller: controller.confirmPasswordController,
         ),
         30.hSpace(),

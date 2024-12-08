@@ -23,7 +23,7 @@ class HomeLayOut extends StatelessWidget {
         mainAxisAlignment:MainAxisAlignment.center,
         children: [
           MainButton(onPressed: (){
-            ApiManger.loginDoctor();
+            ApiManger.login();
           }, text: 'login',),
           MainButton(onPressed: (){
             ApiManger.getDoctors();
