@@ -13,9 +13,14 @@ extension Pad on Widget {
             EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
         child: this,
       );
-  Widget paddingOnly(double left, double top, double right, double bottom) =>
+  Widget paddingOnly({double? left, double? top, double? right, double? bottom}) =>
       Padding(
-        padding: EdgeInsets.fromLTRB(left, top, right, bottom),
+        padding: EdgeInsets.only(
+          left: left ?? 0,
+          top: top ?? 0,
+          right: right ?? 0,
+          bottom: bottom ?? 0,
+        ),
         child: this,
       );
   Widget paddingLeft(double value) => Padding(

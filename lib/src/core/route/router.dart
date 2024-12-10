@@ -11,6 +11,7 @@ import '../../features/auth/design/page/login_page_view.dart';
 import '../../features/auth/design/page/otp_page_view.dart';
 import '../../features/auth/design/page/reset_password_page_view.dart';
 import '../../features/on_boarding/design/layout/on_boarding_layout.dart';
+import '../../features/project_recommendation/design/page/project_recommendation_page_view.dart';
 import '../../features/splash/design/page/on_splash.dart';
 import '../../features/splash/design/page/splash_page_view.dart';
 
@@ -31,6 +32,10 @@ class AppRouter {
     // Layouts
     getPage(name: Routes.onBoarding, page: () => const OnBoardingLayout()),
     getPage(name: Routes.home, page: () => const HomeLayOut()),
+
+    // pages
+    getPage(name: Routes.projectRecommendation, page: () => const ProjectRecommendationPageView()),
+
   ];
 }
 

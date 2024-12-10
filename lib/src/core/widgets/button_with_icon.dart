@@ -7,11 +7,13 @@ class ButtonWithIcon extends StatelessWidget {
   final String text;
   final IconData icon;
   final VoidCallback? onPressed;
+  final IconAlignment iconAlignment;
   const ButtonWithIcon({
     super.key,
     this.text = 'Button',
     this.icon = Icons.add,
     this.onPressed,
+    this.iconAlignment = IconAlignment.end,
   });
 
   @override
@@ -28,8 +30,9 @@ class ButtonWithIcon extends StatelessWidget {
           ),
         ),
       ),
-      iconAlignment: IconAlignment.end,
+      iconAlignment: iconAlignment,
       icon: Icon(icon),
+
       label: Text(
         text,
         style: TextStyle(
