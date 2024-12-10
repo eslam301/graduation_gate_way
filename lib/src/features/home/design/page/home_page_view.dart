@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
 
@@ -10,13 +11,13 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    // final HomeLayoutControllerImp controller = Get.find<HomeLayoutControllerImp>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Categories',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
+            style: theme.textTheme.titleMedium?.copyWith(
               color: AppColors.black,
             )),
         SizedBox(
@@ -36,6 +37,7 @@ class HomePageView extends StatelessWidget {
               return CategoryCard(
                 imagePath: categoryModelList[index].imagePath,
                 title: categoryModelList[index].title,
+                onTap: categoryModelList[index].onTap,
               );
             },
           ),

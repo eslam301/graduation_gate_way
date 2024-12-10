@@ -11,4 +11,6 @@ class Routes {
   // lay out
   static const String onBoarding = '/onBoarding';
   static const String home = '/home';
+  //pages
+  static const String projectRecommendation = '/projectRecommendation';
 }

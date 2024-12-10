@@ -16,34 +16,78 @@ class HomeLayOut extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeLayoutControllerImp controller =
         Get.put(HomeLayoutControllerImp());
+    final pagesList = pages(controller);
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: homeAppBar(controller: controller),
+      appBar: homeAppBar(),
       endDrawer: const CustomDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.only(
-          left: 30,
-          right: 30,
-          top: 30,
-        ),
-        child: HomePageView(
-          categoryModelList: [
-            CategoryCardModel(
-              imagePath: AppImagePathSvg.myProject,
-              title: 'My Project',
-            ),
-            CategoryCardModel(
-              imagePath: AppImagePathSvg.registerProject,
-              title: 'Register project',
-            ),
-            CategoryCardModel(
-              imagePath: AppImagePathSvg.projectRecommendation,
-              title: 'Project Recommendation',
-            ),
-          ],
-        ),
+      body: PageView(
+        children: [
+          ...List.generate(
+              pagesList.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(top: 20,
+                    left: 20, right: 20),
+                child: pagesList[index],
+              )),
+        ],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
+
+ List <Widget> pages (HomeLayoutControllerImp controller) => [
+   HomePageView(
+     categoryModelList: [
+       CategoryCardModel(
+         imagePath: AppImagePathSvg.myProject,
+         title: 'My Project',
+         onTap: () {
+           controller.myProject();
+         },
+       ),
+       CategoryCardModel(
+         imagePath: AppImagePathSvg.registerProject,
+         title: 'Register project',
+         onTap: () {
+           controller.registerProject();
+         },
+
+       ),
+       CategoryCardModel(
+         imagePath: AppImagePathSvg.projectRecommendation,
+         title: 'Project Recommendation',
+         onTap: () {
+           print('project recommendation');
+           controller.projectRecommendation();
+         },
+       ),
+     ],
+   ),
+   HomePageView(
+     categoryModelList: [
+       CategoryCardModel(
+         imagePath: AppImagePathSvg.myProject,
+         title: 'My Project',
+         onTap: () {
+           controller.myProject();
+         },
+       ),
+       CategoryCardModel(
+         imagePath: AppImagePathSvg.registerProject,
+         title: 'Register project',
+         onTap: () {
+           controller.registerProject();
+         },
+       ),
+       CategoryCardModel(
+         imagePath: AppImagePathSvg.projectRecommendation,
+         title: 'Project Recommendation',
+         onTap: () {
+           controller.projectRecommendation();
+         },
+       ),
+     ],
+   ),
+ ]  ;
