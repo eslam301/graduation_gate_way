@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../theme/app_color.dart';
 
@@ -22,6 +21,7 @@ class SmallRoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return FilledButton(
       onPressed: onPressed,
       style: FilledButton.styleFrom(
@@ -33,8 +33,7 @@ class SmallRoundButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: fontSize.sp,
+        style: theme.textTheme.bodyMedium?.copyWith(
           fontWeight: FontWeight.w700,
           color: textColor,
         ),

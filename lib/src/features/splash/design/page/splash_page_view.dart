@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,6 +15,7 @@ class SplashPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SplashControllerImp());
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: AppColors.mainColor,
       body: Center(
@@ -23,25 +25,15 @@ class SplashPageView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Welcome',
-                style: TextStyle(
-                  fontSize: 48.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
+                style: textTheme.headlineLarge
               ),
               Text('Graduation Getaway',
-                style: TextStyle(
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                ),
+                style: textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w400
+                )
               ),
               Text('Your guide to graduate.',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
+                style: textTheme.headlineSmall
               ),
               SvgPicture.asset(
                 AppImagePathSvg.splash,
@@ -51,31 +43,38 @@ class SplashPageView extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              SizedBox(
-                width: 224.w,
-                height: 48.h,
-                child: SmallRoundButton(
-                  text:'Sign up',
-                  color: Colors.white,
-                  textColor: AppColors.textColor,
-                  onPressed: (){
-                    controller.navigateToSignUp();
-                  },
+              FadeInUp(
+                duration: const Duration(milliseconds: 500),
+                child: SizedBox(
+                  width: 224.w,
+                  height: 48.h,
+                  child: SmallRoundButton(
+                    text:'Sign up',
+                    color: Colors.white,
+                    textColor: AppColors.textColor,
+                    onPressed: (){
+                      controller.navigateToSignUp();
+                    },
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: 224.w,
-                height: 48.h,
-                child: SmallRoundButton(
-                  onPressed:(){
-                    controller.navigateToLogin();
-                  },
-                  text:'Log in',
-                  color: Colors.transparent,
-                  textColor: Colors.white,
+              FadeInUp(
+                delay: const Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 500),
+                child: SizedBox(
+                  width: 224.w,
+                  height: 48.h,
+                  child: SmallRoundButton(
+                    onPressed:(){
+                      controller.navigateToLogin();
+                    },
+                    text:'Log in',
+                    color: Colors.transparent,
+                    textColor: Colors.white,
+                  ),
                 ),
               ),
             ],

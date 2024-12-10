@@ -25,6 +25,7 @@ class _OnSplashPageViewState extends State<OnSplashPageView> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
       backgroundColor: AppColors.mainColor,
       body: Center(
@@ -39,7 +40,7 @@ class _OnSplashPageViewState extends State<OnSplashPageView> {
             SizedBox(
               height: 50.h,
             ),
-            Text('Graduation Getaway', style: TextStyle(color: Colors.white, fontSize: 28.sp),),
+            Text('Graduation Getaway', style: theme.textTheme.headlineMedium,),
             SizedBox(
               height: 50.h,
             ),

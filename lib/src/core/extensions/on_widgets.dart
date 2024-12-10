@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 extension Pad on Widget {
@@ -31,4 +34,19 @@ extension Pad on Widget {
         padding: EdgeInsets.only(bottom: value),
         child: this,
       );
+}
+
+
+
+extension Loadable on Widget {
+  Widget loadable({required bool isLoading}) {
+    return Stack (
+      children: [
+        this,
+        if (isLoading) Center(
+            child: Platform.isIOS ? const CupertinoActivityIndicator() : const CircularProgressIndicator()),
+      ],
+    );
+
+  }
 }

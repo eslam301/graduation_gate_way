@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/const/image_pathes.dart';
 import '../../../../core/theme/app_color.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -27,14 +26,15 @@ class CategoryCard extends StatelessWidget {
         children: [
           SvgPicture.asset(imagePath),
           SizedBox(
-            height: 10.h,
+            height: 5.h,
           ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
               title,
+              maxLines: 2,
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: title.length > 20 ? 12.sp : 16.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black,
               ),

@@ -21,7 +21,7 @@ class AppRouter {
     getPage(name: Routes.splash, page: () => const SplashPageView()),
     // Auth
     getPage(name: Routes.login, page: () => const LoginPageView()),
-    getPage(name: Routes.signUp, page: () => const SignUpPageView()),
+    getPage(name: Routes.signUp, page: () => const SignUpPageViewDoctor()),
     getPage(
         name: Routes.forgetPassword,
         page: () => const ForgetPasswordPageView()),
@@ -45,7 +45,7 @@ GetPage<dynamic> getPage(
       }),
       //transition: Transition.fadeIn,
       transition: Platform.isIOS ? Transition.cupertino : Transition.fadeIn,
-      fullscreenDialog: true,
+      fullscreenDialog: false,
       transitionDuration: const Duration(milliseconds: 300),
     );
 

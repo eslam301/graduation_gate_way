@@ -19,7 +19,7 @@ class AuthLayout extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: size.height - 88,
+          height: size.height - 90,
           child: Column(
             children: [
               SvgPicture.asset(

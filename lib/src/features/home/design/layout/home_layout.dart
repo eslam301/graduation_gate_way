@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:graduation_gate_way/src/core/widgets/main_button.dart';
 import 'package:graduation_gate_way/src/features/home/design/page/home_page_view.dart';
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
 
-import '../../../../core/api/api_manger.dart';
 import '../../../../core/const/image_pathes.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../controller/home_layout_controller.dart';
 import '../widget/custom_bottom_navigation_bar.dart';
-import 'home_app_bar.dart';
+import '../widget/home_app_bar.dart';
 
 class HomeLayOut extends StatelessWidget {
   const HomeLayOut({super.key});
@@ -32,7 +29,17 @@ class HomeLayOut extends StatelessWidget {
         child: HomePageView(
           categoryModelList: [
             CategoryCardModel(
-                imagePath: AppImagePathSvg.myProject, title: 'My Project')
+              imagePath: AppImagePathSvg.myProject,
+              title: 'My Project',
+            ),
+            CategoryCardModel(
+              imagePath: AppImagePathSvg.registerProject,
+              title: 'Register project',
+            ),
+            CategoryCardModel(
+              imagePath: AppImagePathSvg.projectRecommendation,
+              title: 'Project Recommendation',
+            ),
           ],
         ),
       ),

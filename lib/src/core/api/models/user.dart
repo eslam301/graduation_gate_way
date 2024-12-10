@@ -1,83 +1,92 @@
-class LoginResponse {
-  User? user;
-  Role? role;
-
-  LoginResponse({this.user, this.role});
-
-  LoginResponse.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    role = fromString(json['role']);
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    data['role'] = role;
-    return data;
-  }
-}
-
 class User {
   int? id;
+  int? studentId;
   String? firstname;
   String? lastname;
   String? email;
   String? username;
   String? password;
-  String? phoneNum;
-  Null doctors;
+  int? countUnits;
+  String? track;
+  int? trackId;
+  int? doctorId;
+  String? doctor;
+  int? projectId;
+  String? project;
+  String? phoneNumber;
 
-  User(
-      {this.id,
-        this.firstname,
-        this.lastname,
-        this.email,
-        this.username,
-        this.password,
-        this.phoneNum,
-        this.doctors});
+  User({
+    this.id,
+    this.studentId,
+    this.firstname,
+    this.lastname,
+    this.email,
+    this.username,
+    this.password,
+    this.countUnits,
+    this.trackId,
+    this.track,
+    this.doctorId,
+    this.doctor,
+    this.projectId,
+    this.project,
+    this.phoneNumber,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    studentId = json['st_id'];
     firstname = json['firstname'];
     lastname = json['lastname'];
     email = json['email'];
     username = json['username'];
     password = json['password'];
-    phoneNum = json['phone_num'];
-    doctors = json['doctors'];
+    countUnits = json['count_units'];
+    trackId = json['track_id'];
+    track = json['track'];
+    doctorId = json['dr_id'];
+    doctor = json['doctor'];
+    projectId = json['project_id'];
+    project = json['project'];
+    phoneNumber = json['phone_num'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
+    data['st_id'] = studentId;
     data['firstname'] = firstname;
     data['lastname'] = lastname;
     data['email'] = email;
     data['username'] = username;
     data['password'] = password;
-    data['phone_num'] = phoneNum;
-    data['doctors'] = doctors;
+    data['count_units'] = countUnits;
+    data['track_id'] = trackId;
+    data['track'] = track;
+    data['dr_id'] = doctorId;
+    data['doctor'] = doctor;
+    data['project_id'] = projectId;
+    data['project'] = project;
+    data['phone_num'] = phoneNumber;
     return data;
   }
-}
 
-enum Role {
-  student,
-  doctor,
-}
+  static String userToString (User user) {
 
-String roleToString(Role role) => role.toString().split('.').last;
-
-Role fromString (String role) {
-  switch (role ) {
-    case  'doctor':
-      return Role.doctor;
-    case 'student':
-    return Role.student;
-    default:
-      return Role.student;
+    return """
+    '${user.firstname},
+     ${user.lastname},
+     ${user.email},
+     ${user.username},
+     ${user.password},
+     ${user.countUnits},
+     ${user.trackId},
+     ${user.track},
+     ${user.doctorId},
+     ${user.doctor},
+     ${user.projectId},
+     ${user.project},
+     ${user.phoneNumber}'
+    """;
   }
 }

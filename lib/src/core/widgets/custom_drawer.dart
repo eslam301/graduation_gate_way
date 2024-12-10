@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 
 import '../route/routes_name.dart';
@@ -18,26 +19,32 @@ class CustomDrawer extends StatelessWidget {
       }),
     ];
     return Drawer(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: ListView(
-        children: [
-          const DrawerHeader(
-            curve: Curves.fastOutSlowIn,
-            duration: Duration(milliseconds: 500),
-            decoration: BoxDecoration(
-              color: AppColors.mainColor,
-            ),
-            child: Center(
-              child: Text(
-                'Graduation Getaway',
-                textAlign: TextAlign.center,
-                softWrap: true,
-                maxLines: 2,
+        padding: EdgeInsets.zero, // Removes the padding above the drawer
 
-                style: TextStyle(
-                  color: AppColors.white,
-                  letterSpacing: 2,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+        children: [
+          SizedBox(
+            height: 0.35.sh,
+            child: const DrawerHeader(
+              curve: Curves.fastOutSlowIn,
+              duration: Duration(milliseconds: 500),
+              decoration: BoxDecoration(
+                color: AppColors.mainColor,
+              ),
+              child: Center(
+                child: Text(
+                  'Graduation Getaway',
+                  textAlign: TextAlign.center,
+                  softWrap: true,
+                  maxLines: 2,
+
+                  style: TextStyle(
+                    color: AppColors.white,
+                    letterSpacing: 2,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

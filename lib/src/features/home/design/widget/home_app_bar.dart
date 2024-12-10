@@ -14,11 +14,12 @@ PreferredSize homeAppBar({required HomeLayoutControllerImp controller}) {
       decoration: const BoxDecoration(
         color: AppColors.mainColor,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
-        ),
+          bottomLeft: Radius.circular(60),
+          bottomRight: Radius.circular(60),
+        )
       ),
       child: AppBar(
+        iconTheme: const IconThemeData(color: AppColors.white , size: 30),
         backgroundColor: Colors.transparent,
         flexibleSpace: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

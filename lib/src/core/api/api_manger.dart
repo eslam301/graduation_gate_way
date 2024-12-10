@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
 
-import '../services/shared_pref.dart';
+import 'models/login_response.dart';
 import 'models/user.dart';
 
 class ApiManger {
@@ -19,7 +18,7 @@ class ApiManger {
   }
 
   static Future<User> login(
-      {String userName = 'fady_yosrey', String password = '123456'}) async {
+      {String userName = 'test', String password = 'test123'}) async {
     final body = jsonEncode({
       "username": userName,
       "password": password,
@@ -32,19 +31,19 @@ class ApiManger {
       },
     );
     if (response.statusCode == 200) {
-      Get.snackbar('success', 'Login successfully');
       final Map<String, dynamic> responseBody = json.decode(response.body);
       LoginResponse loginResponse = LoginResponse.fromJson(responseBody);
       User user = loginResponse.user!;
       // SharedPreferencesService().save(
       //   'role' , roleToString(loginResponse.role!),
       // );
-
+      Get.snackbar('success', 'Login successfully');
       return user;
     } else if (response.statusCode == 400) {
       Get.snackbar('Error', 'Invalid username or password');
       throw Exception('Invalid username or password');
     } else {
+      Get.snackbar('Error', 'Failed to login');
       throw Exception('Failed to login');
     }
   }
