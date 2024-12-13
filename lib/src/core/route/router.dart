@@ -12,6 +12,8 @@ import '../../features/auth/design/page/otp_page_view.dart';
 import '../../features/auth/design/page/reset_password_page_view.dart';
 import '../../features/on_boarding/design/layout/on_boarding_layout.dart';
 import '../../features/project_recommendation/design/page/project_recommendation_page_view.dart';
+import '../../features/project_recommendation/design/page/project_recommendation_result_page.dart';
+import '../../features/project_recommendation/design/page/project_view_details_page_view.dart';
 import '../../features/splash/design/page/on_splash.dart';
 import '../../features/splash/design/page/splash_page_view.dart';
 
@@ -34,7 +36,10 @@ class AppRouter {
     getPage(name: Routes.home, page: () => const HomeLayOut()),
 
     // pages
-    getPage(name: Routes.projectRecommendation, page: () => const ProjectRecommendationPageView()),
+    getPage(name: Routes.projectRecommendationTest, page: () => const ProjectRecommendationPageView()),
+    getPage(name: Routes.projectRecommendationResultPage, page: () => const ProjectRecommendationResultPage()),
+    getPage(name: Routes.projectViewDetailsPageView, page: () => const ProjectViewDetailsPageView()),
+
 
   ];
 }
@@ -65,6 +70,9 @@ extension RouteParse on String {
         arguments: arguments,
         preventDuplicates: true,
       );
+  void getBackToPage({dynamic arguments}) => Get.until(
+    (route) => Get.currentRoute == this,
+  );
   void offPage({dynamic arguments}) => Get.offNamed(
         this,
         arguments: arguments,

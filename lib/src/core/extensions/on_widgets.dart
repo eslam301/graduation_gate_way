@@ -13,7 +13,7 @@ extension Pad on Widget {
             EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
         child: this,
       );
-  Widget paddingOnly({double? left, double? top, double? right, double? bottom}) =>
+  Widget paddingOnlyIn({double? left, double? top, double? right, double? bottom}) =>
       Padding(
         padding: EdgeInsets.only(
           left: left ?? 0,
@@ -46,6 +46,7 @@ extension Pad on Widget {
 extension Loadable on Widget {
   Widget loadable({required bool isLoading}) {
     return Stack (
+      fit: StackFit.expand,
       children: [
         this,
         if (isLoading) Center(

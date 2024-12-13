@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
+import 'package:graduation_gate_way/src/core/utils/shared_pref.dart';
 
 import '../route/routes_name.dart';
 import '../theme/app_color.dart';
@@ -11,18 +12,26 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<DrawerItem> drawerItems = [
-      DrawerItem(title: 'Home', icon: const Icon(Icons.home)),
+      DrawerItem(
+          title: 'Home',
+          icon: const Icon(Icons.home),
+          onTap: () {
+            Routes.home.getBackToPage();
+          }),
       DrawerItem(title: 'Profile', icon: const Icon(Icons.person)),
       DrawerItem(title: 'Settings', icon: const Icon(Icons.settings)),
-      DrawerItem(title: 'Logout', icon: const Icon(Icons.logout) , onTap: (){
-        Routes.login.offAllPage();
-      }),
+      DrawerItem(
+          title: 'Logout',
+          icon: const Icon(Icons.logout),
+          onTap: () {
+            Routes.login.offAllPage();
+            SharedPref.clearUserId();
+          }),
     ];
     return Drawer(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: ListView(
         padding: EdgeInsets.zero, // Removes the padding above the drawer
-
         children: [
           SizedBox(
             height: 0.35.sh,
@@ -38,7 +47,6 @@ class CustomDrawer extends StatelessWidget {
                   textAlign: TextAlign.center,
                   softWrap: true,
                   maxLines: 2,
-
                   style: TextStyle(
                     color: AppColors.white,
                     letterSpacing: 2,
@@ -66,5 +74,6 @@ class DrawerItem {
   final String title;
   final Widget icon;
   final void Function()? onTap;
+
   DrawerItem({required this.title, required this.icon, this.onTap});
 }

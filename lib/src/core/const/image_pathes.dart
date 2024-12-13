@@ -15,3 +15,7 @@ class AppImagePathSvg {
       'assets/svg/project_recommendation.svg';
   static const String registerProject = 'assets/svg/register_project.svg';
 }
+
+class AppImagePathNetwork {
+  static const String errorImageLink = 'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif';
+}

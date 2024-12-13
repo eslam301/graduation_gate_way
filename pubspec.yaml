@@ -55,6 +55,14 @@ dependencies:
   shared_preferences: ^2.3.3
 #  animation
   animate_do: ^3.3.4
+  # dropdown menu
+  multi_dropdown: ^3.0.1
+  dropdown_search: ^6.0.1
+  cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
+  flutter_native_splash: ^2.4.3
+
+
 
 dev_dependencies:
   flutter_test:

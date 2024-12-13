@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/general_app_bar.dart';
-import '../../../home/design/widget/custom_bottom_navigation_bar.dart';
-import '../../../home/design/widget/home_app_bar.dart';
 import '../controller/project_recommendation_controller.dart';
 import '../widget/project_recommendation_page_view_body.dart';
 
@@ -20,10 +16,11 @@ class ProjectRecommendationPageView extends StatelessWidget {
     return Scaffold(
       endDrawer: const CustomDrawer(),
       appBar: generalAppBar(
-        controller.user.firstname,
+        userName:  controller.user.firstname,
+        subTitle: 'Project Recommendation',
       ),
       body: const ProjectRecommendationPageViewBody(),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      //bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

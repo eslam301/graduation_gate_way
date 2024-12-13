@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
@@ -35,18 +34,16 @@ class LoginControllerImp extends LoginController {
 
     if (await connection.hasConnection) {
       try {
-        User user = await ApiManger.login(
+        User user = await ApiManager.login(
           // Uncomment these parameters when implementing
-          // userName: userNameController.text,
-          // password: passwordController.text,
+          //  userName: userNameController.text.isEmpty? null: userNameController.text,
+          //  password: passwordController.text.isEmpty? null: passwordController.text,
         );
-        if (kDebugMode) {
-          print('---------------------------------------');
-          print(User.userToString(user));
-          print('---------------------------------------');
-        }
-
-
+        // if (kDebugMode) {
+        //   print('---------------------------------------');
+        //   print(User.userToString(user));
+        //   print('---------------------------------------');
+        // }
         // Navigate to the home page
         Routes.home.offAllPage(arguments: user);
       } catch (e) {

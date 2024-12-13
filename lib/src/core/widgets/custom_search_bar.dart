@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final List <String> suggestions ;
+  const CustomSearchBar({super.key , this.suggestions = const [
+    '1',
+    '2',
+  ]});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +16,8 @@ class CustomSearchBar extends StatelessWidget {
       width: 0.75.sw,
       child: SearchAnchor(
         searchController: searchController,
-        viewElevation: 0,
 
+        viewElevation: 0,
         viewBackgroundColor: Colors.red,
         builder: (context, controller) {
           return SearchBar(
@@ -40,9 +44,9 @@ class CustomSearchBar extends StatelessWidget {
         },
         suggestionsBuilder:
             (BuildContext context, SearchController searchController) {
-          return List<ListTile>.generate(5, (index) {
+          return List<ListTile>.generate(suggestions.length, (index) {
             return ListTile(
-              title: Text('Suggestion $index'),
+              title: Text(suggestions[index]),
               onTap: () {},
             );
           });

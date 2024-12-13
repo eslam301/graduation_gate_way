@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 
 import '../../../../core/theme/app_color.dart';
-import 'answer_widget.dart';
+import '../controller/project_recommendation_controller.dart';
+import 'answers_list.dart';
+import 'multi_answer_search.dart';
 
 class AnswerContainer extends StatelessWidget {
-  const AnswerContainer({super.key});
+  final QuestionModel? questionModel;
+  final int? totalQuestions;
+  const AnswerContainer({super.key, this.questionModel, this.totalQuestions});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final controller = Get.find<ProjectRecommendationControllerImp>();
     return Container(
       height: 0.50.sh,
       margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.only(
+        top: 10,
+      ),
       decoration: BoxDecoration(
         color: AppColors.whiteBackGround,
         borderRadius: BorderRadius.circular(30),
@@ -24,7 +32,7 @@ class AnswerContainer extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Question 1/10',
+              'Question ${questionModel?.index}/${totalQuestions ?? 2}',
               style: theme.textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.w700, color: AppColors.mainColor),
             ),
@@ -32,24 +40,40 @@ class AnswerContainer extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              '1- What is your major?',
+              '${questionModel?.index}- ${questionModel?.question}',
               style: theme.textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.w700, color: AppColors.black),
             ),
           ).paddingLeft(20),
-          Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.only(top: 20 , left: 20 , right: 20 , bottom: 10),
-              shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, index) => AnswerWidget(
-                title: 'Answer $index',
-              ),
-            ),
-          )
+          questionModel!.type == 'choice'
+              ? AnswersListView(
+                  answers: questionModel!.answers,
+                  questionModel: questionModel!,
+                )
+              : AnswersMultipleSearch(
+            key:controller.keys[questionModel!.index-1],
+            questionModel: questionModel!,
+          ),
         ],
       ),
     );
   }
+}
+
+class QuestionModel {
+  final int index;
+  final String question;
+  final List<String> answers;
+  final String type;
+  final void Function(List<String>)? selectionListAnswerMethod;
+  final void Function(String)? selectionAnswerMethod;
+
+  QuestionModel({
+    required this.index,
+    required this.question,
+    required this.answers,
+    this.type = 'choice',
+    this.selectionListAnswerMethod,
+    this.selectionAnswerMethod,
+  });
 }

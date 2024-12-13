@@ -12,5 +12,8 @@ class Routes {
   static const String onBoarding = '/onBoarding';
   static const String home = '/home';
   //pages
-  static const String projectRecommendation = '/projectRecommendation';
+  // ----> project recommendation
+  static const String projectRecommendationTest = '/projectRecommendationTest';
+  static const String projectViewDetailsPageView = '/projectViewDetailsPageView';
+  static const String projectRecommendationResultPage = '/projectRecommendationResultPage';
 }

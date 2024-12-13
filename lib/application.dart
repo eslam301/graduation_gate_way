@@ -7,7 +7,12 @@ import 'package:graduation_gate_way/src/core/route/routes_name.dart';
 import 'package:graduation_gate_way/src/core/theme/app_theme.dart';
 
 class GraduationGateWay extends StatelessWidget {
-  const GraduationGateWay({super.key});
+  final String? userId;
+  late final String initialRoute;
+
+  GraduationGateWay({super.key, this.userId}) {
+    initialRoute = userId == null ? Routes.splash : Routes.home;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +20,15 @@ class GraduationGateWay extends StatelessWidget {
         designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (_ , child) {
+        builder: (_, child) {
           return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          defaultTransition: Transition.cupertino,
-          transitionDuration: const Duration(milliseconds: 300),
-          getPages: AppRouter.pagesRoute,
-          initialRoute: Routes.onSplash,
-        );
-      }
-    );
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            defaultTransition: Transition.cupertino,
+            transitionDuration: const Duration(milliseconds: 300),
+            getPages: AppRouter.pagesRoute,
+            initialRoute: initialRoute,
+          );
+        });
   }
 }

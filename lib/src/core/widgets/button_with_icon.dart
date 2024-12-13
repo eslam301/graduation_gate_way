@@ -8,12 +8,14 @@ class ButtonWithIcon extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;
   final IconAlignment iconAlignment;
+  final Color? color;
   const ButtonWithIcon({
     super.key,
     this.text = 'Button',
     this.icon = Icons.add,
     this.onPressed,
     this.iconAlignment = IconAlignment.end,
+    this.color = AppColors.mainColor,
   });
 
   @override
@@ -21,7 +23,7 @@ class ButtonWithIcon extends StatelessWidget {
     return FilledButton.icon(
       onPressed: onPressed ?? () {},
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(AppColors.mainColor),
+        backgroundColor: WidgetStateProperty.all(color),
         minimumSize: WidgetStateProperty.all(Size(230.w, 50)),
         maximumSize: WidgetStateProperty.all(Size(230.w, 50)),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
@@ -35,9 +37,12 @@ class ButtonWithIcon extends StatelessWidget {
 
       label: Text(
         text,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
         style: TextStyle(
           color: Colors.white,
           fontSize: 16.sp,
+
           fontWeight: FontWeight.w700,
         ),
       ),

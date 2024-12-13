@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
@@ -7,6 +6,7 @@ import '../../../../core/theme/app_color.dart';
 
 class HomePageView extends StatelessWidget {
   final List<CategoryCardModel> categoryModelList;
+
   const HomePageView({super.key, required this.categoryModelList});
 
   @override

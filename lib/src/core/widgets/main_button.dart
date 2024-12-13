@@ -6,10 +6,12 @@ import '../theme/app_color.dart';
 class MainButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final double fontSize;
   const MainButton({
     super.key,
     required this.onPressed,
     required this.text,
+    this.fontSize = 16,
   });
 
   @override
@@ -27,7 +29,7 @@ class MainButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(color: Colors.white, fontSize: 16.sp),
+        style: TextStyle(color: Colors.white, fontSize: fontSize.sp),
       ),
     );
   }

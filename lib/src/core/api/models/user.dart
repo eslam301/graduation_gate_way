@@ -71,22 +71,24 @@ class User {
     return data;
   }
 
-  static String userToString (User user) {
-
+  @override
+  String toString() {
     return """
-    '${user.firstname},
-     ${user.lastname},
-     ${user.email},
-     ${user.username},
-     ${user.password},
-     ${user.countUnits},
-     ${user.trackId},
-     ${user.track},
-     ${user.doctorId},
-     ${user.doctor},
-     ${user.projectId},
-     ${user.project},
-     ${user.phoneNumber}'
+    '$id,
+     $studentId,
+     $firstname,
+     $lastname,
+     $email,
+     $username,
+     $password,
+     $countUnits,
+     $trackId,
+     $track,
+     $doctorId,
+     $doctor,
+     $projectId,
+     $project,
+     $phoneNumber,
     """;
   }
 }

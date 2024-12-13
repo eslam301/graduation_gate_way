@@ -22,12 +22,12 @@ class AppTheme {
     ),
     titleLarge: TextStyle(
       color: AppColors.black,
-      fontSize: 24.sp,
+      fontSize: 21.sp,
       fontWeight: FontWeight.w600,
     ),
     titleMedium: TextStyle(
       color: AppColors.black,
-      fontSize: 20.sp,
+      fontSize: 18.sp,
       fontWeight: FontWeight.w600,
     ),
     titleSmall: TextStyle(
@@ -36,23 +36,23 @@ class AppTheme {
       fontWeight: FontWeight.w600,
     ),
     bodyLarge: TextStyle(
-      color: AppColors.grey,
-      fontSize: 24.sp,
-      fontWeight: FontWeight.w400,
-    ),
-    bodyMedium: TextStyle(
-      color: AppColors.grey,
+      color: AppColors.black,
       fontSize: 20.sp,
       fontWeight: FontWeight.w400,
     ),
-    bodySmall: TextStyle(
-      color: AppColors.grey,
+    bodyMedium: TextStyle(
+      color: AppColors.black,
       fontSize: 16.sp,
+      fontWeight: FontWeight.w400,
+    ),
+    bodySmall: TextStyle(
+      color: AppColors.black,
+      fontSize: 12.sp,
       fontWeight: FontWeight.w400,
     ),
   );
 
-  static ColorScheme colorScheme = ColorScheme.light(
+  static ColorScheme colorScheme = const ColorScheme.light(
     primary: AppColors.mainColor,
     secondary: AppColors.mainColor,
     onPrimary: AppColors.backGround,
