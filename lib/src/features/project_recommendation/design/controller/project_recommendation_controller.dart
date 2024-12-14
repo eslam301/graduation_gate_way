@@ -13,7 +13,9 @@ import '../widget/answer_container.dart';
 
 abstract class ProjectRecommendationController extends GetxController {
   nextQuestion();
+
   previousQuestion();
+
   submit();
 }
 
@@ -24,9 +26,9 @@ class ProjectRecommendationControllerImp
   final multiKey3 = GlobalKey<FormState>();
   late InternetConnectionChecker connection;
 
+  final apiManger = Get.find<ApiManager>();
 
   var loading = false.obs; // Reactive loading state
-
 
   List<String> selectedSkills = [];
 
@@ -121,30 +123,27 @@ class ProjectRecommendationControllerImp
     loading.value = true; // Show loading animation
     if (await connection.hasConnection) {
       try {
-        List<ProjectsRecommendations> projectsRecommendations =
-        await ApiManager.sendUserAnswerProjectRecommendation(
-            userAnswers: userAnswers);
+        List<ProjectsRecommendations> projectsRecommendations = await apiManger
+            .sendUserAnswerProjectRecommendation(userAnswers: userAnswers);
         Routes.projectRecommendationResultPage.toPage(
-          arguments: <String, dynamic> {
+          arguments: <String, dynamic>{
             'user': user,
             'projectsRecommendationsResult': projectsRecommendations
           },
         );
-      }
-      catch (e) {
+      } catch (e) {
         if (kDebugMode) {
           print('Error submitting form: $e');
         }
-      }
-      finally {
+      } finally {
         loading.value = false; // Hide loading animation
       }
-    }
-    else {
+    } else {
       loading.value = false; // Hide loading animation
       Get.snackbar('No Internet', 'Please check your internet connection');
     }
     loading.value = false; // Hide loading animation
   }
+
   bool isLastPage() => currentPage.value == questions.length;
 }

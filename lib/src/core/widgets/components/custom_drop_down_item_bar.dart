@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/app_color.dart';
+import '../../theme/app_color.dart';
 
 class CustomDropDownItemBar extends StatelessWidget {
   final List<DropItemModel> dropItems;
   final String hintText;
+
   const CustomDropDownItemBar(
       {super.key, required this.dropItems, required this.hintText});
 
@@ -23,14 +24,14 @@ class CustomDropDownItemBar extends StatelessWidget {
         ),
         const Spacer(),
         DropdownMenu(
-          menuHeight: 200.h,
+            menuHeight: 200.h,
             menuStyle: MenuStyle(
-                backgroundColor: const WidgetStatePropertyAll(AppColors.backGround),
+                backgroundColor:
+                    const WidgetStatePropertyAll(AppColors.backGround),
                 elevation: const WidgetStatePropertyAll(0),
                 //maximumSize: WidgetStatePropertyAll(Size(double.infinity, 300.h)),
                 shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.r),
-
                 ))),
             hintText: hintText,
             textStyle: TextStyle(color: AppColors.black, fontSize: 16.sp),
@@ -66,5 +67,6 @@ class CustomDropDownItemBar extends StatelessWidget {
 class DropItemModel {
   final String title;
   final String value;
+
   DropItemModel({required this.title, required this.value});
 }

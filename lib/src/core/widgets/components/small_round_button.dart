@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_color.dart';
-
+import '../../theme/app_color.dart';
 
 class SmallRoundButton extends StatelessWidget {
   final String text;
@@ -10,13 +9,15 @@ class SmallRoundButton extends StatelessWidget {
   final double radius;
   final double fontSize;
   final void Function()? onPressed;
+
   const SmallRoundButton({
     super.key,
     required this.text,
     this.color = AppColors.mainColor,
     required this.textColor,
     this.onPressed,
-    this.radius = 50, this.fontSize = 20,
+    this.radius = 50,
+    this.fontSize = 20,
   });
 
   @override

@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/route/routes_name.dart';
 import 'package:graduation_gate_way/src/features/auth/design/page/forget_password_page_view.dart';
 import 'package:graduation_gate_way/src/features/auth/design/page/sign_up_page_view.dart';
+import 'package:graduation_gate_way/src/features/chat_bot/design/page/chat_page_view.dart';
 import 'package:graduation_gate_way/src/features/home/design/layout/home_layout.dart';
+import 'package:graduation_gate_way/src/features/profile/design/page/profile_page_view.dart';
 
 import '../../features/auth/design/page/login_page_view.dart';
 import '../../features/auth/design/page/otp_page_view.dart';
@@ -36,11 +38,17 @@ class AppRouter {
     getPage(name: Routes.home, page: () => const HomeLayOut()),
 
     // pages
-    getPage(name: Routes.projectRecommendationTest, page: () => const ProjectRecommendationPageView()),
-    getPage(name: Routes.projectRecommendationResultPage, page: () => const ProjectRecommendationResultPage()),
-    getPage(name: Routes.projectViewDetailsPageView, page: () => const ProjectViewDetailsPageView()),
-
-
+    getPage(
+        name: Routes.projectRecommendationTest,
+        page: () => const ProjectRecommendationPageView()),
+    getPage(
+        name: Routes.projectRecommendationResultPage,
+        page: () => const ProjectRecommendationResultPage()),
+    getPage(
+        name: Routes.projectViewDetailsPageView,
+        page: () => const ProjectViewDetailsPageView()),
+    getPage(name: Routes.profile, page: () => const ProfilePageView()),
+    getPage(name: Routes.chat, page: () => const ChatPageView()),
   ];
 }
 
@@ -70,13 +78,16 @@ extension RouteParse on String {
         arguments: arguments,
         preventDuplicates: true,
       );
+
   void getBackToPage({dynamic arguments}) => Get.until(
-    (route) => Get.currentRoute == this,
-  );
+        (route) => Get.currentRoute == this,
+      );
+
   void offPage({dynamic arguments}) => Get.offNamed(
         this,
         arguments: arguments,
       );
+
   void offAllPage({dynamic arguments}) => Get.offAllNamed(
         this,
         arguments: arguments,

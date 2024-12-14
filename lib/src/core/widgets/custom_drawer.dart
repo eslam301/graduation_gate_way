@@ -18,8 +18,14 @@ class CustomDrawer extends StatelessWidget {
           onTap: () {
             Routes.home.getBackToPage();
           }),
-      DrawerItem(title: 'Profile', icon: const Icon(Icons.person)),
-      DrawerItem(title: 'Settings', icon: const Icon(Icons.settings)),
+      DrawerItem(
+          title: 'Profile',
+          icon: const Icon(Icons.person),
+          onTap: () {
+            Routes.profile.toPage();
+          }),
+      DrawerItem(
+          title: 'Settings', icon: const Icon(Icons.settings), onTap: () {}),
       DrawerItem(
           title: 'Logout',
           icon: const Icon(Icons.logout),

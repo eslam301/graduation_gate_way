@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
-import 'package:graduation_gate_way/src/core/widgets/custom_search_bar.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/custom_search_bar.dart';
 
 import '../../../../core/theme/app_color.dart';
 import '../../controller/home_layout_controller.dart';
@@ -34,7 +34,7 @@ PreferredSize homeAppBar() {
               height: 20.h,
             ),
             Text(
-              'Hi, ${controller.user?.firstname ?? 'User'} There 👋',
+              'Hi, ${controller.user.firstname ?? 'User'} There 👋',
               style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w700,

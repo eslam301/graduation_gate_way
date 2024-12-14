@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:graduation_gate_way/src/core/widgets/main_button.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../core/theme/app_color.dart';
@@ -9,6 +9,7 @@ import '../controller/otp_controller.dart';
 
 class OTPBody extends StatelessWidget {
   final String emailText;
+
   const OTPBody({super.key, this.emailText = ''});
 
   @override

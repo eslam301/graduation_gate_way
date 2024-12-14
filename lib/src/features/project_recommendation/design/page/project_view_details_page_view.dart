@@ -2,14 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/button_with_icon.dart';
+import '../../../../core/widgets/components/button_with_icon.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/general_app_bar.dart';
 import '../controller/project_page_view_details_controller.dart';
 
 class ProjectViewDetailsPageView extends StatelessWidget {
-  const ProjectViewDetailsPageView({Key? key}) : super(key: key);
+  const ProjectViewDetailsPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,8 @@ class ProjectViewDetailsPageView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h,bottom: 120.h),
+          padding: EdgeInsets.only(
+              left: 20.w, right: 20.w, top: 20.h, bottom: 120.h),
           child: Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
@@ -38,11 +40,13 @@ class ProjectViewDetailsPageView extends StatelessWidget {
               children: [
                 _buildImage(controller.project.imageLink),
                 SizedBox(height: 10.h),
-                _buildTextRow('Project Title:', controller.project.title, theme),
+                _buildTextRow(
+                    'Project Title:', controller.project.title, theme),
                 SizedBox(height: 10.h),
                 _buildDifficultyChip(controller.project.difficultyLevel, theme),
                 SizedBox(height: 10.h),
-                _buildTextRow('Description:', controller.project.description, theme),
+                _buildTextRow(
+                    'Description:', controller.project.description, theme),
                 SizedBox(height: 10.h),
                 _buildChipList(
                   'Skills Required:',
@@ -150,7 +154,7 @@ class ProjectViewDetailsPageView extends StatelessWidget {
           ),
         ),
         ...items.map(
-              (item) => Chip(
+          (item) => Chip(
             backgroundColor: AppColors.mainColor,
             label: Text(
               item,

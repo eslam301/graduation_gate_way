@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/button_with_icon.dart';
+import '../../../../core/widgets/components/button_with_icon.dart';
 import '../../controller/on_boarding_controller.dart';
 import '../widget/on_boarding_widget.dart';
 
@@ -16,7 +16,6 @@ class OnBoardingLayout extends StatelessWidget {
     return GetBuilder<OnBoardingControllerImp>(
       init: OnBoardingControllerImp(),
       builder: (controller) {
-
         return Scaffold(
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -56,31 +55,32 @@ class OnBoardingLayout extends StatelessWidget {
                   bottom: controller.isLastPage() ? 110.h : 140.h,
                   right: controller.isLastPage() ? 0.w : 20.w,
                   left: controller.isLastPage() ? 0.w : null,
-                  child: AnimatedSwitcher(duration: const Duration(milliseconds: 600), child:controller.isLastPage()
-                      ? ButtonWithIcon(
-                    text: "Let's Start",
-                    icon: Icons.arrow_forward_ios,
-                    onPressed: (){
-                      controller.letsStart();
-                    },
-                  )
-                      : InkWell(
-                        onTap: () {
-                          // Navigate to the end directly or handle "Skip" functionality
-                          controller.skip();
-                        },
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.grey,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 600),
+                    child: controller.isLastPage()
+                        ? ButtonWithIcon(
+                            text: "Let's Start",
+                            icon: Icons.arrow_forward_ios,
+                            onPressed: () {
+                              controller.letsStart();
+                            },
+                          )
+                        : InkWell(
+                            onTap: () {
+                              // Navigate to the end directly or handle "Skip" functionality
+                              controller.skip();
+                            },
+                            child: const Text(
+                              'Skip',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.grey,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
                   ),
                 )
-
               ],
             ),
           ),

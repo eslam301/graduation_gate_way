@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/core/api/models/projects_recommendations.dart';
 import 'package:graduation_gate_way/src/core/const/image_pathes.dart';
-import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
-import 'package:graduation_gate_way/src/core/widgets/main_button.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
+
 import '../../../../core/route/routes_name.dart';
 import '../../../../core/theme/app_color.dart';
 
 class RecommendedResultContainer extends StatelessWidget {
   final ProjectsRecommendations project;
+
   const RecommendedResultContainer({
     super.key,
     required this.project,
@@ -37,11 +37,10 @@ class RecommendedResultContainer extends StatelessWidget {
                 height: 80.h,
                 width: double.infinity,
                 child: const Center(child: CircularProgressIndicator())),
-            errorWidget: (context, url, error) =>
-                SizedBox(
-                    height: 80.h,
-                    width: double.infinity,
-                    child: const Center(child: Icon(Icons.error))),
+            errorWidget: (context, url, error) => SizedBox(
+                height: 80.h,
+                width: double.infinity,
+                child: const Center(child: Icon(Icons.error))),
           ),
           const Spacer(),
           10.h.verticalSpace,

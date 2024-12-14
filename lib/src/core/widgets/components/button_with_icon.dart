@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/app_color.dart';
+import '../../theme/app_color.dart';
 
 class ButtonWithIcon extends StatelessWidget {
   final String text;
@@ -9,6 +9,7 @@ class ButtonWithIcon extends StatelessWidget {
   final VoidCallback? onPressed;
   final IconAlignment iconAlignment;
   final Color? color;
+
   const ButtonWithIcon({
     super.key,
     this.text = 'Button',
@@ -34,7 +35,6 @@ class ButtonWithIcon extends StatelessWidget {
       ),
       iconAlignment: iconAlignment,
       icon: Icon(icon),
-
       label: Text(
         text,
         overflow: TextOverflow.ellipsis,
@@ -42,7 +42,6 @@ class ButtonWithIcon extends StatelessWidget {
         style: TextStyle(
           color: Colors.white,
           fontSize: 16.sp,
-
           fontWeight: FontWeight.w700,
         ),
       ),

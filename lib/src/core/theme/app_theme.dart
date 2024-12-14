@@ -6,17 +6,17 @@ import 'app_color.dart';
 class AppTheme {
   static TextTheme textTheme = TextTheme(
     headlineLarge: TextStyle(
-      color: AppColors.white,
+      color: AppColors.grey,
       fontSize: 48.sp,
       fontWeight: FontWeight.w700,
     ),
     headlineMedium: TextStyle(
-      color: AppColors.white,
+      color: AppColors.grey,
       fontSize: 32.sp,
       fontWeight: FontWeight.w700,
     ),
     headlineSmall: TextStyle(
-      color: AppColors.white,
+      color: AppColors.grey,
       fontSize: 16.sp,
       fontWeight: FontWeight.w700,
     ),
@@ -63,17 +63,14 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.backGround,
       primaryColor: AppColors.mainColor,
       appBarTheme: AppBarTheme(
-        centerTitle: true,
+          centerTitle: true,
           titleTextStyle: TextStyle(
               color: AppColors.textColor,
               fontSize: 20.sp,
               fontWeight: FontWeight.w600),
           backgroundColor: Colors.transparent,
           iconTheme: const IconThemeData(color: AppColors.textColor)),
-      textTheme: textTheme,
-
-      colorScheme:colorScheme,
-
+      colorScheme: colorScheme,
       listTileTheme: const ListTileThemeData(
         iconColor: AppColors.textColor,
         textColor: AppColors.textColor,

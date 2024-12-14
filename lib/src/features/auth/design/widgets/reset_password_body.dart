@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/extensions_on_int.dart';
-import 'package:graduation_gate_way/src/core/widgets/main_button.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/widgets/components/custom_text_form_field.dart';
 import '../controller/reset_password_controller.dart';
 
 class ResetPasswordBody extends StatelessWidget {
@@ -12,7 +13,8 @@ class ResetPasswordBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ResetPasswordControllerImp controller = ResetPasswordControllerImp();
+    ResetPasswordControllerImp controller =
+        Get.put(ResetPasswordControllerImp());
     return Column(
       children: [
         Align(
@@ -50,9 +52,11 @@ class ResetPasswordBody extends StatelessWidget {
         30.hSpace(),
         SizedBox(
             width: 275.w,
-            child: MainButton(onPressed: (){
-              controller.confirmPassword();
-            }, text: 'Confirm Password')),
+            child: MainButton(
+                onPressed: () {
+                  controller.confirmPassword();
+                },
+                text: 'Confirm Password')),
       ],
     );
   }

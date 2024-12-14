@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:graduation_gate_way/src/core/widgets/general_app_bar.dart';
 
 import '../../../../core/widgets/custom_drawer.dart';
@@ -20,7 +18,6 @@ class ProjectRecommendationResultPage extends StatelessWidget {
       appBar: generalAppBar(
         userName: controller.user.firstname,
         subTitle: 'Project Recommendation Result',
-
       ),
       body: GridView.builder(
           padding: const EdgeInsets.only(
@@ -40,7 +37,7 @@ class ProjectRecommendationResultPage extends StatelessWidget {
           itemCount: controller.projectsRecommendationsResult.length,
           itemBuilder: (context, index) => RecommendedResultContainer(
                 project: controller.projectsRecommendationsResult[index],
-          )),
+              )),
     );
   }
 }

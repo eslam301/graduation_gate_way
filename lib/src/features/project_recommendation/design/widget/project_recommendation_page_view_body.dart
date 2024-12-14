@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/button_with_icon.dart';
+import '../../../../core/widgets/components/button_with_icon.dart';
 import '../controller/project_recommendation_controller.dart';
 import 'answer_container.dart';
 
@@ -43,59 +43,59 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                     questionModel: controller.questions[index],
                   ),
                 ),
-                Obx (()=> Container(
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: GetBuilder<ProjectRecommendationControllerImp>(
-                      builder: (context) {
-                    return  Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Skills : ${controller.selectedSkills.join(', ')}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          'difficulty :${controller.selectedDifficulty}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          'categories :${controller.selectedCategories.join(', ')}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          'keywords :${controller.selectedKeywords.join(', ')}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-                ).loadable(isLoading: controller.loading.value)),
+                Obx(() => Container(
+                      margin: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: GetBuilder<ProjectRecommendationControllerImp>(
+                          builder: (context) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Skills : ${controller.selectedSkills.join(', ')}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              softWrap: true,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              'difficulty :${controller.selectedDifficulty}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              softWrap: true,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              'categories :${controller.selectedCategories.join(', ')}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              softWrap: true,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              'keywords :${controller.selectedKeywords.join(', ')}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              softWrap: true,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                    ).loadable(isLoading: controller.loading.value)),
               ],
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/const/image_pathes.dart';
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/small_round_button.dart';
+import '../../../../core/widgets/components/small_round_button.dart';
 import '../../controller/splash_controller.dart';
 
 class SplashPageView extends StatelessWidget {
@@ -20,21 +20,14 @@ class SplashPageView extends StatelessWidget {
       backgroundColor: AppColors.mainColor,
       body: Center(
         child: SingleChildScrollView(
-
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Welcome',
-                style: textTheme.headlineLarge
-              ),
+              Text('Welcome', style: textTheme.headlineLarge),
               Text('Graduation Getaway',
-                style: textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w400
-                )
-              ),
-              Text('Your guide to graduate.',
-                style: textTheme.headlineSmall
-              ),
+                  style: textTheme.headlineMedium
+                      ?.copyWith(fontWeight: FontWeight.w400)),
+              Text('Your guide to graduate.', style: textTheme.headlineSmall),
               SvgPicture.asset(
                 AppImagePathSvg.splash,
                 width: 300.w,
@@ -49,10 +42,10 @@ class SplashPageView extends StatelessWidget {
                   width: 224.w,
                   height: 48.h,
                   child: SmallRoundButton(
-                    text:'Sign up',
+                    text: 'Sign up',
                     color: Colors.white,
                     textColor: AppColors.textColor,
-                    onPressed: (){
+                    onPressed: () {
                       controller.navigateToSignUp();
                     },
                   ),
@@ -68,10 +61,10 @@ class SplashPageView extends StatelessWidget {
                   width: 224.w,
                   height: 48.h,
                   child: SmallRoundButton(
-                    onPressed:(){
+                    onPressed: () {
                       controller.navigateToLogin();
                     },
-                    text:'Log in',
+                    text: 'Log in',
                     color: Colors.transparent,
                     textColor: Colors.white,
                   ),

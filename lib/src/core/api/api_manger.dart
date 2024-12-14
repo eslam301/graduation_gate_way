@@ -12,7 +12,9 @@ class ApiManager {
   static const String baseUrl = 'http://graduationgetaway.somee.com';
   static const String projectRecommendationBaseUrl =
       'https://fadyyosrey.pythonanywhere.com';
-  static final http.Client client = http.Client();
+  final http.Client client;
+
+  ApiManager({required this.client});
 
   /// Default headers for API requests
   static const Map<String, String> baseHeaders = {
@@ -20,7 +22,8 @@ class ApiManager {
   };
 
   /// Sends a GET request to fetch a list of doctors.
-  static Future<List<dynamic>> getDoctors() async {
+  ///
+  Future<List<dynamic>> getDoctors() async {
     final url = Uri.parse('$baseUrl/api/Doctors');
     try {
       final response = await client.get(url, headers: baseHeaders);
@@ -37,7 +40,7 @@ class ApiManager {
   }
 
   /// Logs in the user and returns a [User] object.
-  static Future<User> login({
+  Future<User> login({
     String? userName = 'eslam',
     String? password = 'eslam123',
   }) async {
@@ -54,7 +57,7 @@ class ApiManager {
         final responseBody = jsonDecode(response.body);
         final loginResponse = LoginResponse.fromJson(responseBody);
         Get.snackbar('Success', 'Login successfully');
-        print(loginResponse.user.toString());
+        //print(loginResponse.user.toString());
         SharedPref.saveUserData(loginResponse.user!);
         SharedPref.saveUserId(loginResponse.user!.id.toString());
         return loginResponse.user!;
@@ -73,8 +76,7 @@ class ApiManager {
   }
 
   /// Sends user answers for project recommendations and returns recommendations.
-  static Future<List<ProjectsRecommendations>>
-      sendUserAnswerProjectRecommendation({
+  Future<List<ProjectsRecommendations>> sendUserAnswerProjectRecommendation({
     required Map<String, dynamic> userAnswers,
   }) async {
     final url = Uri.parse('$projectRecommendationBaseUrl/recommend');
@@ -109,14 +111,14 @@ class ApiManager {
   }
 
   /// Handles HTTP errors by throwing appropriate exceptions.
-  static void _handleHttpError(http.Response response) {
+  void _handleHttpError(http.Response response) {
     final message = 'HTTP Error:${response.body}';
     //Get.snackbar('Error', response.body);
     throw Exception(message);
   }
 
   /// Disposes of the HTTP client.
-  static void dispose() {
+  void dispose() {
     client.close();
   }
 }

@@ -2,11 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/app_color.dart';
+import '../../theme/app_color.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final int? delay;
-
   final TextEditingController? controller;
   final String? hintText;
   final String? labelText;
@@ -23,8 +22,10 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType, this.delay,
+    this.textInputType,
+    this.delay,
   });
+
   const CustomTextFormField.email({
     super.key,
     this.controller,
@@ -33,8 +34,10 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.email_outlined,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType = TextInputType.emailAddress, this.delay,
+    this.textInputType = TextInputType.emailAddress,
+    this.delay,
   });
+
   const CustomTextFormField.user({
     super.key,
     this.controller,
@@ -43,8 +46,10 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.person_outline,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType = TextInputType.name, this.delay,
+    this.textInputType = TextInputType.name,
+    this.delay,
   });
+
   const CustomTextFormField.name({
     super.key,
     this.controller,
@@ -53,8 +58,10 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.person_4_outlined,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType = TextInputType.name, this.delay,
+    this.textInputType = TextInputType.name,
+    this.delay,
   });
+
   const CustomTextFormField.phone({
     super.key,
     this.controller,
@@ -63,8 +70,10 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.call_outlined,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType = TextInputType.phone, this.delay,
+    this.textInputType = TextInputType.phone,
+    this.delay,
   });
+
   const CustomTextFormField.password({
     super.key,
     this.controller,
@@ -73,8 +82,10 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.visibility_rounded,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType = TextInputType.visiblePassword, this.delay,
+    this.textInputType = TextInputType.visiblePassword,
+    this.delay,
   });
+
   const CustomTextFormField.confirmPassword({
     super.key,
     this.controller,
@@ -83,7 +94,8 @@ class CustomTextFormField extends StatefulWidget {
     this.suffixIcon = Icons.visibility_rounded,
     this.suffixIconWidget,
     this.validator,
-    this.textInputType = TextInputType.visiblePassword, this.delay,
+    this.textInputType = TextInputType.visiblePassword,
+    this.delay,
   });
 
   @override
@@ -92,6 +104,7 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool obscureText;
+
   @override
   void initState() {
     obscureText = widget.suffixIcon == Icons.visibility_rounded ? true : false;

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../theme/app_color.dart';
+import '../../theme/app_color.dart';
 
 class MainButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final double fontSize;
+
   const MainButton({
     super.key,
     required this.onPressed,

@@ -2,12 +2,12 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:graduation_gate_way/src/core/widgets/main_button.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
 import 'package:graduation_gate_way/src/features/auth/design/widgets/terms_widget.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/custom_drop_down_item_bar.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/widgets/components/custom_drop_down_item_bar.dart';
+import '../../../../core/widgets/components/custom_text_form_field.dart';
 import '../controller/sign_up_controller.dart';
 
 class SignUpBodyDoctor extends StatelessWidget {
@@ -50,15 +50,16 @@ class SignUpBodyDoctor extends StatelessWidget {
                   ),
                 )),
           ),
-          const CustomTextFormField.name(labelText: 'first Name' , delay: 200),
-          const CustomTextFormField.name(labelText: 'last Name',delay: 300),
+          const CustomTextFormField.name(labelText: 'first Name', delay: 200),
+          const CustomTextFormField.name(labelText: 'last Name', delay: 300),
           const CustomTextFormField.user(delay: 400),
-          const CustomTextFormField.email(labelText: 'Email Address',delay: 500),
+          const CustomTextFormField.email(
+              labelText: 'Email Address', delay: 500),
           const CustomTextFormField.phone(delay: 600),
           const CustomTextFormField.password(delay: 700),
           const CustomTextFormField.confirmPassword(delay: 800),
           CustomDropDownItemBar(
-            hintText : 'Your Track',
+            hintText: 'Your Track',
             dropItems: [
               DropItemModel(
                 title: 'Flutter',
@@ -86,7 +87,6 @@ class SignUpBodyDoctor extends StatelessWidget {
               ),
             ],
           ),
-
           const TermsAndPrivacyCheckbox(),
           SizedBox(
             height: 16.h,

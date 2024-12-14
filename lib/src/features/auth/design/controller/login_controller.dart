@@ -9,7 +9,9 @@ import '../../../../core/route/routes_name.dart';
 
 abstract class LoginController extends GetxController {
   void login();
+
   void forgetPassword();
+
   void navigateToSignUp();
 }
 
@@ -17,6 +19,8 @@ class LoginControllerImp extends LoginController {
   late TextEditingController userNameController;
   late TextEditingController passwordController;
   late InternetConnectionChecker connection;
+
+  final ApiManager apiManger = Get.find<ApiManager>();
 
   var loading = false.obs; // Reactive loading state
 
@@ -34,17 +38,11 @@ class LoginControllerImp extends LoginController {
 
     if (await connection.hasConnection) {
       try {
-        User user = await ApiManager.login(
-          // Uncomment these parameters when implementing
-          //  userName: userNameController.text.isEmpty? null: userNameController.text,
-          //  password: passwordController.text.isEmpty? null: passwordController.text,
-        );
-        // if (kDebugMode) {
-        //   print('---------------------------------------');
-        //   print(User.userToString(user));
-        //   print('---------------------------------------');
-        // }
-        // Navigate to the home page
+        User user = await apiManger.login(
+            // Uncomment these parameters when implementing
+            //  userName: userNameController.text.isEmpty? null: userNameController.text,
+            //  password: passwordController.text.isEmpty? null: passwordController.text,
+            );
         Routes.home.offAllPage(arguments: user);
       } catch (e) {
         Get.snackbar('Error', 'Login failed: $e');

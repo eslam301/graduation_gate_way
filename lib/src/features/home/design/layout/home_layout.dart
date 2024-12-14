@@ -4,10 +4,10 @@ import 'package:graduation_gate_way/src/features/home/design/page/home_page_view
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
 
 import '../../../../core/const/image_pathes.dart';
+import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/loading_page.dart';
 import '../../controller/home_layout_controller.dart';
-import '../widget/custom_bottom_navigation_bar.dart';
 import '../widget/home_app_bar.dart';
 
 class HomeLayOut extends StatelessWidget {

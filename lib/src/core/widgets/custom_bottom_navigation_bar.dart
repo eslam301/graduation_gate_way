@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_gate_way/src/core/route/router.dart';
 
-import '../../../../core/const/image_pathes.dart';
-import '../../../../core/theme/app_color.dart';
+import '../const/image_pathes.dart';
+import '../route/routes_name.dart';
+import '../theme/app_color.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  final List<MyBottomNavigationBarItem> itemsPath;
-
   const CustomBottomNavigationBar({
     super.key,
-    this.itemsPath = myItemsPath,
   });
 
   @override
@@ -40,13 +39,17 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         onTap: (index) {
           setState(() {
             currentIndex = index;
+            _myItemsPath[index].onTab!();
           });
         },
         items: List.generate(
-          widget.itemsPath.length,
+          _myItemsPath.length,
           (index) => BottomNavigationBarItem(
-            icon: Image.asset(widget.itemsPath[index].iconPath , color: AppColors.white,),
-            label: widget.itemsPath[index].label,
+            icon: Image.asset(
+              _myItemsPath[index].iconPath,
+              color: AppColors.white,
+            ),
+            label: _myItemsPath[index].label,
             activeIcon: Container(
                 width: 40.w,
                 height: 40.h,
@@ -56,7 +59,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   color: AppColors.whiteBackGround,
                 ),
                 child: Image.asset(
-                  widget.itemsPath[index].iconPath,
+                  _myItemsPath[index].iconPath,
                   color: AppColors.black,
                 )),
           ),
@@ -69,16 +72,29 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 class MyBottomNavigationBarItem {
   final String iconPath;
   final String label;
-  const MyBottomNavigationBarItem(
-      {required this.iconPath, required this.label});
+  final void Function()? onTab;
+
+  const MyBottomNavigationBarItem({
+    required this.iconPath,
+    required this.label,
+    this.onTab,
+  });
 }
 
-const List<MyBottomNavigationBarItem> myItemsPath = [
-  MyBottomNavigationBarItem(iconPath: AppImagePath.houseIcon, label: 'Home'),
-  MyBottomNavigationBarItem(iconPath: AppImagePath.chatIcon, label: 'chat'),
+List<MyBottomNavigationBarItem> _myItemsPath = [
+  const MyBottomNavigationBarItem(
+      iconPath: AppImagePath.houseIcon, label: 'Home'),
   MyBottomNavigationBarItem(
+    iconPath: AppImagePath.chatIcon,
+    label: 'chat',
+    onTab: () {
+      Routes.chat.toPage();
+    },
+  ),
+  const MyBottomNavigationBarItem(
       iconPath: AppImagePath.notificationIcon, label: 'notification'),
-  MyBottomNavigationBarItem(
+  const MyBottomNavigationBarItem(
       iconPath: AppImagePath.briefingIcon, label: 'Report'),
-  MyBottomNavigationBarItem(iconPath: AppImagePath.userIcon, label: 'profile'),
+  const MyBottomNavigationBarItem(
+      iconPath: AppImagePath.userIcon, label: 'profile'),
 ];

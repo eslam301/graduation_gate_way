@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../../../core/widgets/main_button.dart';
+import '../../../../core/widgets/components/custom_text_form_field.dart';
+import '../../../../core/widgets/components/main_button.dart';
 import '../controller/forget_password_controller.dart';
 
 class ForgetPasswordBody extends StatelessWidget {

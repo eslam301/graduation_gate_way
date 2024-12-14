@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../theme/app_color.dart';
 
 PreferredSize generalAppBar({
@@ -28,13 +29,13 @@ PreferredSize generalAppBar({
         title: title == null
             ? null
             : Text(
-          title,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: AppColors.white,
-          ),
-        ),
+                title,
+                style: TextStyle(
+                  fontSize: 21.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.white,
+                ),
+              ),
         flexibleSpace: Padding(
           padding: EdgeInsets.only(left: 20.w, right: 20.w),
           child: Column(
