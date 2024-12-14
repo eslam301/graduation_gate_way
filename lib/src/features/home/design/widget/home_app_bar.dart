@@ -12,7 +12,7 @@ PreferredSize homeAppBar() {
       Get.find<HomeLayoutControllerImp>();
 
   return PreferredSize(
-    preferredSize: Size.fromHeight(180.h),
+    preferredSize: const Size.fromHeight(180),
     child: Container(
       padding: const EdgeInsets.all(10),
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -30,23 +30,23 @@ PreferredSize homeAppBar() {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CustomSearchBar(),
-            SizedBox(
-              height: 20.h,
+            const SizedBox(
+              height: 20,
             ),
             Text(
               'Hi, ${controller.user.firstname ?? 'User'} There 👋',
-              style: TextStyle(
-                  fontSize: 16.sp,
+              style: const TextStyle(
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: AppColors.white),
             ).paddingLeft(10.w),
-            Text(
+            const Text(
               'Let’s start working!',
               style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: AppColors.white),
-            ).paddingLeft(10.w),
+            ).paddingLeft(10),
           ],
         ),
       ),

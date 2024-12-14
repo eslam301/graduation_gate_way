@@ -81,5 +81,5 @@ class DrawerItem {
   final Widget icon;
   final void Function()? onTap;
 
-  DrawerItem({required this.title, required this.icon, this.onTap});
+  const DrawerItem({required this.title, required this.icon, this.onTap});
 }

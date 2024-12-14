@@ -16,10 +16,12 @@ class ProjectRecommendationPageView extends StatelessWidget {
     return Scaffold(
       endDrawer: const CustomDrawer(),
       appBar: generalAppBar(
-        userName:  controller.user.firstname,
+        userName: controller.user.firstname,
         subTitle: 'Project Recommendation',
       ),
-      body: const ProjectRecommendationPageViewBody(),
+      body: ProjectRecommendationPageViewBody(
+        controller: controller,
+      ),
       //bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }

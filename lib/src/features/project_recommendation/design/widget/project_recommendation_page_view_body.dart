@@ -9,21 +9,24 @@ import '../controller/project_recommendation_controller.dart';
 import 'answer_container.dart';
 
 class ProjectRecommendationPageViewBody extends StatelessWidget {
-  const ProjectRecommendationPageViewBody({super.key});
+  final ProjectRecommendationControllerImp controller;
+
+  const ProjectRecommendationPageViewBody(
+      {super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    ProjectRecommendationControllerImp controller =
-        Get.find<ProjectRecommendationControllerImp>();
     var theme = Theme.of(context);
     return SingleChildScrollView(
       child: Column(
         children: [
-          Align(
+          const Align(
             alignment: Alignment.centerLeft,
             child: Text(
               'Answer questions for \nproject recommendation.',
-              style: theme.textTheme.bodySmall?.copyWith(
+              style: TextStyle(
+                color: AppColors.grey,
+                fontSize: 16,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -35,6 +38,7 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
               controller: controller.pageController,
               physics: const NeverScrollableScrollPhysics(),
               pageSnapping: false,
+              allowImplicitScrolling: true,
               children: [
                 ...List.generate(
                   controller.questions.length,
@@ -95,7 +99,7 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                           ],
                         );
                       }),
-                    ).loadable(isLoading: controller.loading.value)),
+                    ).loadable(isLoading: controller.isLoading.value)),
               ],
             ),
           ),
@@ -103,8 +107,8 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
-                height: 40.h,
-                width: 130.w,
+                height: 40,
+                width: 130,
                 child: ButtonWithIcon(
                   onPressed: () {
                     controller.previousQuestion();
@@ -115,8 +119,8 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                 ),
               ),
               Obx(() => SizedBox(
-                    height: 40.h,
-                    width: 130.w,
+                    height: 40,
+                    width: 130,
                     child: ButtonWithIcon(
                       color: controller.isLastPage()
                           ? AppColors.mainColorShaded

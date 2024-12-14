@@ -25,52 +25,53 @@ class ProjectViewDetailsPageView extends StatelessWidget {
         height: 80,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: 20.w, right: 20.w, top: 20.h, bottom: 120.h),
-          child: Container(
-            padding: EdgeInsets.all(20.w),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(30.r),
-              border: Border.all(color: AppColors.grey, width: 1.w),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildImage(controller.project.imageLink),
-                SizedBox(height: 10.h),
-                _buildTextRow(
-                    'Project Title:', controller.project.title, theme),
-                SizedBox(height: 10.h),
-                _buildDifficultyChip(controller.project.difficultyLevel, theme),
-                SizedBox(height: 10.h),
-                _buildTextRow(
-                    'Description:', controller.project.description, theme),
-                SizedBox(height: 10.h),
-                _buildChipList(
-                  'Skills Required:',
-                  controller.project.skillsRequiredList,
-                  theme,
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 120,
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(30),
+            //border: Border.all(color: AppColors.grey, width: 1),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildImage(controller.project.imageLink),
+              const SizedBox(height: 10),
+              _buildTextRow('Project Title:', controller.project.title, theme),
+              const SizedBox(height: 10),
+              _buildDifficultyChip(controller.project.difficultyLevel, theme),
+              const SizedBox(height: 10),
+              _buildTextRow(
+                  'Description:', controller.project.description, theme),
+              const SizedBox(height: 10),
+              _buildChipList(
+                'Skills Required:',
+                controller.project.skillsRequiredList,
+                theme,
+              ),
+              const SizedBox(height: 10),
+              _buildChipList(
+                'Category:',
+                controller.project.categoryList,
+                theme,
+              ),
+              const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.center,
+                child: ButtonWithIcon(
+                  color: AppColors.mainColorShaded,
+                  //onPressed: () => {}, // Define your action
+                  text: 'Register Project',
+                  icon: Icons.arrow_forward_rounded,
                 ),
-                SizedBox(height: 10.h),
-                _buildChipList(
-                  'Category:',
-                  controller.project.categoryList,
-                  theme,
-                ),
-                SizedBox(height: 20.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: ButtonWithIcon(
-                    color: AppColors.mainColorShaded,
-                    onPressed: () => {}, // Define your action
-                    text: 'Register Project',
-                    icon: Icons.arrow_forward_rounded,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

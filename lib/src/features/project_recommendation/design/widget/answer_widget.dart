@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theme/app_color.dart';
 
 class AnswerWidget extends StatefulWidget {
   final String title;
+
   const AnswerWidget({super.key, required this.title});
 
   @override
@@ -13,6 +13,7 @@ class AnswerWidget extends StatefulWidget {
 
 class _AnswerWidgetState extends State<AnswerWidget> {
   bool isSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,11 +22,11 @@ class _AnswerWidgetState extends State<AnswerWidget> {
           duration: const Duration(milliseconds: 400),
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.symmetric(vertical: 10),
-          height: 40.h,
+          height: 40,
           decoration: BoxDecoration(
             color: isSelected ? AppColors.mainColor : AppColors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.grey, width: 1.w),
+            border: Border.all(color: AppColors.grey, width: 1),
             boxShadow: const [
               BoxShadow(
                 color: AppColors.grey,
@@ -48,8 +49,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
               ),
               const Spacer(),
             ],
-          )
-      ),
+          )),
     );
   }
 }

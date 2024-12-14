@@ -30,21 +30,21 @@ PreferredSize generalAppBar({
             ? null
             : Text(
                 title,
-                style: TextStyle(
-                  fontSize: 21.sp,
+                style: const TextStyle(
+                  fontSize: 21,
                   fontWeight: FontWeight.w400,
                   color: AppColors.white,
                 ),
               ),
         flexibleSpace: Padding(
-          padding: EdgeInsets.only(left: 20.w, right: 20.w),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               if (userName != null) _buildGreeting(userName),
               if (!centerTitle && subTitle != null) _buildSubtitle(subTitle),
-              SizedBox(height: 10.h),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -56,8 +56,8 @@ PreferredSize generalAppBar({
 Widget _buildGreeting(String userName) {
   return Text(
     'Hi, $userName There 👋',
-    style: TextStyle(
-      fontSize: 16.sp,
+    style: const TextStyle(
+      fontSize: 16,
       fontWeight: FontWeight.w700,
       color: AppColors.white,
     ),
@@ -67,8 +67,8 @@ Widget _buildGreeting(String userName) {
 Widget _buildSubtitle(String subTitle) {
   return Text(
     subTitle,
-    style: TextStyle(
-      fontSize: 16.sp,
+    style: const TextStyle(
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: AppColors.white,
     ),

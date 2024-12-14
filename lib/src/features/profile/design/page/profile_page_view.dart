@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 
 import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/custom_drawer.dart';
@@ -18,65 +17,68 @@ class ProfilePageView extends StatelessWidget {
           centerTitle: true,
           height: 80,
         ),
-        body: Column(
-          children: [
-            Row(
-              children: [
-                Image.asset(
-                  'assets/images/user_image.png',
-                  width: 60.w,
-                  height: 60.h,
-                  fit: BoxFit.cover,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 20.w),
-                  child: Text(
-                    'User Name',
-                    style: Theme.of(context).textTheme.titleMedium,
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Image.asset(
+                    'assets/images/user_image.png',
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
                   ),
-                ),
-              ],
-            ),
-            Divider(color: Colors.grey, thickness: 1.w),
-            ...List.generate(
-                ProfileItem._profileItems.length,
-                (index) => ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      style: ListTileStyle.drawer,
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20.sp,
-                        color: AppColors.grey,
-                      ),
-                      leading: Icon(
-                        ProfileItem._profileItems[index].icon,
-                        size: 30.sp,
-                        color: AppColors.black,
-                      ),
-                      onTap: () {},
-                      title: Text(ProfileItem._profileItems[index].title),
-                    )),
-            Divider(color: Colors.grey, thickness: 1.w),
-            ...List.generate(
-                ProfileItem._accountItems.length,
-                (index) => ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      style: ListTileStyle.drawer,
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20.sp,
-                        color: AppColors.grey,
-                      ),
-                      leading: Icon(
-                        ProfileItem._accountItems[index].icon,
-                        size: 30.sp,
-                        color: AppColors.black,
-                      ),
-                      onTap: () {},
-                      title: Text(ProfileItem._accountItems[index].title),
-                    )),
-          ],
-        ).paddingAll(20.w));
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      'User Name',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ],
+              ),
+              Divider(color: Colors.grey, thickness: 1.w),
+              ...List.generate(
+                  ProfileItem._profileItems.length,
+                  (index) => ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        style: ListTileStyle.drawer,
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                          color: AppColors.grey,
+                        ),
+                        leading: Icon(
+                          ProfileItem._profileItems[index].icon,
+                          size: 30,
+                          color: AppColors.black,
+                        ),
+                        onTap: () {},
+                        title: Text(ProfileItem._profileItems[index].title),
+                      )),
+              Divider(color: Colors.grey, thickness: 1.w),
+              ...List.generate(
+                  ProfileItem._accountItems.length,
+                  (index) => ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        style: ListTileStyle.drawer,
+                        trailing: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                          color: AppColors.grey,
+                        ),
+                        leading: Icon(
+                          ProfileItem._accountItems[index].icon,
+                          size: 30,
+                          color: AppColors.black,
+                        ),
+                        onTap: () {},
+                        title: Text(ProfileItem._accountItems[index].title),
+                      )),
+            ],
+          ),
+        ));
   }
 }
 

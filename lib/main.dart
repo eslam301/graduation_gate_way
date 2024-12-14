@@ -24,6 +24,8 @@ void main() async {
         Brightness.light, // Sets status bar icon brightness
   ));
 
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   // Ensure edge-to-edge layout
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 }

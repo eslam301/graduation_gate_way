@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../theme/app_color.dart';
 
@@ -25,11 +24,10 @@ class ButtonWithIcon extends StatelessWidget {
       onPressed: onPressed ?? () {},
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all(color),
-        minimumSize: WidgetStateProperty.all(Size(230.w, 50)),
-        maximumSize: WidgetStateProperty.all(Size(230.w, 50)),
+        minimumSize: WidgetStateProperty.all(const Size(230, 50)),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.r),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
       ),
@@ -39,9 +37,9 @@ class ButtonWithIcon extends StatelessWidget {
         text,
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
-          fontSize: 16.sp,
+          fontSize: 16,
           fontWeight: FontWeight.w700,
         ),
       ),

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
 
-import '../../../../core/theme/app_color.dart';
-
-class HomePageView extends StatelessWidget {
+class CategoryPageView extends StatelessWidget {
   final List<CategoryCardModel> categoryModelList;
 
-  const HomePageView({super.key, required this.categoryModelList});
+  const CategoryPageView({super.key, required this.categoryModelList});
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +13,12 @@ class HomePageView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Categories',
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: AppColors.black,
-            )),
-        SizedBox(
-          height: 20.h,
+        Text(
+          'Categories',
+          style: theme.textTheme.titleMedium,
+        ),
+        const SizedBox(
+          height: 20,
         ),
         Expanded(
           child: GridView.builder(

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/core/api/models/projects_recommendations.dart';
@@ -12,138 +12,169 @@ import '../../../../core/route/routes_name.dart';
 import '../widget/answer_container.dart';
 
 abstract class ProjectRecommendationController extends GetxController {
-  nextQuestion();
+  void nextQuestion();
 
-  previousQuestion();
+  void previousQuestion();
 
-  submit();
+  Future<void> submit();
 }
 
 class ProjectRecommendationControllerImp
     extends ProjectRecommendationController {
-  final multiKey1 = GlobalKey<FormState>();
-  final multiKey2 = GlobalKey<FormState>();
-  final multiKey3 = GlobalKey<FormState>();
-  late InternetConnectionChecker connection;
+  final _apiManager = Get.find<ApiManager>();
+  final _connection = InternetConnectionChecker();
 
-  final apiManger = Get.find<ApiManager>();
+  // Reactive Variables
+  final RxBool isLoading = false.obs;
+  final RxInt currentPage = 0.obs;
+  final RxMap<String, String> userAnswers = <String, String>{}.obs;
 
-  var loading = false.obs; // Reactive loading state
-
-  List<String> selectedSkills = [];
-
-  List<String> selectedKeywords = [];
-
-  List<String> selectedCategories = [];
-
+  // State variables
+  final List<String> selectedSkills = [];
+  final List<String> selectedCategories = [];
+  final List<String> selectedKeywords = [];
   String selectedDifficulty = '';
 
-  final currentPage = 0.obs; // Reactive variable to track current page
-
-  late final List<GlobalKey> keys;
-
-  late final User user;
+  // UI Elements
   final PageController pageController = PageController(initialPage: 0);
+  final List<GlobalKey<FormState>> keys = [];
+  late final User user;
   late final List<QuestionModel> questions;
-  Map<String, dynamic> userAnswers = {
-    'skills': '',
-    'difficulty': '',
-    'categories': '',
-    'keywords': '',
-  };
 
   @override
   void onInit() {
-    user = Get.arguments as User;
-    connection = InternetConnectionChecker();
-    //---------------------
-    keys = [multiKey1, multiKey2, multiKey3];
+    user = Get.find<User>();
+    _initializeQuestions();
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    // Listen for pageController changes after UI is ready
+    pageController.addListener(() {
+      currentPage.value = pageController.page?.round() ?? 0;
+    });
+    super.onReady();
+  }
+
+  void _initializeQuestions() {
+    // Configure form keys and questions
+    keys.addAll([
+      GlobalKey<FormState>(),
+      GlobalKey<FormState>(),
+      GlobalKey<FormState>()
+    ]);
     questions = [
       QuestionModel(
         index: 1,
         question: 'What is your Skill',
         type: 'search Box',
         answers: skillsList,
-        selectionListAnswerMethod: (value) => selectedSkills = value,
+        selectionListAnswerMethod: (value) => selectedSkills.assignAll(value),
       ),
       QuestionModel(
         index: 2,
         question: 'What is your Category?',
         type: 'search Box',
         answers: categories,
-        selectionListAnswerMethod: (value) => selectedCategories = value,
+        selectionListAnswerMethod: (value) =>
+            selectedCategories.assignAll(value),
       ),
       QuestionModel(
         index: 3,
-        question: 'What is your keywords?',
+        question: 'What are your keywords?',
         type: 'search Box',
         answers: keywords,
-        selectionListAnswerMethod: (value) => selectedKeywords = value,
+        selectionListAnswerMethod: (value) => selectedKeywords.assignAll(value),
       ),
       QuestionModel(
         index: 4,
         question: 'What is your Difficulty level?',
-        answers: [
-          'Easy',
-          'Medium',
-          'Hard',
-        ],
+        answers: ['Easy', 'Medium', 'Hard'],
         selectionAnswerMethod: (value) => selectedDifficulty = value,
-      )
+      ),
     ];
-
-    pageController.addListener(() {
-      // Update currentPage when pageController changes
-      currentPage.value = pageController.page?.round() ?? 0;
-    });
-
-    super.onInit();
   }
 
   @override
-  nextQuestion() {
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 600), curve: Curves.easeOut);
-    userAnswers = {
-      'skills': selectedSkills.join(','),
-      'categories': selectedCategories.join(','),
-      'keywords': selectedKeywords.join(','),
-      'difficulty': selectedDifficulty,
-    };
+  void nextQuestion() {
+    if (currentPage.value < questions.length - 1) {
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      _updateUserAnswers();
+    }
   }
 
   @override
-  previousQuestion() {
-    pageController.previousPage(
-        duration: const Duration(milliseconds: 600), curve: Curves.easeOut);
+  void previousQuestion() {
+    if (currentPage.value > 0) {
+      pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   @override
-  submit() async {
-    loading.value = true; // Show loading animation
-    if (await connection.hasConnection) {
+  Future<void> submit() async {
+    _setLoading(true);
+    if (await _checkInternetConnection()) {
       try {
-        List<ProjectsRecommendations> projectsRecommendations = await apiManger
-            .sendUserAnswerProjectRecommendation(userAnswers: userAnswers);
+        _updateUserAnswers();
+
+        final List<ProjectsRecommendations> recommendations =
+            await _apiManager.sendUserAnswerProjectRecommendation(
+          userAnswers: userAnswers,
+        );
+
         Routes.projectRecommendationResultPage.toPage(
-          arguments: <String, dynamic>{
+          arguments: {
             'user': user,
-            'projectsRecommendationsResult': projectsRecommendations
+            'projectsRecommendationsResult': recommendations,
           },
         );
       } catch (e) {
-        if (kDebugMode) {
-          print('Error submitting form: $e');
-        }
+        _handleError(e);
       } finally {
-        loading.value = false; // Hide loading animation
+        _setLoading(false);
       }
     } else {
-      loading.value = false; // Hide loading animation
-      Get.snackbar('No Internet', 'Please check your internet connection');
+      _showNoInternetSnackbar();
+      _setLoading(false);
     }
-    loading.value = false; // Hide loading animation
   }
 
-  bool isLastPage() => currentPage.value == questions.length;
+  bool isLastPage() => currentPage.value == questions.length - 1;
+
+  Future<bool> _checkInternetConnection() async {
+    try {
+      return await _connection.hasConnection;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  void _setLoading(bool value) {
+    isLoading.value = value;
+  }
+
+  void _updateUserAnswers() {
+    userAnswers['skills'] = selectedSkills.join(',');
+    userAnswers['categories'] = selectedCategories.join(',');
+    userAnswers['keywords'] = selectedKeywords.join(',');
+    userAnswers['difficulty'] = selectedDifficulty;
+  }
+
+  void _handleError(dynamic error) {
+    if (kDebugMode) {
+      print('Error occurred: $error');
+    }
+    Get.snackbar('Error', 'Something went wrong. Please try again.');
+  }
+
+  void _showNoInternetSnackbar() {
+    Get.snackbar('No Internet', 'Please check your internet connection');
+  }
 }

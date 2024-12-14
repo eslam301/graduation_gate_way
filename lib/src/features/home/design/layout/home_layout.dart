@@ -16,25 +16,26 @@ class HomeLayOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeLayoutControllerImp controller =
-        Get.put(HomeLayoutControllerImp());
+        Get.put(HomeLayoutControllerImp(), permanent: true);
     final pagesList = pages(controller);
-    return GetBuilder<HomeLayoutControllerImp>(builder: (context) {
-      return controller.isLoading
+
+    return Obx(() {
+      return controller.isLoading.value
           ? const LoadingPage()
           : Scaffold(
-              resizeToAvoidBottomInset: true,
+              resizeToAvoidBottomInset: false,
               appBar: homeAppBar(),
-              endDrawer: const CustomDrawer(),
-              body: PageView(
-                children: [
-                  ...List.generate(
-                      pagesList.length,
-                      (index) => Padding(
-                            padding: const EdgeInsets.only(
-                                top: 20, left: 20, right: 20),
-                            child: pagesList[index],
-                          )),
-                ],
+              endDrawer: const Material(
+                clipBehavior: Clip.antiAlias,
+                child: CustomDrawer(),
+              ),
+              body: PageView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: pagesList.length,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                  child: pagesList[index],
+                ),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(),
             );
@@ -43,7 +44,7 @@ class HomeLayOut extends StatelessWidget {
 }
 
 List<Widget> pages(HomeLayoutControllerImp controller) => [
-      HomePageView(
+      CategoryPageView(
         categoryModelList: [
           CategoryCardModel(
             imagePath: AppImagePathSvg.myProject,

@@ -19,11 +19,10 @@ abstract class HomeLayoutController extends GetxController {
 }
 
 class HomeLayoutControllerImp extends HomeLayoutController {
-  late User
-      user; // Use `late` for non-nullable initialization after async fetch
+  late User user;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool isLoading = false;
+  final RxBool isLoading = false.obs; // Reactive variable
 
   @override
   void onInit() {
@@ -32,42 +31,37 @@ class HomeLayoutControllerImp extends HomeLayoutController {
   }
 
   Future<void> _initializeUser() async {
-    isLoading = true;
-    log("Initializing user...");
+    isLoading.value = true; // Update only reactive variable
     try {
       user = await SharedPref.getUserData();
       log("User loaded successfully: ${user.toJson()}");
+      Get.put(user);
     } catch (e) {
       log("Error initializing user: $e");
       user = User(); // Fallback to an empty User object
     } finally {
-      log("User initialization completed.");
-      isLoading = false;
+      isLoading.value = false;
     }
-    update(); // Notify the UI about changes
   }
 
   @override
   openMyDrawer() {
     scaffoldKey.currentState?.openEndDrawer();
-    update();
+    // No unnecessary call to `update()`
   }
 
   @override
   myProject() {
-    // TODO: implement myProject
-    throw UnimplementedError();
+    // Implement logic here
   }
 
   @override
   projectRecommendation() {
-    Routes.projectRecommendationTest.toPage(
-      arguments: user,
-    );
+    Routes.projectRecommendationTest.toPage();
   }
 
   @override
   registerProject() {
-    // TODO: implement registerProject
+    // Implement logic here
   }
 }

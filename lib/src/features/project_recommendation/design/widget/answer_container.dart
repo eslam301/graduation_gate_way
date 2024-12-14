@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 
@@ -11,6 +10,7 @@ import 'multi_answer_search.dart';
 class AnswerContainer extends StatelessWidget {
   final QuestionModel? questionModel;
   final int? totalQuestions;
+
   const AnswerContainer({super.key, this.questionModel, this.totalQuestions});
 
   @override
@@ -18,11 +18,8 @@ class AnswerContainer extends StatelessWidget {
     final theme = Theme.of(context);
     final controller = Get.find<ProjectRecommendationControllerImp>();
     return Container(
-      height: 0.50.sh,
       margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.only(
-        top: 10,
-      ),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.whiteBackGround,
         borderRadius: BorderRadius.circular(30),
@@ -30,13 +27,15 @@ class AnswerContainer extends StatelessWidget {
       child: Column(
         children: [
           Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Question ${questionModel?.index}/${totalQuestions ?? 2}',
-              style: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.w700, color: AppColors.mainColor),
-            ),
-          ).paddingLeft(20),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Question ${questionModel?.index}/${totalQuestions ?? 2}',
+                style: const TextStyle(
+                  color: AppColors.mainColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              )),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -51,9 +50,9 @@ class AnswerContainer extends StatelessWidget {
                   questionModel: questionModel!,
                 )
               : AnswersMultipleSearch(
-            key:controller.keys[questionModel!.index-1],
-            questionModel: questionModel!,
-          ),
+                  key: controller.keys[questionModel!.index - 1],
+                  questionModel: questionModel!,
+                ),
         ],
       ),
     );

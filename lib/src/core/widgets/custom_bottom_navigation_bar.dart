@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 
-import '../const/image_pathes.dart';
 import '../route/routes_name.dart';
-import '../theme/app_color.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  const CustomBottomNavigationBar({
-    super.key,
-  });
+  const CustomBottomNavigationBar({super.key});
 
   @override
   State<CustomBottomNavigationBar> createState() =>
@@ -19,50 +14,42 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex = 0;
 
+  void _onTap(int index) {
+    // Triggering animation on change
+    setState(() {
+      currentIndex = index;
+    });
+
+    // Execute the respective onTab callback
+    _myItemsPath[index].onTab?.call();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.r),
-          topRight: Radius.circular(30.r),
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
         ),
       ),
       child: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
         currentIndex: currentIndex,
-        elevation: 0,
-        iconSize: 24.sp,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-            _myItemsPath[index].onTab!();
-          });
-        },
+        iconSize: 24,
+        onTap: _onTap,
         items: List.generate(
           _myItemsPath.length,
-          (index) => BottomNavigationBarItem(
-            icon: Image.asset(
-              _myItemsPath[index].iconPath,
-              color: AppColors.white,
-            ),
-            label: _myItemsPath[index].label,
-            activeIcon: Container(
-                width: 40.w,
-                height: 40.h,
-                padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.whiteBackGround,
-                ),
-                child: Image.asset(
-                  _myItemsPath[index].iconPath,
-                  color: AppColors.black,
-                )),
-          ),
+          (index) {
+            final isSelected = currentIndex == index;
+            return BottomNavigationBarItem(
+              icon: Icon(
+                _myItemsPath[index].iconData,
+              ),
+              label: _myItemsPath[index].label,
+            );
+          },
         ),
       ),
     );
@@ -70,12 +57,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 }
 
 class MyBottomNavigationBarItem {
-  final String iconPath;
+  final IconData iconData;
   final String label;
   final void Function()? onTab;
 
   const MyBottomNavigationBarItem({
-    required this.iconPath,
+    required this.iconData,
     required this.label,
     this.onTab,
   });
@@ -83,18 +70,23 @@ class MyBottomNavigationBarItem {
 
 List<MyBottomNavigationBarItem> _myItemsPath = [
   const MyBottomNavigationBarItem(
-      iconPath: AppImagePath.houseIcon, label: 'Home'),
+      iconData: Icons.home, label: 'Home', onTab: null),
   MyBottomNavigationBarItem(
-    iconPath: AppImagePath.chatIcon,
-    label: 'chat',
+    iconData: Icons.chat,
+    label: 'Chat',
     onTab: () {
       Routes.chat.toPage();
     },
   ),
+  MyBottomNavigationBarItem(
+    iconData: Icons.notifications,
+    label: 'Notifications',
+    onTab: () {
+      // Example functionality
+    },
+  ),
   const MyBottomNavigationBarItem(
-      iconPath: AppImagePath.notificationIcon, label: 'notification'),
+      iconData: Icons.report, label: 'Report', onTab: null),
   const MyBottomNavigationBarItem(
-      iconPath: AppImagePath.briefingIcon, label: 'Report'),
-  const MyBottomNavigationBarItem(
-      iconPath: AppImagePath.userIcon, label: 'profile'),
+      iconData: Icons.person, label: 'Profile', onTab: null),
 ];

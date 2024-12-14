@@ -80,18 +80,13 @@ class AppTheme {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.mainColor,
-        selectedItemColor: AppColors.black,
-        unselectedItemColor: AppColors.white,
-        selectedLabelStyle: TextStyle(
-          color: AppColors.white,
-          fontSize: 14,
-        ),
-        unselectedLabelStyle: TextStyle(
-          color: AppColors.textColor,
-          fontSize: 12,
-        ),
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
         showUnselectedLabels: true,
-        elevation: 0,
+        backgroundColor: AppColors.mainColor,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white30,
+        selectedIconTheme: IconThemeData(color: Colors.white, size: 32),
+        elevation: 5,
       ));
 }
