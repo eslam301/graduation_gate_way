@@ -6,10 +6,10 @@ import '../../../../core/api/models/user.dart';
 abstract class ProjectRecommendationResultController extends GetxController {}
 
 class ProjectRecommendationResultControllerImp
-  extends ProjectRecommendationResultController {
+    extends ProjectRecommendationResultController {
   late final User user;
 
-  late final List<ProjectsRecommendations> projectsRecommendationsResult;
+  late final List<ProjectRecommendationModel> projectsRecommendationsResult;
 
   @override
   void onInit() {

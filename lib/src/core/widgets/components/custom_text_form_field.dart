@@ -74,6 +74,18 @@ class CustomTextFormField extends StatefulWidget {
     this.delay,
   });
 
+  const CustomTextFormField.number({
+    super.key,
+    this.controller,
+    this.hintText = 'number',
+    this.labelText = 'number',
+    this.suffixIcon = Icons.perm_identity,
+    this.suffixIconWidget,
+    this.validator,
+    this.textInputType = TextInputType.number,
+    this.delay,
+  });
+
   const CustomTextFormField.password({
     super.key,
     this.controller,

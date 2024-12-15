@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
+import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -35,6 +36,7 @@ class LoginControllerImp extends LoginController {
   @override
   void login() async {
     loading.value = true; // Show loading animation
+    Get.context!.loadable(isLoading: loading.value);
 
     if (await connection.hasConnection) {
       try {

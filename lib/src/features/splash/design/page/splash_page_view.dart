@@ -23,11 +23,23 @@ class SplashPageView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Welcome', style: textTheme.headlineLarge),
-              Text('Graduation Getaway',
-                  style: textTheme.headlineMedium
-                      ?.copyWith(fontWeight: FontWeight.w400)),
-              Text('Your guide to graduate.', style: textTheme.headlineSmall),
+              const Text('Welcome',
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white)),
+              const Text('Graduation Getaway',
+                  style: TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  )),
+              Text('Your guide to graduate.',
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  )),
               SvgPicture.asset(
                 AppImagePathSvg.splash,
                 width: 300.w,

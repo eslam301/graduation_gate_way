@@ -75,8 +75,10 @@ class ApiManager {
     throw Exception('Unexpected error during login');
   }
 
+  /// sign up
+
   /// Sends user answers for project recommendations and returns recommendations.
-  Future<List<ProjectsRecommendations>> sendUserAnswerProjectRecommendation({
+  Future<List<ProjectRecommendationModel>> sendUserAnswerProjectRecommendation({
     required Map<String, dynamic> userAnswers,
   }) async {
     final url = Uri.parse('$projectRecommendationBaseUrl/recommend');
@@ -90,10 +92,10 @@ class ApiManager {
       if (response.statusCode == 200) {
         // Clean up the JSON response
         final sanitizedResponseBody = response.body.replaceAll('NaN', 'null');
-        final List<ProjectsRecommendations> recommendations =
+        final List<ProjectRecommendationModel> recommendations =
             (jsonDecode(sanitizedResponseBody) as List)
                 .map((recommendation) =>
-                    ProjectsRecommendations.fromJson(recommendation))
+                    ProjectRecommendationModel.fromJson(recommendation))
                 .toList();
         // Parse sanitized JSON
         return recommendations;

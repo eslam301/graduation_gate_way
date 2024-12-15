@@ -1,4 +1,6 @@
-class ProjectsRecommendations {
+import '../../../features/project_registeration/data/models/project_model.dart';
+
+class ProjectRecommendationModel {
   String? category;
   String? description;
   String? difficultyLevel;
@@ -12,8 +14,7 @@ class ProjectsRecommendations {
   List<String>? keywordsList;
   List<String>? categoryList;
 
-
-  ProjectsRecommendations({
+  ProjectRecommendationModel({
     this.category,
     this.description,
     this.difficultyLevel,
@@ -26,7 +27,7 @@ class ProjectsRecommendations {
     _initializeLists();
   }
 
-  ProjectsRecommendations.fromJson(Map<String, dynamic> json) {
+  ProjectRecommendationModel.fromJson(Map<String, dynamic> json) {
     category = json['category'];
     description = json['description'];
     difficultyLevel = json['difficulty_level'];
@@ -40,7 +41,8 @@ class ProjectsRecommendations {
 
   void _initializeLists() {
     if (skillsRequired != null) {
-      skillsRequiredList = skillsRequired!.split(', ').where((e) => e.isNotEmpty).toList();
+      skillsRequiredList =
+          skillsRequired!.split(', ').where((e) => e.isNotEmpty).toList();
     }
     if (keywords != null) {
       keywordsList = keywords!.split(', ').where((e) => e.isNotEmpty).toList();
@@ -78,4 +80,15 @@ class ProjectsRecommendations {
     keywordsList: $keywordsList
     """;
   }
+
+  ProjectModel toProjectModel() => ProjectModel(
+        category: category ?? '',
+        description: description ?? '',
+        difficultyLevel: difficultyLevel ?? '',
+        keywords: keywords ?? '',
+        imageLink: imageLink ?? '',
+        links: links ?? '',
+        skillsRequired: skillsRequired ?? '',
+        title: title ?? '',
+      );
 }

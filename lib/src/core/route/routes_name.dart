@@ -22,6 +22,9 @@ class Routes {
   static const String projectRecommendationResultPage =
       '/projectRecommendationResultPage';
 
+  // project register
+  static const String projectRegistration = '/projectRegistration';
+
   //profile pages
   static const String profile = '/profile';
 

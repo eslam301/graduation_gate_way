@@ -47,59 +47,59 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                     questionModel: controller.questions[index],
                   ),
                 ),
-                Obx(() => Container(
-                      margin: const EdgeInsets.all(20),
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: GetBuilder<ProjectRecommendationControllerImp>(
-                          builder: (context) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Skills : ${controller.selectedSkills.join(', ')}',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              softWrap: true,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              'difficulty :${controller.selectedDifficulty}',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              softWrap: true,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              'categories :${controller.selectedCategories.join(', ')}',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              softWrap: true,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              'keywords :${controller.selectedKeywords.join(', ')}',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              softWrap: true,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        );
-                      }),
-                    ).loadable(isLoading: controller.isLoading.value)),
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: GetBuilder<ProjectRecommendationControllerImp>(
+                      builder: (context) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Skills : ${controller.selectedSkills.join(', ')}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          softWrap: true,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          'difficulty :${controller.selectedDifficulty}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          softWrap: true,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          'categories :${controller.selectedCategories.join(', ')}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          softWrap: true,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          'keywords :${controller.selectedKeywords.join(', ')}',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          softWrap: true,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+                ),
               ],
             ),
           ),
@@ -118,22 +118,24 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                   icon: Icons.arrow_back,
                 ),
               ),
-              Obx(() => SizedBox(
-                    height: 40,
-                    width: 130,
-                    child: ButtonWithIcon(
-                      color: controller.isLastPage()
-                          ? AppColors.mainColorShaded
-                          : AppColors.mainColor,
-                      onPressed: () {
-                        controller.isLastPage()
-                            ? controller.submit()
-                            : controller.nextQuestion();
-                      },
-                      text: controller.isLastPage() ? 'Submit' : 'Next',
-                      icon: Icons.arrow_forward,
-                    ),
-                  )),
+              SizedBox(
+                height: 40,
+                width: 130,
+                child: Obx(() {
+                  return ButtonWithIcon(
+                    color: controller.isLastPage()
+                        ? AppColors.mainColorShaded
+                        : AppColors.mainColor,
+                    onPressed: () {
+                      controller.isLastPage()
+                          ? controller.submit()
+                          : controller.nextQuestion();
+                    },
+                    text: controller.isLastPage() ? 'Submit' : 'Next',
+                    icon: Icons.arrow_forward,
+                  );
+                }),
+              ),
             ],
           )
         ],

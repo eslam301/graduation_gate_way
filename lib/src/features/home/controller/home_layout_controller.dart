@@ -34,7 +34,7 @@ class HomeLayoutControllerImp extends HomeLayoutController {
     isLoading.value = true; // Update only reactive variable
     try {
       user = await SharedPref.getUserData();
-      log("User loaded successfully: ${user.toJson()}");
+      log("User loaded successfully: ${user.toJson}");
       Get.put(user);
     } catch (e) {
       log("Error initializing user: $e");
@@ -62,6 +62,6 @@ class HomeLayoutControllerImp extends HomeLayoutController {
 
   @override
   registerProject() {
-    // Implement logic here
+    Routes.projectRegistration.toPage();
   }
 }

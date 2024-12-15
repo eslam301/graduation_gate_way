@@ -16,6 +16,7 @@ import '../../features/on_boarding/design/layout/on_boarding_layout.dart';
 import '../../features/project_recommendation/design/page/project_recommendation_page_view.dart';
 import '../../features/project_recommendation/design/page/project_recommendation_result_page.dart';
 import '../../features/project_recommendation/design/page/project_view_details_page_view.dart';
+import '../../features/project_registeration/design/pages/project_registration_page_view.dart';
 import '../../features/splash/design/page/on_splash.dart';
 import '../../features/splash/design/page/splash_page_view.dart';
 
@@ -37,27 +38,38 @@ class AppRouter {
     getPage(name: Routes.onBoarding, page: () => const OnBoardingLayout()),
     getPage(name: Routes.home, page: () => const HomeLayOut()),
 
-    // pages
+    // Project Recommendation
     getPage(
-        name: Routes.projectRecommendationTest,
-        page: () => const ProjectRecommendationPageView()),
+      name: Routes.projectRecommendationTest,
+      page: () => const ProjectRecommendationPageView(),
+    ),
     getPage(
         name: Routes.projectRecommendationResultPage,
         page: () => const ProjectRecommendationResultPage()),
     getPage(
         name: Routes.projectViewDetailsPageView,
         page: () => const ProjectViewDetailsPageView()),
+
+    // project registration
+    getPage(
+        name: Routes.projectRegistration,
+        page: () => const ProjectRegistrationPageView()),
+    // Profile
     getPage(name: Routes.profile, page: () => const ProfilePageView()),
+    // Chat
     getPage(name: Routes.chat, page: () => const ChatPageView()),
   ];
 }
 
 GetPage<dynamic> getPage(
-        {required String name, required Widget Function() page}) =>
+        {required String name,
+        required Widget Function() page,
+        List<GetPage<dynamic>> children = const []}) =>
     GetPage(
       name: name,
       page: page,
       curve: Curves.easeInOut,
+      children: children,
       binding: BindingsBuilder(() {
         debugPrint('Binding $name');
       }),

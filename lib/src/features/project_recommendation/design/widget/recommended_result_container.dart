@@ -9,7 +9,7 @@ import '../../../../core/route/routes_name.dart';
 import '../../../../core/theme/app_color.dart';
 
 class RecommendedResultContainer extends StatelessWidget {
-  final ProjectsRecommendations project;
+  final ProjectRecommendationModel project;
 
   const RecommendedResultContainer({
     super.key,

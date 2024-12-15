@@ -14,7 +14,8 @@ class ProjectViewDetailsPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProjectPageViewDetailsControllerImp());
+    final ProjectPageViewDetailsControllerImp controller =
+        Get.put(ProjectPageViewDetailsControllerImp());
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -61,12 +62,19 @@ class ProjectViewDetailsPageView extends StatelessWidget {
                 controller.project.categoryList,
                 theme,
               ),
+              const SizedBox(height: 10),
+              _buildChipList(
+                'keywords:',
+                controller.project.keywordsList,
+                theme,
+              ),
               const SizedBox(height: 20),
-              const Align(
+              Align(
                 alignment: Alignment.center,
                 child: ButtonWithIcon(
                   color: AppColors.mainColorShaded,
-                  //onPressed: () => {}, // Define your action
+                  onPressed: () => controller.registerProject(),
+                  // Define your action
                   text: 'Register Project',
                   icon: Icons.arrow_forward_rounded,
                 ),
@@ -128,9 +136,13 @@ class ProjectViewDetailsPageView extends StatelessWidget {
             fontSize: 18.sp,
           ),
         ),
-        Chip(
-          backgroundColor: AppColors.mainColor,
-          label: Text(
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          decoration: BoxDecoration(
+            color: AppColors.mainColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
             difficultyLevel ?? 'Unknown',
             style: TextStyle(color: AppColors.white, fontSize: 14.sp),
           ),
@@ -141,25 +153,36 @@ class ProjectViewDetailsPageView extends StatelessWidget {
 
   Widget _buildChipList(String label, List<String>? items, ThemeData theme) {
     if (items == null || items.isEmpty) {
-      return Text('$label N/A', style: theme.textTheme.bodyLarge);
+      return Text('$label N/A',
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            color: AppColors.black,
+          ));
     }
     return Wrap(
-      spacing: 8.w,
-      runSpacing: 8.h,
+      spacing: 8,
+      runSpacing: 8,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
         Text(
           '$label ',
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 16.sp,
+            fontSize: 18,
+            color: AppColors.black,
           ),
         ),
         ...items.map(
-          (item) => Chip(
-            backgroundColor: AppColors.mainColor,
-            label: Text(
+          (item) => Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            decoration: BoxDecoration(
+              color: AppColors.mainColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
               item,
-              style: TextStyle(color: AppColors.white, fontSize: 14.sp),
+              style: const TextStyle(color: AppColors.white, fontSize: 16),
             ),
           ),
         ),

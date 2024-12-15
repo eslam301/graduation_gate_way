@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/core/api/models/projects_recommendations.dart';
+import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -98,7 +99,7 @@ class ProjectRecommendationControllerImp
 
   @override
   void nextQuestion() {
-    if (currentPage.value < questions.length - 1) {
+    if (currentPage.value < questions.length) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -120,11 +121,11 @@ class ProjectRecommendationControllerImp
   @override
   Future<void> submit() async {
     _setLoading(true);
+    Get.context?.loadable(isLoading: isLoading.value);
     if (await _checkInternetConnection()) {
       try {
         _updateUserAnswers();
-
-        final List<ProjectsRecommendations> recommendations =
+        final List<ProjectRecommendationModel> recommendations =
             await _apiManager.sendUserAnswerProjectRecommendation(
           userAnswers: userAnswers,
         );
@@ -146,7 +147,7 @@ class ProjectRecommendationControllerImp
     }
   }
 
-  bool isLastPage() => currentPage.value == questions.length - 1;
+  bool isLastPage() => currentPage.value == questions.length;
 
   Future<bool> _checkInternetConnection() async {
     try {

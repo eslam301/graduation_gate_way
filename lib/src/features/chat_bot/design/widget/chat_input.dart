@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:graduation_gate_way/src/features/chat_bot/design/widget/text_input_field.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/text_input_field.dart';
 
 import '../../../../core/theme/app_color.dart';
 import '../controller/chat_controller.dart';

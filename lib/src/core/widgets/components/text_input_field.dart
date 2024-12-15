@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theme/app_color.dart';
+import '../../theme/app_color.dart';
 
 class TextInputField extends StatefulWidget {
   final int? delay;
@@ -13,6 +12,7 @@ class TextInputField extends StatefulWidget {
   final Widget? suffixIconWidget;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
+  final double? radius;
 
   const TextInputField({
     super.key,
@@ -25,6 +25,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType,
     this.delay,
+    this.radius,
   });
 
   const TextInputField.email({
@@ -38,6 +39,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType = TextInputType.emailAddress,
     this.delay,
+    this.radius,
   });
 
   const TextInputField.user({
@@ -51,6 +53,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType = TextInputType.name,
     this.delay,
+    this.radius,
   });
 
   const TextInputField.name({
@@ -64,6 +67,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType = TextInputType.name,
     this.delay,
+    this.radius,
   });
 
   const TextInputField.phone({
@@ -77,6 +81,21 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType = TextInputType.phone,
     this.delay,
+    this.radius,
+  });
+
+  const TextInputField.number({
+    super.key,
+    this.controller,
+    this.hintText = 'number',
+    this.labelText = 'number',
+    this.suffixIcon = Icons.numbers,
+    this.suffixIconWidget,
+    this.validator,
+    this.textInputType = TextInputType.number,
+    this.delay,
+    this.prefixIcon,
+    this.radius,
   });
 
   const TextInputField.password({
@@ -90,6 +109,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType = TextInputType.visiblePassword,
     this.delay,
+    this.radius,
   });
 
   const TextInputField.confirmPassword({
@@ -103,6 +123,7 @@ class TextInputField extends StatefulWidget {
     this.validator,
     this.textInputType = TextInputType.visiblePassword,
     this.delay,
+    this.radius,
   });
 
   @override
@@ -121,47 +142,50 @@ class _CustomTextFormFieldState extends State<TextInputField> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return TextFormField(
-      controller: widget.controller,
-      keyboardType: widget.textInputType,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColors.white,
-        border: outlineBorder(theme),
-        enabledBorder: outlineBorder(theme),
-        focusedBorder: outlineBorder(theme),
-        hintText: widget.hintText,
-        prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.suffixIcon != Icons.visibility_rounded
-            ? Icon(
-                widget.suffixIcon,
-                color: theme.primaryColor,
-                size: 20,
-              )
-            : obscureTextWidget(theme),
-        hintStyle: TextStyle(
-          color: AppColors.grey,
-          //fontFamily: fontName1,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        controller: widget.controller,
+        keyboardType: widget.textInputType,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: AppColors.white,
+          border: outlineBorder(theme, radius: widget.radius),
+          enabledBorder: outlineBorder(theme, radius: widget.radius),
+          focusedBorder: outlineBorder(theme, radius: widget.radius),
+          hintText: widget.hintText,
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.suffixIcon != Icons.visibility_rounded
+              ? Icon(
+                  widget.suffixIcon,
+                  color: theme.primaryColor,
+                  size: 16,
+                )
+              : obscureTextWidget(theme),
+          hintStyle: const TextStyle(
+            color: AppColors.grey,
+            //fontFamily: fontName1,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+          //lapel
+          //labelText: widget.labelText,
+          // labelStyle: TextStyle(
+          //   color: theme.primaryColor,
+          //   //fontFamily: fontName2,
+          //   fontSize: 14.sp,
+          //   fontWeight: FontWeight.w800,
+          // ),
         ),
-        //lapel
-        //labelText: widget.labelText,
-        // labelStyle: TextStyle(
-        //   color: theme.primaryColor,
-        //   //fontFamily: fontName2,
-        //   fontSize: 14.sp,
-        //   fontWeight: FontWeight.w800,
-        // ),
+        obscureText: obscureText,
+        obscuringCharacter: '*',
+        style: const TextStyle(
+          color: AppColors.black,
+          //fontFamily: fontName2,
+          fontSize: 14,
+        ),
+        validator: widget.validator,
       ),
-      obscureText: obscureText,
-      obscuringCharacter: '*',
-      style: TextStyle(
-        color: AppColors.black,
-        //fontFamily: fontName2,
-        fontSize: 16.sp,
-      ),
-      validator: widget.validator,
     );
   }
 
@@ -180,10 +204,10 @@ class _CustomTextFormFieldState extends State<TextInputField> {
     );
   }
 
-  OutlineInputBorder outlineBorder(theme) {
-    return const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-        borderSide: BorderSide(
+  OutlineInputBorder outlineBorder(theme, {double? radius}) {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(radius ?? 15.0)),
+        borderSide: const BorderSide(
           color: Colors.black,
           width: 1.0,
         ));
