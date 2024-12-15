@@ -2,19 +2,19 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/features/chat_bot/data/data_source/api/chat_bot_api_manger.dart';
-import 'package:graduation_gate_way/src/features/home/controller/home_layout_controller.dart';
 import 'package:http/http.dart' as http;
 
-import '../../features/auth/design/controller/forget_password_controller.dart';
-import '../../features/auth/design/controller/login_controller.dart';
-import '../../features/auth/design/controller/otp_controller.dart';
-import '../../features/auth/design/controller/reset_password_controller.dart';
-import '../../features/auth/design/controller/sign_up_controller.dart';
-import '../../features/chat_bot/design/controller/chat_controller.dart';
-import '../../features/project_recommendation/design/controller/project_page_view_details_controller.dart';
-import '../../features/project_recommendation/design/controller/project_recommendation_controller.dart';
-import '../../features/project_recommendation/design/controller/project_recommendation_result_controller.dart';
-import '../../features/splash/controller/splash_controller.dart';
+//
+// import '../../features/auth/design/controller/forget_password_controller.dart';
+// import '../../features/auth/design/controller/login_controller.dart';
+// import '../../features/auth/design/controller/otp_controller.dart';
+// import '../../features/auth/design/controller/reset_password_controller.dart';
+// import '../../features/auth/design/controller/sign_up_controller.dart';
+// import '../../features/chat_bot/design/controller/chat_controller.dart';
+// import '../../features/project_recommendation/design/controller/project_page_view_details_controller.dart';
+// import '../../features/project_recommendation/design/controller/project_recommendation_controller.dart';
+// import '../../features/project_recommendation/design/controller/project_recommendation_result_controller.dart';
+// import '../../features/splash/controller/splash_controller.dart';
 
 Future<void> $initGetIt(GetIt sl) async {
   //! core

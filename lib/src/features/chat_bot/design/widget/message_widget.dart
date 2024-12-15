@@ -30,14 +30,17 @@ class MessageWidget extends StatelessWidget {
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
             children: [
-              AutoStyleText(message.message,
-                  textAlign: message.messageType == MessageType.user
-                      ? TextAlign.end
-                      : TextAlign.start,
-                  style: TextStyle(
-                      color: message.messageType == MessageType.user
-                          ? Colors.white
-                          : Colors.black)),
+              AutoStyleText(
+                message.message,
+                textAlign: message.messageType == MessageType.user
+                    ? TextAlign.end
+                    : TextAlign.start,
+                style: TextStyle(
+                  color: message.messageType == MessageType.user
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              ),
               Text(
                 textAlign: TextAlign.end,
                 '${message.dateTime.hour}:${message.dateTime.minute} ${message.dateTime.hour > 12 ? 'PM' : 'AM'}',

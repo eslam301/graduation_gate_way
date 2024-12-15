@@ -17,29 +17,36 @@ abstract class ChatController extends GetxController {
 
 class ChatControllerImp extends ChatController {
   late final TextEditingController messageController;
-  var messages = <MessageModel>[].obs; // RxList
+  var messages = <MessageModel>[].obs; // RxList for reactive updates
 
-  ChatBotApiManager chatBotApiManager = Get.find<ChatBotApiManager>();
+  final ChatBotApiManager chatBotApiManager = Get.find<ChatBotApiManager>();
 
   @override
-  void onInit() async {
-    messageController = TextEditingController();
-    List<MessageModel> cashedMessages =
-        await ChatCashedDataSource.getMessagesList();
-    messages.assignAll(cashedMessages);
+  Future<void> onInit() async {
     super.onInit();
+    messageController = TextEditingController();
+
+    // Fetch cached messages and ensure proper update synchronization
+    final cachedMessages = await ChatCashedDataSource.getMessagesList();
+    if (cachedMessages.isNotEmpty) {
+      // Use RxList's `addAll` to trigger observable update safely
+      messages.clear();
+      messages.addAll(cachedMessages);
+    }
   }
 
   @override
   void onClose() {
     messageController.dispose();
-    ChatCashedDataSource.saveMessagesList(messages);
+
+    // Save current state to cache upon closing
+    ChatCashedDataSource.saveMessagesList(messages.toList());
     super.onClose();
   }
 
   @override
-  receiveMessage() async {
-    MessageModel messageResponse =
+  Future<void> receiveMessage() async {
+    final messageResponse =
         await chatBotApiManager.sendMessage(messageController.text);
     messages.add(
       MessageModel(
@@ -51,8 +58,9 @@ class ChatControllerImp extends ChatController {
   }
 
   @override
-  sendMessage() {
+  void sendMessage() {
     if (messageController.text.isNotEmpty) {
+      // Add user's message to the list
       messages.add(
         MessageModel(
           message: messageController.text,
@@ -61,18 +69,21 @@ class ChatControllerImp extends ChatController {
         ),
       );
       receiveMessage();
+
+      // Clear input field and dismiss the keyboard focus
       messageController.clear();
-      FocusScope.of(Get.context!).requestFocus(FocusNode());
+      FocusScope.of(Get.context!).unfocus();
+      // Process bot response asynchronously
     }
   }
 
   @override
-  attachFile() {
+  void attachFile() {
     throw UnimplementedError();
   }
 
   @override
-  openEmojiPicker() {
+  void openEmojiPicker() {
     throw UnimplementedError();
   }
 }
