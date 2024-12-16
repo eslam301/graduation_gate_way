@@ -26,7 +26,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return Container(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: const BoxDecoration(
@@ -42,7 +41,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         items: List.generate(
           _myItemsPath.length,
           (index) {
-            final isSelected = currentIndex == index;
             return BottomNavigationBarItem(
               icon: Icon(
                 _myItemsPath[index].iconData,

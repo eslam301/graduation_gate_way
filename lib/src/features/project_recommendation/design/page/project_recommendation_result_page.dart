@@ -16,8 +16,8 @@ class ProjectRecommendationResultPage extends StatelessWidget {
     return Scaffold(
       endDrawer: const CustomDrawer(),
       appBar: generalAppBar(
-        userName: controller.user.firstname,
-        subTitle: 'Project Recommendation Result',
+        title: 'Recommendation Result',
+        centerTitle: true,
       ),
       body: GridView.builder(
           padding: const EdgeInsets.only(

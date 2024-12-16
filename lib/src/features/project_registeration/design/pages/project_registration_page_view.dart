@@ -46,13 +46,10 @@ class ProjectRegistrationPageView extends StatelessWidget {
                 ListView.separated(
                   cacheExtent: 1000,
                   padding: const EdgeInsets.all(20),
-                  itemCount: controller.doctorsNameList.length,
+                  itemCount: 1,
                   separatorBuilder: (_, __) => const SizedBox(height: 20),
                   itemBuilder: (context, index) {
-                    return InputSectionDoctor(
-                      index: index,
-                      doctorController: controller.doctorsNameList[index],
-                    );
+                    return const InputSectionDoctor();
                   },
                 ),
               ],

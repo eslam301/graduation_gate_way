@@ -4,6 +4,8 @@ import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/features/chat_bot/data/data_source/api/chat_bot_api_manger.dart';
 import 'package:http/http.dart' as http;
 
+import '../../features/project_recommendation/data/data_source/api/project_recommendation_api.dart';
+
 //
 // import '../../features/auth/design/controller/forget_password_controller.dart';
 // import '../../features/auth/design/controller/login_controller.dart';
@@ -63,6 +65,8 @@ Future<void> initGetItGetx() async {
 //   core
   Get.put(http.Client(), permanent: true);
   Get.put(ApiManager(client: Get.find<http.Client>()), permanent: true);
+  Get.put(ProjectRecommendationApi(client: Get.find<http.Client>()),
+      permanent: true);
   //features
   //splash
   //Get.put(SplashControllerImp(), permanent: true);

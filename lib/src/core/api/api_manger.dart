@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
 import 'package:graduation_gate_way/src/core/utils/shared_pref.dart';
 import 'package:http/http.dart' as http;
 
+import '../error/error_handel_api.dart';
 import 'models/login_response.dart';
-import 'models/projects_recommendations.dart';
 import 'models/user.dart';
 
 class ApiManager {
   static const String baseUrl = 'http://graduationgetaway.somee.com';
-  static const String projectRecommendationBaseUrl =
-      'https://fadyyosrey.pythonanywhere.com';
+
   final http.Client client;
 
   ApiManager({required this.client});
@@ -23,19 +23,28 @@ class ApiManager {
 
   /// Sends a GET request to fetch a list of doctors.
   ///
-  Future<List<dynamic>> getDoctors() async {
+  Future<List<DoctorModel>> getDoctors() async {
     final url = Uri.parse('$baseUrl/api/Doctors');
     try {
+      // Send HTTP GET request
       final response = await client.get(url, headers: baseHeaders);
 
       if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+        // Decode response body to a List of Map objects
+        final List<dynamic> decodedData = jsonDecode(response.body);
+
+        // Map each JSON object to a DoctorModel
+        return decodedData.map((json) => DoctorModel.fromJson(json)).toList();
       } else {
-        _handleHttpError(response);
+        // Handle HTTP errors
+        handleHttpError(response);
       }
     } catch (e) {
+      // Rethrow exceptions for the caller to handle
       rethrow;
     }
+
+    // Return an empty list in case of errors (optional, usually unreachable due to rethrow)
     return [];
   }
 
@@ -60,12 +69,13 @@ class ApiManager {
         //print(loginResponse.user.toString());
         SharedPref.saveUserData(loginResponse.user!);
         SharedPref.saveUserId(loginResponse.user!.id.toString());
+
         return loginResponse.user!;
       } else if (response.statusCode == 400) {
         Get.snackbar('Error', 'Invalid username or password');
         throw Exception('Invalid username or password');
       } else {
-        _handleHttpError(response);
+        handleHttpError(response);
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to login');
@@ -78,46 +88,8 @@ class ApiManager {
   /// sign up
 
   /// Sends user answers for project recommendations and returns recommendations.
-  Future<List<ProjectRecommendationModel>> sendUserAnswerProjectRecommendation({
-    required Map<String, dynamic> userAnswers,
-  }) async {
-    final url = Uri.parse('$projectRecommendationBaseUrl/recommend');
-    final body = jsonEncode(userAnswers);
-    try {
-      final response = await client.post(url, body: body, headers: baseHeaders);
-      // if (kDebugMode) {
-      //   print('Raw response: ${response.body}');
-      // }
-
-      if (response.statusCode == 200) {
-        // Clean up the JSON response
-        final sanitizedResponseBody = response.body.replaceAll('NaN', 'null');
-        final List<ProjectRecommendationModel> recommendations =
-            (jsonDecode(sanitizedResponseBody) as List)
-                .map((recommendation) =>
-                    ProjectRecommendationModel.fromJson(recommendation))
-                .toList();
-        // Parse sanitized JSON
-        return recommendations;
-      } else {
-        _handleHttpError(response);
-      }
-    } catch (e) {
-      Get.snackbar('Error', 'Failed to get project recommendations');
-      // if (kDebugMode) {
-      //   print(e.toString());
-      // }
-      rethrow;
-    }
-    throw Exception('Unexpected error during project recommendations');
-  }
 
   /// Handles HTTP errors by throwing appropriate exceptions.
-  void _handleHttpError(http.Response response) {
-    final message = 'HTTP Error:${response.body}';
-    //Get.snackbar('Error', response.body);
-    throw Exception(message);
-  }
 
   /// Disposes of the HTTP client.
   void dispose() {

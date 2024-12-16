@@ -19,4 +19,9 @@ class LoginResponse {
     data['role'] = role;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'LoginResponse{user: $user, role: $role}';
+  }
 }

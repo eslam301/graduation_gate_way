@@ -1,37 +1,40 @@
-class User {
+import 'package:graduation_gate_way/src/core/api/models/login_response.dart';
+
+class User extends LoginResponse {
   int? id;
   int? studentId;
+  int? countUnits;
+  int? trackId;
+  int? doctorId;
+  int? projectId;
+
   String? firstname;
   String? lastname;
   String? email;
   String? username;
   String? password;
-  int? countUnits;
   String? track;
-  int? trackId;
-  int? doctorId;
   String? doctor;
-  int? projectId;
   String? project;
   String? phoneNumber;
 
-  User({
-    this.id,
-    this.studentId,
-    this.firstname,
-    this.lastname,
-    this.email,
-    this.username,
-    this.password,
-    this.countUnits,
-    this.trackId,
-    this.track,
-    this.doctorId,
-    this.doctor,
-    this.projectId,
-    this.project,
-    this.phoneNumber,
-  });
+  User(
+      {this.id,
+      this.studentId,
+      this.firstname,
+      this.lastname,
+      this.email,
+      this.username,
+      this.password,
+      this.countUnits,
+      this.trackId,
+      this.track,
+      this.doctorId,
+      this.doctor,
+      this.projectId,
+      this.project,
+      this.phoneNumber,
+      super.role});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -51,6 +54,7 @@ class User {
     phoneNumber = json['phone_num'];
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
@@ -89,6 +93,7 @@ class User {
      $projectId,
      $project,
      $phoneNumber,
+     $role
     """;
   }
 }

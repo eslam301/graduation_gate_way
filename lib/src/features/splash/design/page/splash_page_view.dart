@@ -15,7 +15,6 @@ class SplashPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SplashControllerImp());
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: AppColors.mainColor,
       body: Center(

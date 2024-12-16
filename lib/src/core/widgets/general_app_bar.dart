@@ -7,8 +7,8 @@ PreferredSize generalAppBar({
   String? userName,
   String? subTitle,
   String? title,
-  int height = 130,
-  bool centerTitle = false,
+  int height = 80,
+  bool centerTitle = true,
 }) {
   return PreferredSize(
     preferredSize: Size.fromHeight(height.h),
@@ -30,8 +30,8 @@ PreferredSize generalAppBar({
             ? null
             : Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 21,
+                style: TextStyle(
+                  fontSize: title.length > 20 ? 18 : 21,
                   fontWeight: FontWeight.w400,
                   color: AppColors.white,
                 ),

@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
 
+import '../../../../core/api/api_manger.dart';
 import '../../data/models/project_model.dart';
 
 abstract class ProjectRegisterController extends GetxController {
@@ -11,8 +15,6 @@ abstract class ProjectRegisterController extends GetxController {
       List.generate(6, (_) => TextEditingController());
   final List<TextEditingController> studentIdList =
       List.generate(6, (_) => TextEditingController());
-  final List<TextEditingController> doctorsNameList =
-      List.generate(3, (_) => TextEditingController());
 
   late final ProjectModel projectModel;
 
@@ -55,14 +57,18 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
         curve: Curves.easeInOut,
       );
     } else {
-      print("Moving to the next page...");
+      log("Project details submitted");
     }
+  }
+
+  Future<List<DoctorModel>> getDoctors() async {
+    return await Get.find<ApiManager>().getDoctors();
   }
 
   @override
   void submit() {
     // Add your submit logic here
-    print("Submitting project details...");
+    log("Submitting project details...");
   }
 
   bool isLastPage() => currentPageIndex.value == 1;
@@ -73,7 +79,6 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     for (var controller in [
       ...studentNameList,
       ...studentIdList,
-      ...doctorsNameList
     ]) {
       controller.dispose();
     }

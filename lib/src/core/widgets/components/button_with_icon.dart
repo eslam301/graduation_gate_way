@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_color.dart';
-
 class ButtonWithIcon extends StatelessWidget {
   final String text;
   final IconData icon;
@@ -15,7 +13,7 @@ class ButtonWithIcon extends StatelessWidget {
     this.icon = Icons.add,
     this.onPressed,
     this.iconAlignment = IconAlignment.end,
-    this.color = AppColors.mainColor,
+    this.color,
   });
 
   @override
@@ -23,7 +21,8 @@ class ButtonWithIcon extends StatelessWidget {
     return FilledButton.icon(
       onPressed: onPressed ?? () {},
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(color),
+        backgroundColor:
+            WidgetStateProperty.all(color ?? Theme.of(context).primaryColor),
         minimumSize: WidgetStateProperty.all(const Size(230, 50)),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(

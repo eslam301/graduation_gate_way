@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../controller/project_recommendation_controller.dart';
 import 'answers_list.dart';
 import 'multi_answer_search.dart';
 
@@ -16,7 +14,6 @@ class AnswerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final controller = Get.find<ProjectRecommendationControllerImp>();
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
@@ -50,8 +47,10 @@ class AnswerContainer extends StatelessWidget {
                   questionModel: questionModel!,
                 )
               : AnswersMultipleSearch(
-                  key: controller.keys[questionModel!.index - 1],
-                  questionModel: questionModel!,
+                  answers: questionModel!.answers,
+                  searchEnabled: true,
+                  selectionListAnswerMethod:
+                      questionModel!.selectionListAnswerMethod,
                 ),
         ],
       ),

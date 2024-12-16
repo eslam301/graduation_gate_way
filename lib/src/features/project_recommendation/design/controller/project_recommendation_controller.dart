@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/core/api/models/projects_recommendations.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
@@ -10,6 +9,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../../../../core/api/models/user.dart';
 import '../../../../core/const/consts.dart';
 import '../../../../core/route/routes_name.dart';
+import '../../data/data_source/api/project_recommendation_api.dart';
 import '../widget/answer_container.dart';
 
 abstract class ProjectRecommendationController extends GetxController {
@@ -22,7 +22,7 @@ abstract class ProjectRecommendationController extends GetxController {
 
 class ProjectRecommendationControllerImp
     extends ProjectRecommendationController {
-  final _apiManager = Get.find<ApiManager>();
+  final _apiManager = Get.find<ProjectRecommendationApi>();
   final _connection = InternetConnectionChecker();
 
   // Reactive Variables

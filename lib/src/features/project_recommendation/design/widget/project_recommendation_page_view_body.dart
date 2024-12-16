@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
+import 'package:graduation_gate_way/src/features/project_recommendation/design/widget/selcted_answer_container.dart';
 
 import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/components/button_with_icon.dart';
@@ -16,7 +17,6 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -38,7 +38,7 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
               controller: controller.pageController,
               physics: const NeverScrollableScrollPhysics(),
               pageSnapping: false,
-              allowImplicitScrolling: true,
+              //allowImplicitScrolling: true,
               children: [
                 ...List.generate(
                   controller.questions.length,
@@ -47,59 +47,7 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                     questionModel: controller.questions[index],
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: GetBuilder<ProjectRecommendationControllerImp>(
-                      builder: (context) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Skills : ${controller.selectedSkills.join(', ')}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          'difficulty :${controller.selectedDifficulty}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          'categories :${controller.selectedCategories.join(', ')}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          'keywords :${controller.selectedKeywords.join(', ')}',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          softWrap: true,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-                ),
+                const SelectedAnswerContainer()
               ],
             ),
           ),

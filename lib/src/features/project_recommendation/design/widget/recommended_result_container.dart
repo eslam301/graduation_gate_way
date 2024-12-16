@@ -32,6 +32,7 @@ class RecommendedResultContainer extends StatelessWidget {
           CachedNetworkImage(
             imageUrl: project.imageLink ?? AppImagePathNetwork.errorImageLink,
             fit: BoxFit.cover,
+            height: 120,
             placeholder: (context, url) => const SizedBox(
                 height: 100,
                 width: double.infinity,
