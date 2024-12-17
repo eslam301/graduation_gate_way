@@ -20,6 +20,10 @@ class LoginResponse {
     return data;
   }
 
+  User? getUser() {
+    return user?.copyWith(role: role);
+  }
+
   @override
   String toString() {
     return 'LoginResponse{user: $user, role: $role}';

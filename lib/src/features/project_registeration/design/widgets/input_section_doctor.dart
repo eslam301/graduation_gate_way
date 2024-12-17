@@ -36,9 +36,9 @@ class InputSectionDoctor extends StatelessWidget {
               isFuturesEnabled: true,
               searchEnabled: true,
               selectionListAnswerMethodObject: (value) {
-                value.forEach((element) {
-                  log(element.toString());
-                });
+                int? id = int.parse(value[0].toString());
+                log(id.toString());
+                controller.addDoctorId(id);
               },
               fetchAnswersFuture: () async {
                 List<DoctorModel> doctors = await controller.getDoctors();

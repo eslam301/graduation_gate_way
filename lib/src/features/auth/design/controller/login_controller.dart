@@ -29,7 +29,7 @@ class LoginControllerImp extends LoginController {
   void onInit() {
     userNameController = TextEditingController();
     passwordController = TextEditingController();
-    connection = InternetConnectionChecker();
+    connection = Get.find<InternetConnectionChecker>();
     super.onInit();
   }
 

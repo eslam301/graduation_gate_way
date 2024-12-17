@@ -42,13 +42,11 @@ class LoginBody extends StatelessWidget {
         const SizedBox(height: 30),
         CustomTextFormField.user(
           controller: controller.userNameController,
-          delay: 200,
           labelText: 'User Name',
           hintText: 'User Name',
         ),
         const SizedBox(height: 10),
         CustomTextFormField.password(
-          delay: 300,
           controller: controller.passwordController,
         ),
         const SizedBox(height: 20),

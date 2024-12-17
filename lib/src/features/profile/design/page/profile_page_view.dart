@@ -1,104 +1,133 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theme/app_color.dart';
+import '../../../../core/api/models/user.dart';
+import '../../../../core/utils/shared_pref.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/general_app_bar.dart';
+import '../widget/profile_list_tile.dart';
 
-class ProfilePageView extends StatelessWidget {
+class ProfilePageView extends StatefulWidget {
   const ProfilePageView({super.key});
+
+  @override
+  State<ProfilePageView> createState() => _ProfilePageViewState();
+}
+
+class _ProfilePageViewState extends State<ProfilePageView> {
+  User? user;
+  bool isLoading = true;
+  List<ProfileListTile> profileListTiles = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    user = await SharedPref.getUserData();
+    profileListTiles = [
+      ProfileListTile(
+        title: 'First Name',
+        iconData: Icons.person,
+        subtitle: user?.firstname ?? '',
+      ),
+      ProfileListTile(
+        title: 'Last Name',
+        iconData: Icons.person,
+        subtitle: user?.lastname ?? '',
+      ),
+      ProfileListTile(
+        title: 'Role',
+        iconData: Icons.person,
+        subtitle: user?.role ?? '',
+      ),
+      ProfileListTile(
+        title: 'Username',
+        iconData: Icons.person,
+        subtitle: user?.username ?? '',
+      ),
+      ProfileListTile(
+        title: 'Email',
+        iconData: Icons.email_rounded,
+        subtitle: user?.email ?? '',
+      ),
+      ProfileListTile(
+        title: 'Phone Number',
+        iconData: Icons.phone,
+        subtitle: user?.phoneNumber ?? '',
+      ),
+    ];
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        endDrawer: const CustomDrawer(),
-        appBar: generalAppBar(
-          title: 'Profile',
-          centerTitle: true,
-          height: 80,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Row(
+      endDrawer: const CustomDrawer(),
+      appBar: generalAppBar(
+        title: 'Profile',
+        centerTitle: true,
+        height: 80,
+      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    'assets/images/user_image.png',
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      'User Name',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
+                  _buildUserHeader(context),
+                  Divider(color: Colors.grey, thickness: 1.w),
+                  _buildUserData(context, profileListTiles),
                 ],
               ),
-              Divider(color: Colors.grey, thickness: 1.w),
-              ...List.generate(
-                  ProfileItem._profileItems.length,
-                  (index) => ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        style: ListTileStyle.drawer,
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios,
-                          size: 20,
-                          color: AppColors.grey,
-                        ),
-                        leading: Icon(
-                          ProfileItem._profileItems[index].icon,
-                          size: 30,
-                          color: AppColors.black,
-                        ),
-                        onTap: () {},
-                        title: Text(ProfileItem._profileItems[index].title),
-                      )),
-              Divider(color: Colors.grey, thickness: 1.w),
-              ...List.generate(
-                  ProfileItem._accountItems.length,
-                  (index) => ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        style: ListTileStyle.drawer,
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios,
-                          size: 20,
-                          color: AppColors.grey,
-                        ),
-                        leading: Icon(
-                          ProfileItem._accountItems[index].icon,
-                          size: 30,
-                          color: AppColors.black,
-                        ),
-                        onTap: () {},
-                        title: Text(ProfileItem._accountItems[index].title),
-                      )),
+            ),
+    );
+  }
+
+  Widget _buildUserHeader(BuildContext context) {
+    return Row(
+      children: [
+        Image.asset(
+          'assets/images/user_image.png',
+          width: 60,
+          height: 60,
+          fit: BoxFit.cover,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${user?.firstname ?? ''} ${user?.lastname ?? ''}', // Full name
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                user?.email ?? '', // Email address
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              Text(
+                user?.phoneNumber ?? '', // Phone number
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
             ],
           ),
-        ));
+        ),
+      ],
+    );
   }
-}
 
-class ProfileItem {
-  final String title;
-  final IconData icon;
-  final void Function()? onTap;
-
-  static final List<ProfileItem> _profileItems = [
-    ProfileItem(title: 'Name', icon: Icons.person),
-    ProfileItem(title: 'Phone', icon: Icons.call),
-    ProfileItem(title: 'Mail', icon: Icons.mail),
-    ProfileItem(title: 'change password', icon: Icons.lock),
-  ];
-  static final List<ProfileItem> _accountItems = [
-    ProfileItem(title: 'Notification', icon: Icons.notifications),
-    ProfileItem(title: 'help', icon: Icons.help),
-    ProfileItem(title: 'about', icon: Icons.info),
-    ProfileItem(title: 'Logout', icon: Icons.logout),
-  ];
-
-  ProfileItem({required this.title, required this.icon, this.onTap});
+  Widget _buildUserData(
+      BuildContext context, List<ProfileListTile> profileListTiles) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: profileListTiles.length,
+      itemBuilder: (context, index) => profileListTiles[index],
+    );
+  }
 }

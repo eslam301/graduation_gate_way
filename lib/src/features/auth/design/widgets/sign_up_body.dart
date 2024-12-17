@@ -50,14 +50,15 @@ class SignUpBodyDoctor extends StatelessWidget {
                   ),
                 )),
           ),
-          const CustomTextFormField.name(labelText: 'first Name', delay: 200),
-          const CustomTextFormField.name(labelText: 'last Name', delay: 300),
-          const CustomTextFormField.user(delay: 400),
+          const CustomTextFormField.name(labelText: 'first Name'),
+          const CustomTextFormField.name(labelText: 'last Name'),
+          const CustomTextFormField.user(),
           const CustomTextFormField.email(
-              labelText: 'Email Address', delay: 500),
-          const CustomTextFormField.phone(delay: 600),
-          const CustomTextFormField.password(delay: 700),
-          const CustomTextFormField.confirmPassword(delay: 800),
+            labelText: 'Email Address',
+          ),
+          const CustomTextFormField.phone(),
+          const CustomTextFormField.password(),
+          const CustomTextFormField.confirmPassword(),
           CustomDropDownItemBar(
             hintText: 'Your Track',
             dropItems: [

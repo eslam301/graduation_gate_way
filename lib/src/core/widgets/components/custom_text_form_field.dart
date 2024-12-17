@@ -1,113 +1,121 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../theme/app_color.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final int? delay;
   final TextEditingController? controller;
+  final double radius;
   final String? hintText;
   final String? labelText;
   final IconData? suffixIcon;
   final Widget? suffixIconWidget;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
+  final Color? borderColor;
 
   const CustomTextFormField({
     super.key,
     this.controller,
+    this.borderColor = Colors.transparent,
+    this.radius = 15,
     this.hintText,
     this.labelText,
     this.suffixIcon,
     this.suffixIconWidget,
     this.validator,
     this.textInputType,
-    this.delay,
   });
 
   const CustomTextFormField.email({
     super.key,
     this.controller,
+    this.radius = 15,
+    this.borderColor = Colors.transparent,
     this.hintText = 'Enter your email',
     this.labelText = 'Email Address',
     this.suffixIcon = Icons.email_outlined,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.emailAddress,
-    this.delay,
   });
 
   const CustomTextFormField.user({
     super.key,
     this.controller,
+    this.radius = 15,
     this.hintText = 'Enter user name',
     this.labelText = 'User Name',
     this.suffixIcon = Icons.person_outline,
+    this.borderColor = Colors.transparent,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.name,
-    this.delay,
   });
 
   const CustomTextFormField.name({
     super.key,
     this.controller,
+    this.radius = 15,
     this.hintText = 'Enter your name',
     this.labelText = 'Name',
     this.suffixIcon = Icons.person_4_outlined,
+    this.borderColor = Colors.transparent,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.name,
-    this.delay,
   });
 
   const CustomTextFormField.phone({
     super.key,
     this.controller,
     this.hintText = 'Enter your phone number',
+    this.radius = 15,
     this.labelText = 'Phone number',
     this.suffixIcon = Icons.call_outlined,
+    this.borderColor = Colors.transparent,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.phone,
-    this.delay,
   });
 
   const CustomTextFormField.number({
     super.key,
     this.controller,
+    this.radius = 15,
     this.hintText = 'number',
     this.labelText = 'number',
     this.suffixIcon = Icons.perm_identity,
+    this.borderColor = Colors.transparent,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.number,
-    this.delay,
   });
 
   const CustomTextFormField.password({
     super.key,
     this.controller,
+    this.radius = 15,
     this.hintText = 'Enter your password',
     this.labelText = 'Password',
     this.suffixIcon = Icons.visibility_rounded,
+    this.borderColor = Colors.transparent,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.visiblePassword,
-    this.delay,
   });
 
   const CustomTextFormField.confirmPassword({
     super.key,
     this.controller,
+    this.radius = 15,
     this.hintText = 'Enter your password again',
+    this.borderColor = Colors.transparent,
     this.labelText = 'confirm Password',
     this.suffixIcon = Icons.visibility_rounded,
     this.suffixIconWidget,
     this.validator,
     this.textInputType = TextInputType.visiblePassword,
-    this.delay,
   });
 
   @override
@@ -126,67 +134,67 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return FadeInLeft(
-      duration: const Duration(milliseconds: 400),
-      delay: Duration(milliseconds: widget.delay ?? 0),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.labelText!,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.labelText!,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 16.sp,
             ),
-            SizedBox(height: 8.h),
-            TextFormField(
-              controller: widget.controller,
-              keyboardType: widget.textInputType,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppColors.white,
-                border: outlineBorder(theme),
-                enabledBorder: outlineBorder(theme),
-                focusedBorder: outlineBorder(theme),
-                hintText: widget.hintText,
-                suffixIcon: widget.suffixIcon != Icons.visibility_rounded
-                    ? Icon(
-                        widget.suffixIcon,
-                        color: theme.primaryColor,
-                        size: 20,
-                      )
-                    : obscureTextWidget(theme),
-                hintStyle: TextStyle(
-                  color: AppColors.grey,
-                  //fontFamily: fontName1,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-                //lapel
-                //labelText: widget.labelText,
-                // labelStyle: TextStyle(
-                //   color: theme.primaryColor,
-                //   //fontFamily: fontName2,
-                //   fontSize: 14.sp,
-                //   fontWeight: FontWeight.w800,
-                // ),
-              ),
-              obscureText: obscureText,
-              obscuringCharacter: '*',
-              style: TextStyle(
+          ),
+          SizedBox(height: 8.h),
+          TextFormField(
+            controller: widget.controller,
+            keyboardType: widget.textInputType,
+            maxLines: widget.suffixIcon != null ? 1 : 5,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: AppColors.white,
+              border: outlineBorder(theme,
+                  color: widget.borderColor, radius: widget.radius),
+              enabledBorder: outlineBorder(theme,
+                  color: widget.borderColor, radius: widget.radius),
+              focusedBorder: outlineBorder(theme,
+                  color: widget.borderColor, radius: widget.radius),
+              hintText: widget.hintText,
+              suffixIcon: widget.suffixIcon != Icons.visibility_rounded
+                  ? Icon(
+                      widget.suffixIcon,
+                      color: theme.primaryColor,
+                      size: 20,
+                    )
+                  : obscureTextWidget(theme),
+              hintStyle: TextStyle(
                 color: AppColors.grey,
-                //fontFamily: fontName2,
+                //fontFamily: fontName1,
                 fontSize: 16.sp,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w500,
               ),
-              validator: widget.validator,
+              //lapel
+              //labelText: widget.labelText,
+              // labelStyle: TextStyle(
+              //   color: theme.primaryColor,
+              //   //fontFamily: fontName2,
+              //   fontSize: 14.sp,
+              //   fontWeight: FontWeight.w800,
+              // ),
             ),
-          ],
-        ),
+            obscureText: obscureText,
+            obscuringCharacter: '*',
+            style: TextStyle(
+              color: AppColors.grey,
+              //fontFamily: fontName2,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w800,
+            ),
+            validator: widget.validator,
+          ),
+        ],
       ),
     );
   }
@@ -206,11 +214,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     );
   }
 
-  OutlineInputBorder outlineBorder(theme) {
-    return const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+  OutlineInputBorder outlineBorder(theme, {double radius = 12, Color? color}) {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
         borderSide: BorderSide(
-          color: Colors.transparent,
+          color: color ?? Colors.transparent,
           width: 1.0,
         ));
   }

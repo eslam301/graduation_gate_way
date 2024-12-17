@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/features/chat_bot/data/data_source/api/chat_bot_api_manger.dart';
 import 'package:http/http.dart' as http;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../features/project_recommendation/data/data_source/api/project_recommendation_api.dart';
 
@@ -64,6 +65,7 @@ Future<void> $initGetIt(GetIt sl) async {
 Future<void> initGetItGetx() async {
 //   core
   Get.put(http.Client(), permanent: true);
+  Get.put(InternetConnectionChecker(), permanent: true);
   Get.put(ApiManager(client: Get.find<http.Client>()), permanent: true);
   Get.put(ProjectRecommendationApi(client: Get.find<http.Client>()),
       permanent: true);

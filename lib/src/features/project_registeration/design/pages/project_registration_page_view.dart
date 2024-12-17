@@ -5,7 +5,7 @@ import '../../../../core/widgets/components/main_button.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/general_app_bar.dart';
 import '../manager/project_register_controller.dart';
-import '../widgets/input_section_doctor.dart';
+import '../widgets/doctot_project_input.dart';
 import '../widgets/input_section_student.dart';
 
 class ProjectRegistrationPageView extends StatelessWidget {
@@ -28,7 +28,7 @@ class ProjectRegistrationPageView extends StatelessWidget {
           Expanded(
             child: PageView(
               controller: controller.pageController,
-              allowImplicitScrolling: true,
+              // allowImplicitScrolling: true,
               children: [
                 ListView.separated(
                   cacheExtent: 1000,
@@ -43,15 +43,7 @@ class ProjectRegistrationPageView extends StatelessWidget {
                     );
                   },
                 ),
-                ListView.separated(
-                  cacheExtent: 1000,
-                  padding: const EdgeInsets.all(20),
-                  itemCount: 1,
-                  separatorBuilder: (_, __) => const SizedBox(height: 20),
-                  itemBuilder: (context, index) {
-                    return const InputSectionDoctor();
-                  },
-                ),
+                DoctorAndProjectInputSection(controller: controller),
               ],
             ),
           ),
