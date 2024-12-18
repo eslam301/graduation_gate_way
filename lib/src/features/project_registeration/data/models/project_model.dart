@@ -1,7 +1,7 @@
 import '../../../../core/api/models/projects_recommendations.dart';
 
 class ProjectModel extends ProjectRecommendationModel {
-  List<Students> students = [];
+  List<Student> students = [];
   List<String> doctorsNames = [];
 
   ProjectModel({
@@ -38,9 +38,9 @@ class ProjectModel extends ProjectRecommendationModel {
   }
 }
 
-class Students {
+class Student {
   String? name;
   String? id;
 
-  Students({required this.name, required this.id});
+  Student({required this.name, required this.id});
 }

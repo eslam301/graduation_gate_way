@@ -3,12 +3,13 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
-import 'package:graduation_gate_way/src/core/utils/shared_pref.dart';
+import 'package:graduation_gate_way/src/core/api/models/student_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../error/error_handel_api.dart';
 import 'models/login_response.dart';
 import 'models/register_project_model.dart';
+import 'models/track_model.dart';
 import 'models/user.dart';
 
 class ApiManager {
@@ -49,18 +50,65 @@ class ApiManager {
     return [];
   }
 
-  registerProject(RegisterProjectModel project) async {
-    final url = Uri.parse('$baseUrl/api/Project/add-project');
-    final body = jsonEncode(project.toJson());
+  Future<List<TrackModel>> getTracks() async {
+    final url = Uri.parse('$baseUrl/api/Tracks');
+    try {
+      // Send HTTP GET request
+      final response = await client.get(url, headers: baseHeaders);
+
+      if (response.statusCode == 200) {
+        // Decode response body to a List of Map objects
+        final List<dynamic> decodedData = jsonDecode(response.body);
+
+        // Map each JSON object to a TrackModel
+        return decodedData.map((json) => TrackModel.fromJson(json)).toList();
+      } else {
+        // Handle HTTP errors
+        handleHttpError(response);
+      }
+    } catch (e) {
+      // Rethrow exceptions for the caller to handle
+      log(e.toString());
+      rethrow;
+    }
+    throw [];
+  }
+
+  Future<StudentModel> signUpStudent({required StudentModel student}) async {
+    final url = Uri.parse('$baseUrl/api/Student');
+    final body = jsonEncode(student.toJsonBody());
     try {
       log('body: $body');
       final response = await client.post(url, body: body, headers: baseHeaders);
+      if (response.statusCode == 200) {
+        log('Student registered successfully${response.body}');
+        Get.snackbar('Success', 'Student registered successfully');
+        return StudentModel.fromJson(jsonDecode(response.body));
+      } else if (response.statusCode == 400) {
+        log('Failed to register student${response.body}');
+        Get.snackbar('Error', 'Failed to register student${response.body}');
+      } else {
+        handleHttpError(response);
+        log('Failed to register student${response.body}');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to register student');
+    }
+    throw Exception('Failed to register student');
+  }
 
+  registerProject(RegisterProjectModel project) async {
+    final url = Uri.parse('$baseUrl/api/Project/add-project');
+    final body = jsonEncode(project.toJsonBody());
+    try {
+      log('body: $body');
+      final response = await client.post(url, body: body, headers: baseHeaders);
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'Project registered successfully');
         log('Project registered successfully${response.body}');
       } else if (response.statusCode == 400) {
-        Get.snackbar('Error', 'Project already registered');
+        log('Failed to register project${response.body}');
+        Get.snackbar('Error', 'Failed to register project${response.body}');
       } else {
         handleHttpError(response);
         log('Failed to register project${response.body}');
@@ -73,13 +121,13 @@ class ApiManager {
 
   /// Logs in the user and returns a [User] object.
   Future<User> login({
-    String? userName = 'eslam',
-    String? password = 'eslam123',
+    String? userName,
+    String? password,
   }) async {
     final url = Uri.parse('$baseUrl/api/Token/Login');
     final body = jsonEncode({
-      "username": userName,
-      "password": password,
+      "username": userName ?? 'test',
+      "password": password ?? 'test123',
     });
 
     try {
@@ -93,8 +141,6 @@ class ApiManager {
         log('Login successfully : ${user.toString()}');
         Get.snackbar('Success', 'Login successfully');
         //print(loginResponse.user.toString());
-        SharedPref.saveUserData(user);
-        SharedPref.saveUserId(user.id.toString());
         return user;
       } else if (response.statusCode == 400) {
         Get.snackbar('Error', 'Invalid username or password');

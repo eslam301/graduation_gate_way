@@ -10,22 +10,17 @@ import '../../../../core/api/api_manger.dart';
 import '../../data/models/project_model.dart';
 
 abstract class ProjectRegisterController extends GetxController {
-  final PageController pageController = PageController();
   final RxInt currentPageIndex = 0.obs;
 
-  final List<TextEditingController> studentNameList =
-      List.generate(6, (_) => TextEditingController());
-  final List<TextEditingController> studentIdList =
-      List.generate(6, (_) => TextEditingController());
+  final TextEditingController studentNameController = TextEditingController();
+  final TextEditingController studentIdController = TextEditingController();
 
-  final TextEditingController nameController = TextEditingController();
+  final TextEditingController projectNameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController proposalFileNameController =
       TextEditingController();
 
   late final ProjectModel projectModel;
-
-  void nextPage();
 
   void submit();
 
@@ -54,25 +49,8 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
 
     if (projectModel != ProjectModel.empty()) {
       updateRegisterProjectModelFromRecommended(projectModel: projectModel);
-      nameController.text = projectModel.title ?? '';
+      projectNameController.text = projectModel.title ?? '';
       descriptionController.text = projectModel.description ?? '';
-    }
-
-    // Update page index reactively on page changes
-    pageController.addListener(() {
-      final page = pageController.page?.round() ?? 0;
-      currentPageIndex(page);
-    });
-  }
-
-  @override
-  void nextPage() {
-    if (!isLastPage()) {
-      addStudentListId();
-      pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     }
   }
 
@@ -81,9 +59,9 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
   void updateRegisterProjectModelFromRecommended(
       {required ProjectModel projectModel}) {
     registerProjectModel = registerProjectModel.copyWith(
-      name: projectModel.title ?? '',
+      projectName: projectModel.title ?? '',
       description: projectModel.description ?? '',
-      categoryId: 1,
+      categoryId: 0,
     );
   }
 
@@ -93,14 +71,12 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     );
   }
 
-  void addStudentListId() {
-    final studentIds = studentIdList
-        .where((controller) => controller.text.isNotEmpty)
-        .map((controller) => int.parse(controller.text))
-        .toList();
-
+  void addProjectData() {
     registerProjectModel = registerProjectModel.copyWith(
-      studentIds: studentIds,
+      studentName: studentNameController.text,
+      studentId: int.parse(studentIdController.text),
+      projectName: projectNameController.text,
+      description: descriptionController.text,
     );
   }
 
@@ -108,6 +84,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
   void submit() async {
     if (await connection.hasConnection) {
       try {
+        addProjectData();
         await apiManager.registerProject(registerProjectModel);
         log("Project registration submitted successfully: $registerProjectModel");
       } catch (e) {
@@ -122,9 +99,8 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
 
   @override
   void onClose() {
-    pageController.dispose();
-    studentNameList.forEach((controller) => controller.dispose());
-    studentIdList.forEach((controller) => controller.dispose());
+    studentNameController.dispose();
+    studentIdController.dispose();
     super.onClose();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 
-import '../../../../core/theme/app_color.dart';
+import '../theme/app_color.dart';
 
 class AnswersMultipleSearch extends StatelessWidget {
   // Properties

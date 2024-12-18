@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 
 import '../../../../core/theme/app_color.dart';
+import '../../../../core/widgets/multi_answer_search.dart';
 import 'answers_list.dart';
-import 'multi_answer_search.dart';
 
 class AnswerContainer extends StatelessWidget {
   final QuestionModel? questionModel;

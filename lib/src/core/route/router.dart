@@ -12,6 +12,8 @@ import 'package:graduation_gate_way/src/features/profile/design/page/profile_pag
 import '../../features/auth/design/page/login_page_view.dart';
 import '../../features/auth/design/page/otp_page_view.dart';
 import '../../features/auth/design/page/reset_password_page_view.dart';
+import '../../features/auth/design/page/sign_up_page_as_doctor.dart';
+import '../../features/auth/design/page/sign_up_page_as_student.dart';
 import '../../features/on_boarding/design/layout/on_boarding_layout.dart';
 import '../../features/project_recommendation/design/page/project_recommendation_page_view.dart';
 import '../../features/project_recommendation/design/page/project_recommendation_result_page.dart';
@@ -27,7 +29,11 @@ class AppRouter {
     getPage(name: Routes.splash, page: () => const SplashPageView()),
     // Auth
     getPage(name: Routes.login, page: () => const LoginPageView()),
-    getPage(name: Routes.signUp, page: () => const SignUpPageViewDoctor()),
+    getPage(name: Routes.signUp, page: () => const SignUpPageView()),
+    getPage(
+        name: Routes.signUpAsDoctor, page: () => const SignUpPageAsDoctor()),
+    getPage(
+        name: Routes.signUpAsStudent, page: () => const SignUpPageAsStudent()),
     getPage(
         name: Routes.forgetPassword,
         page: () => const ForgetPasswordPageView()),

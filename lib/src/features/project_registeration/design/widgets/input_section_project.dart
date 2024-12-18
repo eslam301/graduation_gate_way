@@ -21,7 +21,7 @@ class InputSectionProject extends StatelessWidget {
           children: [
             const Text('Project Input Section'),
             CustomTextFormField(
-              controller: controller.nameController,
+              controller: controller.projectNameController,
               labelText: 'Project Name',
               borderColor: Colors.black,
               radius: 20,

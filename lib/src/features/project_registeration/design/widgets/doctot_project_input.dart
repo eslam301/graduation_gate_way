@@ -11,7 +11,7 @@ class DoctorAndProjectInputSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(padding: const EdgeInsets.all(20), children: const [
+    return const Column(children: [
       InputSectionDoctor(),
       SizedBox(height: 20),
       InputSectionProject()

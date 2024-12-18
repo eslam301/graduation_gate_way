@@ -6,7 +6,7 @@ import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
 import 'package:graduation_gate_way/src/features/project_registeration/design/manager/project_register_controller.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 
-import '../../../project_recommendation/design/widget/multi_answer_search.dart';
+import '../../../../core/widgets/multi_answer_search.dart';
 
 class InputSectionDoctor extends StatelessWidget {
   const InputSectionDoctor({

@@ -1,86 +1,103 @@
 class RegisterProjectModel {
-  String? name;
-  String? description;
-  String? proposalFileName;
   int? categoryId;
   int? doctorId;
-  List<int>? studentIds;
+  int? studentId;
+  String? projectName;
+  String? description;
+  String? proposalFileName;
+  String? studentName;
 
   // Constructor
   RegisterProjectModel({
-    this.name,
-    this.description,
-    this.proposalFileName,
     this.categoryId,
     this.doctorId,
-    this.studentIds,
+    this.studentId,
+    this.studentName,
+    this.projectName,
+    this.description,
+    this.proposalFileName,
   });
 
   // Empty factory method with reasonable defaults
   RegisterProjectModel.empty()
-      : name = '',
+      : projectName = '',
         description = '',
         proposalFileName = '',
+        studentName = '',
         categoryId = 0,
         doctorId = 0,
-        studentIds = const [];
+        studentId = 0;
 
   // Factory for creating an instance from JSON
   factory RegisterProjectModel.fromJson(Map<String, dynamic> json) {
     return RegisterProjectModel(
-      name: json['name'],
+      projectName: json['name'],
       description: json['description'],
       proposalFileName: json['proposalFileName'],
+      studentName: json['studentName'],
       categoryId: json['categoryId'] ?? 0,
       doctorId: json['doctorId'] ?? 0,
-      studentIds:
-          json['studentIds'] != null ? List<int>.from(json['studentIds']) : [],
+      studentId: json['studentId'],
     );
   }
 
   // Convert instance to JSON
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'name': projectName,
+      'description': description,
+      'proposalFileName': proposalFileName,
+      'studentName': studentName,
+      'categoryId': categoryId,
+      'doctorId': doctorId,
+      'studentId': studentId,
+    };
+  }
+
+  Map<String, dynamic> toJsonBody() {
+    return {
+      'name': projectName,
       'description': description,
       'proposalFileName': proposalFileName,
       'categoryId': categoryId,
       'doctorId': doctorId,
-      'studentIds': studentIds,
+      'studentId': studentId,
     };
   }
 
   // Improved copyWith method (returns a new instance)
   RegisterProjectModel copyWith({
-    String? name,
+    String? projectName,
     String? description,
     String? proposalFileName,
+    String? studentName,
     int? categoryId,
     int? doctorId,
-    List<int>? studentIds,
+    int? studentId,
   }) {
     return RegisterProjectModel(
-      name: name ?? this.name,
+      projectName: projectName ?? this.projectName,
       description: description ?? this.description,
       proposalFileName: proposalFileName ?? this.proposalFileName,
+      studentName: studentName ?? this.studentName,
       categoryId: categoryId ?? this.categoryId,
       doctorId: doctorId ?? this.doctorId,
-      studentIds: studentIds ?? this.studentIds,
+      studentId: studentId ?? this.studentId,
     );
   }
 
   // Reset all fields to default (mutates the current instance)
   void clear() {
-    name = '';
+    projectName = '';
     description = '';
     proposalFileName = '';
     categoryId = 0;
     doctorId = 0;
-    studentIds = [];
+    studentId = 0;
   }
 
   @override
   String toString() {
-    return 'RegisterProjectModel{name: $name, description: $description, proposalFileName: $proposalFileName, categoryId: $categoryId, doctorId: $doctorId, studentIds: $studentIds}';
+    return 'RegisterProjectModel{name: $projectName, description: $description, proposalFileName: $proposalFileName, categoryId: $categoryId, doctorId: $doctorId, studentIds: $studentId}';
   }
 }

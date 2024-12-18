@@ -38,7 +38,7 @@ class User extends LoginResponse {
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    studentId = json['st_id'];
+    studentId = json['st_ID'];
     firstname = json['firstname'];
     lastname = json['lastname'];
     email = json['email'];

@@ -6,7 +6,6 @@ import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart
 import 'package:graduation_gate_way/src/features/auth/design/widgets/terms_widget.dart';
 
 import '../../../../core/theme/app_color.dart';
-import '../../../../core/widgets/components/custom_drop_down_item_bar.dart';
 import '../../../../core/widgets/components/custom_text_form_field.dart';
 import '../controller/sign_up_controller.dart';
 
@@ -15,9 +14,8 @@ class SignUpBodyDoctor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SignUpControllerImp controller = Get.put(SignUpControllerImp());
+    SignUpControllerImp controller = Get.find<SignUpControllerImp>();
     const Duration animationDuration = Duration(milliseconds: 400);
-
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 100),
       child: Column(
@@ -59,41 +57,12 @@ class SignUpBodyDoctor extends StatelessWidget {
           const CustomTextFormField.phone(),
           const CustomTextFormField.password(),
           const CustomTextFormField.confirmPassword(),
-          CustomDropDownItemBar(
-            hintText: 'Your Track',
-            dropItems: [
-              DropItemModel(
-                title: 'Flutter',
-                value: 'Fl',
-              ),
-              DropItemModel(
-                title: 'AI',
-                value: 'Ai',
-              ),
-              DropItemModel(
-                title: 'Machine Learning',
-                value: 'Ml',
-              ),
-              DropItemModel(
-                title: 'Android',
-                value: 'And',
-              ),
-              DropItemModel(
-                title: 'IOS',
-                value: 'Ios',
-              ),
-              DropItemModel(
-                title: 'Web',
-                value: 'Web',
-              ),
-            ],
-          ),
           const TermsAndPrivacyCheckbox(),
-          SizedBox(
-            height: 16.h,
+          const SizedBox(
+            height: 20,
           ),
           SizedBox(
-            width: 275.w,
+            width: 275,
             child: MainButton(
                 text: 'Create account',
                 onPressed: () {

@@ -32,9 +32,10 @@ class HomeLayoutControllerImp extends HomeLayoutController {
 
   Future<void> _initializeUser() async {
     isLoading.value = true; // Update only reactive variable
+
     try {
       user = await SharedPref.getUserData();
-      log("User loaded successfully: ${user.toJson}");
+      log("User loaded successfully: ${user.toString()}");
       Get.put(user);
     } catch (e) {
       log("Error initializing user: $e");

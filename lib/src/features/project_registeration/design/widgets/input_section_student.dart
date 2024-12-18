@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/text_input_field.dart';
 
 class InputSectionStudent extends StatelessWidget {
-  final int index;
   final TextEditingController nameController;
   final TextEditingController idController;
 
   const InputSectionStudent({
     super.key,
-    required this.index,
     required this.nameController,
     required this.idController,
   });
@@ -16,6 +14,7 @@ class InputSectionStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: const BoxConstraints(maxWidth: 200),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.white,
@@ -26,7 +25,7 @@ class InputSectionStudent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Student ${index + 1}',
+              'Student',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             TextInputField.name(

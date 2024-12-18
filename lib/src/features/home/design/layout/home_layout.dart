@@ -16,7 +16,7 @@ class HomeLayOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeLayoutControllerImp controller =
-        Get.put(HomeLayoutControllerImp(), permanent: true);
+        Get.put(HomeLayoutControllerImp());
     final pagesList = pages(controller);
 
     return Obx(() {
