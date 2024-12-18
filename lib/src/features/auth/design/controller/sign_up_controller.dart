@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
+import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -27,7 +28,7 @@ abstract class SignUpController extends GetxController {
 
   late final ApiManager apiManager;
 
-  createAccount();
+  createStudentAccount();
 
   navigateToLogin();
 }
@@ -40,7 +41,7 @@ class SignUpControllerImp extends SignUpController {
   }
 
   @override
-  createAccount() {
+  createStudentAccount() {
     StudentModel student = StudentModel(
       firstname: firstNameController.text,
       lastname: lastNameController.text,
@@ -53,6 +54,21 @@ class SignUpControllerImp extends SignUpController {
     );
     apiManager.signUpStudent(student: student);
     log('Student model ${student.toString()}');
+  }
+
+  createDoctorAccount() {
+    DoctorModel doctor = DoctorModel(
+      firstname: firstNameController.text,
+      lastname: lastNameController.text,
+      phoneNumber: phoneNumberController.text,
+      username: userNameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      //trackId: selectedTrackId ?? 1,
+      //countUnits: int.parse(countStudentUnitsController.text),
+    );
+    apiManager.signUpDoctor(doctor: doctor);
+    log('Student model ${doctor.toString()}');
   }
 
   @override

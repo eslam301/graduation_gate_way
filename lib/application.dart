@@ -25,6 +25,8 @@ class GraduationGateWay extends StatelessWidget {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.system,
             defaultTransition: Transition.cupertino,
             transitionDuration: const Duration(milliseconds: 300),
             getPages: AppRouter.pagesRoute,

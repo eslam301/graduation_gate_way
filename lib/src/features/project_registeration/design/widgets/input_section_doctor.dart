@@ -44,7 +44,7 @@ class InputSectionDoctor extends StatelessWidget {
                 List<DoctorModel> doctors = await controller.getDoctors();
                 return doctors
                     .map((e) => DropdownItem(
-                          label: e.fullName ?? e.userName ?? '',
+                          label: e.fullName ?? e.username ?? '',
                           value: e.id ?? 0,
                         ))
                     .toList();

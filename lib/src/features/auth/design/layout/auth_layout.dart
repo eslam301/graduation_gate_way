@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/theme/app_color.dart';
 import '../widgets/login_app_bar.dart';
 
 class AuthLayout extends StatelessWidget {
@@ -14,9 +13,7 @@ class AuthLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: LoginAppBar(
-        title: title,
-      ),
+      appBar: LoginAppBar(title: title),
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height - 90,
@@ -33,9 +30,9 @@ class AuthLayout extends StatelessWidget {
                     left: 24,
                     right: 24,
                   ),
-                  decoration: const BoxDecoration(
-                    color: AppColors.whiteBackGround,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50),
                     ),

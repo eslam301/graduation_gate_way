@@ -48,15 +48,30 @@ class SignUpBodyDoctor extends StatelessWidget {
                   ),
                 )),
           ),
-          const CustomTextFormField.name(labelText: 'first Name'),
-          const CustomTextFormField.name(labelText: 'last Name'),
-          const CustomTextFormField.user(),
-          const CustomTextFormField.email(
-            labelText: 'Email Address',
+          CustomTextFormField.name(
+            labelText: 'first Name',
+            controller: controller.firstNameController,
           ),
-          const CustomTextFormField.phone(),
-          const CustomTextFormField.password(),
-          const CustomTextFormField.confirmPassword(),
+          CustomTextFormField.name(
+            labelText: 'last Name',
+            controller: controller.lastNameController,
+          ),
+          CustomTextFormField.user(
+            controller: controller.userNameController,
+          ),
+          CustomTextFormField.email(
+            labelText: 'Email Address',
+            controller: controller.emailController,
+          ),
+          CustomTextFormField.phone(
+            controller: controller.phoneNumberController,
+          ),
+          CustomTextFormField.password(
+            controller: controller.passwordController,
+          ),
+          CustomTextFormField.confirmPassword(
+            controller: controller.confirmPasswordController,
+          ),
           const TermsAndPrivacyCheckbox(),
           const SizedBox(
             height: 20,
@@ -66,7 +81,7 @@ class SignUpBodyDoctor extends StatelessWidget {
             child: MainButton(
                 text: 'Create account',
                 onPressed: () {
-                  controller.createAccount();
+                  controller.createDoctorAccount();
                 }),
           ),
           Column(

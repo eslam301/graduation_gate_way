@@ -97,6 +97,30 @@ class ApiManager {
     throw Exception('Failed to register student');
   }
 
+  Future<DoctorModel> signUpDoctor({required DoctorModel doctor}) async {
+    final url = Uri.parse('$baseUrl/api/Doctors');
+    final body = jsonEncode(doctor.toJsonBody());
+    log('body: $body');
+    try {
+      log('body: $body');
+      final response = await client.post(url, body: body, headers: baseHeaders);
+      if (response.statusCode == 200) {
+        log('Doctor registered successfully${response.body}');
+        Get.snackbar('Success', 'Doctor registered successfully');
+        return DoctorModel.fromJson(jsonDecode(response.body));
+      } else if (response.statusCode == 400) {
+        log('Failed to register doctor${response.body}');
+        Get.snackbar('Error', 'Failed to register doctor${response.body}');
+      } else {
+        handleHttpError(response);
+        log('Failed to register doctor${response.body}');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to register Doctor');
+    }
+    throw Exception('Failed to register doctor');
+  }
+
   registerProject(RegisterProjectModel project) async {
     final url = Uri.parse('$baseUrl/api/Project/add-project');
     final body = jsonEncode(project.toJsonBody());

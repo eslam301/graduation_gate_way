@@ -113,7 +113,7 @@ class SignUpBodyAsStudent extends StatelessWidget {
             child: MainButton(
                 text: 'Create account',
                 onPressed: () {
-                  controller.createAccount();
+                  controller.createStudentAccount();
                 }),
           ),
           Column(

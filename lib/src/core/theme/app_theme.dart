@@ -89,4 +89,35 @@ class AppTheme {
         selectedIconTheme: IconThemeData(color: Colors.white, size: 32),
         elevation: 5,
       ));
+
+  static ThemeData darkTheme = ThemeData(
+      scaffoldBackgroundColor: AppColors.textColor,
+      primaryColor: AppColors.mainColorBlue,
+      appBarTheme: AppBarTheme(
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+              color: AppColors.textColor,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w600),
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(color: AppColors.textColor)),
+      colorScheme: colorScheme,
+      listTileTheme: const ListTileThemeData(
+        iconColor: AppColors.textColor,
+        textColor: AppColors.textColor,
+        titleTextStyle: TextStyle(
+          color: AppColors.textColor,
+          fontSize: 16,
+        ),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: true,
+        backgroundColor: AppColors.mainColor,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white30,
+        selectedIconTheme: IconThemeData(color: Colors.white, size: 32),
+        elevation: 5,
+      ));
 }
