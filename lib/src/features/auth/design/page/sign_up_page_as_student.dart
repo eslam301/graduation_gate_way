@@ -9,6 +9,9 @@ class SignUpPageAsStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AuthLayout(
-        title: 'Sign Up as Student', body: SignUpBodyAsStudent());
+        appBarTitle: 'Sign Up as Student',
+        title: 'hello',
+        subTitle: 'Create an account',
+        body: SignUpBodyAsStudent());
   }
 }

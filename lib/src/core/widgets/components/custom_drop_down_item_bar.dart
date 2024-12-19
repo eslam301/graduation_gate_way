@@ -27,7 +27,7 @@ class CustomDropDownItemBar extends StatelessWidget {
             menuHeight: 200.h,
             menuStyle: MenuStyle(
                 backgroundColor:
-                    const WidgetStatePropertyAll(AppColors.backGround),
+                    const WidgetStatePropertyAll(AppColors.scaffold),
                 elevation: const WidgetStatePropertyAll(0),
                 //maximumSize: WidgetStatePropertyAll(Size(double.infinity, 300.h)),
                 shape: WidgetStatePropertyAll(RoundedRectangleBorder(
@@ -39,7 +39,7 @@ class CustomDropDownItemBar extends StatelessWidget {
               filled: true,
               fillColor: AppColors.white,
               contentPadding: EdgeInsets.symmetric(horizontal: 20.w),
-              suffixIconColor: AppColors.textColor,
+              suffixIconColor: AppColors.onSurface,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r),
                 borderSide: BorderSide.none,

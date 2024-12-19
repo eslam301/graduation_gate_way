@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/components/custom_text_form_field.dart';
 import '../../../../core/widgets/components/main_button.dart';
 import '../controller/login_controller.dart';
@@ -13,32 +12,11 @@ class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LoginControllerImp controller = Get.put(LoginControllerImp());
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
     const Duration animationDuration = Duration(milliseconds: 400);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        FadeInLeft(
-          duration: animationDuration,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Welcome back!',
-              style: textTheme.titleMedium,
-            ),
-          ),
-        ),
-        FadeInLeft(
-          duration: animationDuration,
-          delay: const Duration(milliseconds: 100),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Hello there, login to continue',
-              style: textTheme.bodySmall,
-            ),
-          ),
-        ),
         const SizedBox(height: 30),
         CustomTextFormField.user(
           controller: controller.userNameController,
@@ -61,7 +39,6 @@ class LoginBody extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
                 ),
               ),
             ),
@@ -84,24 +61,17 @@ class LoginBody extends StatelessWidget {
           delay: const Duration(milliseconds: 400),
           child: InkWell(
             onTap: controller.navigateToSignUp,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 20),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Don\'t have an account?',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.grey,
-                    ),
                   ),
                   Text(
                     'Sign Up',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.mainColor,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ],

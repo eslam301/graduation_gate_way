@@ -1,19 +1,29 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../widgets/login_app_bar.dart';
 
 class AuthLayout extends StatelessWidget {
-  final String title;
+  final String appBarTitle;
   final Widget body;
+  final String title;
+  final String subTitle;
 
-  const AuthLayout({super.key, required this.title, required this.body});
+  const AuthLayout(
+      {super.key,
+      required this.appBarTitle,
+      required this.body,
+      required this.title,
+      required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
     return Scaffold(
-      appBar: LoginAppBar(title: title),
+      appBar: LoginAppBar(title: appBarTitle),
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height - 90,
@@ -37,7 +47,32 @@ class AuthLayout extends StatelessWidget {
                       topRight: Radius.circular(50),
                     ),
                   ),
-                  child: body,
+                  child: Column(
+                    children: [
+                      FadeInLeft(
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              title.capitalize!,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )),
+                      ),
+                      FadeInLeft(
+                        child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: SizedBox(
+                              child: Text(
+                                subTitle,
+                                style: theme.textTheme.bodyMedium,
+                              ),
+                            )),
+                      ),
+                      body
+                    ],
+                  ),
                 ),
               )
             ],

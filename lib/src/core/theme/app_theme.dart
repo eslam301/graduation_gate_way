@@ -5,77 +5,73 @@ import 'app_color.dart';
 
 class AppTheme {
   static TextTheme textTheme = TextTheme(
-    headlineLarge: TextStyle(
-      color: AppColors.grey,
+    displayLarge: TextStyle(
+      fontSize: 57.sp,
+      fontWeight: FontWeight.w700,
+    ),
+    displayMedium: TextStyle(
       fontSize: 48.sp,
       fontWeight: FontWeight.w700,
     ),
-    headlineMedium: TextStyle(
-      color: AppColors.grey,
+    displaySmall: TextStyle(
       fontSize: 32.sp,
       fontWeight: FontWeight.w700,
     ),
+    headlineLarge: TextStyle(
+      fontSize: 32.sp,
+    ),
+    headlineMedium: TextStyle(
+      fontSize: 28.sp,
+    ),
     headlineSmall: TextStyle(
-      color: AppColors.grey,
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w700,
+      fontSize: 21.sp,
     ),
     titleLarge: TextStyle(
-      color: AppColors.black,
-      fontSize: 21.sp,
-      fontWeight: FontWeight.w600,
+      fontSize: 24.sp,
     ),
     titleMedium: TextStyle(
-      color: AppColors.black,
-      fontSize: 18.sp,
-      fontWeight: FontWeight.w600,
+      fontSize: 21.sp,
     ),
     titleSmall: TextStyle(
-      color: AppColors.black,
-      fontSize: 16.sp,
-      fontWeight: FontWeight.w600,
+      fontSize: 18.sp,
     ),
     bodyLarge: TextStyle(
-      color: AppColors.black,
-      fontSize: 20.sp,
-      fontWeight: FontWeight.w400,
+      fontSize: 18.sp,
     ),
     bodyMedium: TextStyle(
-      color: AppColors.black,
       fontSize: 16.sp,
-      fontWeight: FontWeight.w400,
     ),
     bodySmall: TextStyle(
-      color: AppColors.black,
       fontSize: 12.sp,
-      fontWeight: FontWeight.w400,
     ),
-  );
-
-  static ColorScheme colorScheme = const ColorScheme.light(
-    primary: AppColors.mainColor,
-    secondary: AppColors.mainColor,
-    onPrimary: AppColors.backGround,
-    onSecondary: AppColors.backGround,
   );
 
   static ThemeData lightTheme = ThemeData(
-      scaffoldBackgroundColor: AppColors.backGround,
       primaryColor: AppColors.mainColor,
+      scaffoldBackgroundColor: AppColors.scaffold,
       appBarTheme: AppBarTheme(
           centerTitle: true,
           titleTextStyle: TextStyle(
-              color: AppColors.textColor,
+              color: AppColors.onSurface,
               fontSize: 20.sp,
               fontWeight: FontWeight.w600),
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: AppColors.textColor)),
-      colorScheme: colorScheme,
+          iconTheme: const IconThemeData(color: AppColors.onSurface)),
+      colorScheme: const ColorScheme.light(
+        brightness: Brightness.light,
+        primary: AppColors.mainColor,
+        onPrimary: AppColors.white,
+        secondary: AppColors.mainColorShaded,
+        onSecondary: AppColors.black,
+        surface: AppColors.surface,
+        onSurface: AppColors.onSurface,
+      ),
+      textTheme: textTheme,
       listTileTheme: const ListTileThemeData(
-        iconColor: AppColors.textColor,
-        textColor: AppColors.textColor,
+        iconColor: AppColors.onSurface,
+        textColor: AppColors.onSurface,
         titleTextStyle: TextStyle(
-          color: AppColors.textColor,
+          color: AppColors.onSurface,
           fontSize: 16,
         ),
       ),
@@ -91,22 +87,31 @@ class AppTheme {
       ));
 
   static ThemeData darkTheme = ThemeData(
-      scaffoldBackgroundColor: AppColors.textColor,
-      primaryColor: AppColors.mainColorBlue,
+      primaryColor: AppColors.darkMainColor,
+      scaffoldBackgroundColor: AppColors.darkScaffold,
+      textTheme: textTheme,
       appBarTheme: AppBarTheme(
           centerTitle: true,
           titleTextStyle: TextStyle(
-              color: AppColors.textColor,
+              color: AppColors.darkOnSurface,
               fontSize: 20.sp,
               fontWeight: FontWeight.w600),
           backgroundColor: Colors.transparent,
-          iconTheme: const IconThemeData(color: AppColors.textColor)),
-      colorScheme: colorScheme,
+          iconTheme: const IconThemeData(color: AppColors.darkOnSurface)),
+      colorScheme: const ColorScheme.dark(
+        brightness: Brightness.dark,
+        primary: AppColors.darkMainColor,
+        onPrimary: AppColors.white,
+        secondary: AppColors.mainColorShaded,
+        onSecondary: AppColors.black,
+        surface: AppColors.darkSurface,
+        onSurface: AppColors.darkOnSurface,
+      ),
       listTileTheme: const ListTileThemeData(
-        iconColor: AppColors.textColor,
-        textColor: AppColors.textColor,
+        iconColor: AppColors.onSurface,
+        textColor: AppColors.onSurface,
         titleTextStyle: TextStyle(
-          color: AppColors.textColor,
+          color: AppColors.onSurface,
           fontSize: 16,
         ),
       ),

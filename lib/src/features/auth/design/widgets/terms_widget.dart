@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theme/app_color.dart';
 
@@ -8,8 +7,7 @@ class TermsAndPrivacyCheckbox extends StatefulWidget {
   const TermsAndPrivacyCheckbox({super.key});
 
   @override
-  TermsAndPrivacyCheckboxState createState() =>
-      TermsAndPrivacyCheckboxState();
+  TermsAndPrivacyCheckboxState createState() => TermsAndPrivacyCheckboxState();
 }
 
 class TermsAndPrivacyCheckboxState extends State<TermsAndPrivacyCheckbox> {
@@ -17,6 +15,7 @@ class TermsAndPrivacyCheckboxState extends State<TermsAndPrivacyCheckbox> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -31,19 +30,20 @@ class TermsAndPrivacyCheckboxState extends State<TermsAndPrivacyCheckbox> {
         Expanded(
           child: RichText(
             text: TextSpan(
-              style: TextStyle(color: AppColors.textColor, fontSize: 16.sp),
+              style: theme.textTheme.bodyMedium,
               children: [
                 const TextSpan(text: "I agree to platform’s "),
                 TextSpan(
                   text: "Terms of Service",
                   style: const TextStyle(
-                      color: AppColors.lighterMainColor,
-                      ),
+                    color: AppColors.lighterMainColor,
+                  ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       // Handle Terms of Service tap
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Terms of Service clicked")),
+                        const SnackBar(
+                            content: Text("Terms of Service clicked")),
                       );
                     },
                 ),
@@ -51,8 +51,8 @@ class TermsAndPrivacyCheckboxState extends State<TermsAndPrivacyCheckbox> {
                 TextSpan(
                   text: "Privacy Policy",
                   style: const TextStyle(
-                      color: AppColors.lighterMainColor,
-                      ),
+                    color: AppColors.lighterMainColor,
+                  ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       // Handle Privacy Policy tap

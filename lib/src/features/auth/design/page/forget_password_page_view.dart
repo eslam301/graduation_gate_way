@@ -9,7 +9,9 @@ class ForgetPasswordPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AuthLayout(
-        title: 'Forget Password',
+        appBarTitle: 'Forget Password',
+        title: 'Password Recovery',
+        subTitle: 'Enter your email address\nto Recover your password',
         body: ForgetPasswordBody());
   }
 }

@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,38 +15,10 @@ class SignUpBodyDoctor extends StatelessWidget {
   Widget build(BuildContext context) {
     SignUpControllerImp controller = Get.find<SignUpControllerImp>();
     const Duration animationDuration = Duration(milliseconds: 400);
-    return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 100),
-      child: Column(
+    return Expanded(
+      child: ListView(
+        padding: const EdgeInsets.only(bottom: 100),
         children: [
-          FadeInLeft(
-            duration: animationDuration,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Hello',
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
-          ),
-          FadeInLeft(
-            duration: animationDuration,
-            delay: const Duration(milliseconds: 100),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Create an account to continue',
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.grey,
-                  ),
-                )),
-          ),
           CustomTextFormField.name(
             labelText: 'first Name',
             controller: controller.firstNameController,

@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/features/auth/design/widgets/terms_widget.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
@@ -20,39 +18,12 @@ class SignUpBodyAsStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SignUpControllerImp controller = Get.find<SignUpControllerImp>();
-    const Duration animationDuration = Duration(milliseconds: 400);
-    return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 100),
-      child: Column(
+    final theme = Theme.of(context);
+    return Expanded(
+      child: ListView(
+        padding: const EdgeInsets.only(bottom: 100),
+        cacheExtent: 1000,
         children: [
-          FadeInLeft(
-            duration: animationDuration,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Hello',
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.black,
-                ),
-              ),
-            ),
-          ),
-          FadeInLeft(
-            duration: animationDuration,
-            delay: const Duration(milliseconds: 100),
-            child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Create an account to continue',
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.grey,
-                  ),
-                )),
-          ),
           CustomTextFormField.name(
             labelText: 'first Name',
             controller: controller.firstNameController,
@@ -87,10 +58,9 @@ class SignUpBodyAsStudent extends StatelessWidget {
           AnswersMultipleSearch(
             isSingleSelect: true,
             isFuturesEnabled: true,
+            searchEnabled: true,
             selectionListAnswerMethodObject: (value) {
-              log(value.toString());
               int? id = int.parse(value[0].toString());
-              log(id.toString());
               controller.setSelectedTrackId(id);
             },
             fetchAnswersFuture: () async {
@@ -118,26 +88,16 @@ class SignUpBodyAsStudent extends StatelessWidget {
           ),
           Column(
             children: [
-              Text(
-                'Already have an account?',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.grey,
-                ),
-              ),
+              Text('Already have an account?',
+                  style: theme.textTheme.bodyMedium),
               InkWell(
                 onTap: () {
                   controller.navigateToLogin();
                 },
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.lighterMainColor,
-                  ),
-                ),
+                child: Text('Login',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: AppColors.mainColor,
+                    )),
               ),
             ],
           ),

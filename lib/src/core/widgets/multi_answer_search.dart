@@ -29,13 +29,14 @@ class AnswersMultipleSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child:
-          isFuturesEnabled ? _buildFutureDropdown() : _buildStandardDropdown(),
+      child: isFuturesEnabled
+          ? _buildFutureDropdown(context)
+          : _buildStandardDropdown(context),
     );
   }
 
   /// Builds the standard dropdown when `isFuturesEnabled` is false.
-  Widget _buildStandardDropdown() {
+  Widget _buildStandardDropdown(context) {
     return MultiDropdown(
       onSelectionChange: (value) {
         if (selectionListAnswerMethod != null) {
@@ -51,9 +52,9 @@ class AnswersMultipleSearch extends StatelessWidget {
         return null;
       },
       closeOnBackButton: true,
-      fieldDecoration: _fieldDecoration(),
-      dropdownDecoration: _dropdownDecoration(),
-      dropdownItemDecoration: _dropdownItemDecoration(),
+      fieldDecoration: _fieldDecoration(context: context),
+      dropdownDecoration: _dropdownDecoration(context),
+      dropdownItemDecoration: _dropdownItemDecoration(context),
       searchDecoration: _searchDecoration(),
       chipDecoration: _chipDecoration(),
       items: List.generate(
@@ -67,7 +68,7 @@ class AnswersMultipleSearch extends StatelessWidget {
   }
 
   /// Builds the future-based dropdown when `isFuturesEnabled` is true.
-  Widget _buildFutureDropdown() {
+  Widget _buildFutureDropdown(context) {
     return MultiDropdown.future(
       future: () async {
         // Use the provided future or default logic.
@@ -80,6 +81,10 @@ class AnswersMultipleSearch extends StatelessWidget {
           selectionListAnswerMethodObject!(value);
         }
       },
+      dropdownDecoration: _dropdownDecoration(context),
+      dropdownItemDecoration: _dropdownItemDecoration(context),
+      searchDecoration: _searchDecoration(),
+      chipDecoration: _chipDecoration(),
       searchEnabled: searchEnabled,
       singleSelect: isSingleSelect,
       validator: (value) {
@@ -89,7 +94,7 @@ class AnswersMultipleSearch extends StatelessWidget {
         return null;
       },
       closeOnBackButton: true,
-      fieldDecoration: _fieldDecoration(),
+      fieldDecoration: _fieldDecoration(context: context),
     );
   }
 
@@ -107,34 +112,31 @@ class AnswersMultipleSearch extends StatelessWidget {
   }
 
   /// Decorations used across dropdown configurations.
-  FieldDecoration _fieldDecoration() {
-    return const FieldDecoration(
-      labelText: 'Select answers',
-      labelStyle: TextStyle(
-        color: AppColors.grey,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
+  FieldDecoration _fieldDecoration({required BuildContext context}) {
+    final theme = Theme.of(context);
+    return FieldDecoration(
+      labelText: 'Select',
+      labelStyle: theme.textTheme.bodyMedium,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
         borderSide: BorderSide(
-          color: AppColors.black,
+          color: theme.colorScheme.onSurface,
           width: 2,
         ),
       ),
     );
   }
 
-  DropdownDecoration _dropdownDecoration() {
-    return const DropdownDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      backgroundColor: AppColors.whiteBackGround,
+  DropdownDecoration _dropdownDecoration(BuildContext context) {
+    return DropdownDecoration(
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 
-  DropdownItemDecoration _dropdownItemDecoration() {
-    return const DropdownItemDecoration(
-      selectedBackgroundColor: AppColors.mainColor,
+  DropdownItemDecoration _dropdownItemDecoration(BuildContext context) {
+    return DropdownItemDecoration(
+      selectedBackgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 
@@ -143,14 +145,12 @@ class AnswersMultipleSearch extends StatelessWidget {
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         borderSide: BorderSide(
-          color: AppColors.black,
           width: 2,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         borderSide: BorderSide(
-          color: AppColors.black,
           width: 2,
         ),
       ),

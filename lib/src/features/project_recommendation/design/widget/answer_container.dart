@@ -18,7 +18,7 @@ class AnswerContainer extends StatelessWidget {
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.whiteBackGround,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(

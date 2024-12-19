@@ -9,7 +9,9 @@ class SignUpPageAsDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AuthLayout(
-      title: 'Sign Up as Doctor',
+      appBarTitle: 'Sign Up as Doctor',
+      title: 'Sign Up',
+      subTitle: 'Create an account',
       body: SignUpBodyDoctor(),
     );
   }

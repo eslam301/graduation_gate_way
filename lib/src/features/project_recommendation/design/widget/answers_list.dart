@@ -6,6 +6,7 @@ import '../../../../core/theme/app_color.dart';
 class AnswersListView extends StatefulWidget {
   final List<String> answers; // List of choices to display in the list view>
   final QuestionModel questionModel;
+
   const AnswersListView(
       {super.key, required this.answers, required this.questionModel});
 
@@ -46,9 +47,7 @@ class _AnswersListViewState extends State<AnswersListView> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.mainColor
-                      : AppColors.whiteBackGround,
+                  color: isSelected ? AppColors.mainColor : AppColors.surface,
                   borderRadius: BorderRadius.circular(isSelected ? 25 : 20),
                   boxShadow: isSelected
                       ? [

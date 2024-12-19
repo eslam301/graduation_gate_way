@@ -14,6 +14,7 @@ class SplashPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     final controller = Get.put(SplashControllerImp());
     return Scaffold(
       backgroundColor: AppColors.mainColor,
@@ -22,23 +23,13 @@ class SplashPageView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Welcome',
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white)),
-              const Text('Graduation Getaway',
-                  style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  )),
+              Text('Welcome',
+                  style: theme.displayLarge?.copyWith(color: Colors.white)),
+              Text('Graduation Getaway',
+                  style: theme.headlineLarge?.copyWith(color: Colors.white)),
               Text('Your guide to graduate.',
-                  style: TextStyle(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                  )),
+                  style: theme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w700, color: Colors.white)),
               SvgPicture.asset(
                 AppImagePathSvg.splash,
                 width: 300.w,
@@ -55,7 +46,7 @@ class SplashPageView extends StatelessWidget {
                   child: SmallRoundButton(
                     text: 'Sign up',
                     color: Colors.white,
-                    textColor: AppColors.textColor,
+                    textColor: AppColors.onSurface,
                     onPressed: () {
                       controller.navigateToSignUp();
                     },

@@ -15,7 +15,9 @@ class SignUpPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SignUpControllerImp());
     return AuthLayout(
-      title: 'Select sign up type',
+      appBarTitle: 'Select sign up type',
+      title: '',
+      subTitle: '',
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

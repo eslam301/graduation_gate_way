@@ -42,7 +42,7 @@ class _AnswerWidgetState extends State<AnswerWidget> {
                 widget.title,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  color: isSelected ? AppColors.white : AppColors.textColor,
+                  color: isSelected ? AppColors.white : AppColors.onSurface,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),

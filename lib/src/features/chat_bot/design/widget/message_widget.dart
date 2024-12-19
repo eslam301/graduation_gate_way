@@ -22,7 +22,7 @@ class MessageWidget extends StatelessWidget {
             color: message.messageType == MessageType.user
                 ? AppColors.mainColor
                 : AppColors.white,
-            border: Border.all(color: AppColors.textColor),
+            border: Border.all(color: AppColors.onSurface),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(

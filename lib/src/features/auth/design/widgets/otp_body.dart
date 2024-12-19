@@ -17,28 +17,6 @@ class OTPBody extends StatelessWidget {
     OTPControllerImp controller = Get.put(OTPControllerImp());
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Enter recovery code',
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'We have sent it on your email $emailText',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.grey,
-            ),
-          ),
-        ),
         SizedBox(height: 30.h),
         Pinput(
           length: 6,

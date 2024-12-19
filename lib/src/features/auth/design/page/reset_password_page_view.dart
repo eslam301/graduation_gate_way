@@ -8,6 +8,10 @@ class ResetPasswordPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AuthLayout(title: 'Reset Password', body: ResetPasswordBody());
+    return const AuthLayout(
+        appBarTitle: 'Reset Password',
+        title: 'New password',
+        subTitle: 'Please enter your password',
+        body: ResetPasswordBody());
   }
 }

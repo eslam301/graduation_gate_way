@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/extensions/extensions_on_int.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
 
-import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/components/custom_text_form_field.dart';
 import '../controller/reset_password_controller.dart';
 
@@ -17,39 +16,17 @@ class ResetPasswordBody extends StatelessWidget {
         Get.put(ResetPasswordControllerImp());
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'New password',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.black,
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Please inter your password',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.grey,
-            ),
-          ),
-        ),
-        30.hSpace(),
+        20.hSpace(),
         CustomTextFormField.password(
           labelText: 'Password',
           controller: controller.passwordController,
         ),
-        30.hSpace(),
+        20.hSpace(),
         CustomTextFormField.password(
           labelText: 'Re-enter password',
           controller: controller.confirmPasswordController,
         ),
-        30.hSpace(),
+        20.hSpace(),
         SizedBox(
             width: 275.w,
             child: MainButton(

@@ -139,14 +139,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.labelText!,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: 16.sp,
-            ),
-          ),
+          Text(widget.labelText!,
+              style: theme.textTheme.bodyMedium?.copyWith()),
           SizedBox(height: 8.h),
           TextFormField(
             controller: widget.controller,
