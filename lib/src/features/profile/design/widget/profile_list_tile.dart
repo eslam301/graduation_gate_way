@@ -19,12 +19,14 @@ class ProfileListTile extends StatelessWidget {
         children: [
           Text(
             '$title: ',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
           ),
           Text(
             subtitle,
             // Full name
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
       ),

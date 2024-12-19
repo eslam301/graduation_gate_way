@@ -10,6 +10,13 @@ class AppColors {
   static const Color scaffold = Color(0xFFE2E2E2);
   static const Color surface = Color(0xFFF8F8F8);
   static const Color onSurface = Color(0xFF171717);
+  static const Color surfaceVariant = Color(0xFF171717);
+
+  // tint
+
+  static Color surfaceTint([double factor = 0.08]) {
+    return Color.alphaBlend(mainColor.withOpacity(factor), surface);
+  }
 
   // general colors
   static const Color grey = Color(0xFF8A8A8A);
@@ -20,8 +27,14 @@ class AppColors {
   // dark colors
   static const Color darkMainColor = Color(0xff5649A5);
 
+  //tint
+  static Color darkSurfaceTint([double factor = 0.08]) {
+    return Color.alphaBlend(darkMainColor.withOpacity(factor), darkSurface);
+  }
+
   //surfaces
   static const Color darkScaffold = Color(0xff121212);
   static const Color darkSurface = Color(0xff1E1E1E);
+  static const Color darkSurfaceVariant = Color(0xff383838);
   static const Color darkOnSurface = Color(0xffffffff);
 }

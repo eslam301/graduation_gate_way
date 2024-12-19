@@ -57,7 +57,7 @@ class AppTheme {
               fontWeight: FontWeight.w600),
           backgroundColor: Colors.transparent,
           iconTheme: const IconThemeData(color: AppColors.onSurface)),
-      colorScheme: const ColorScheme.light(
+      colorScheme: ColorScheme.light(
         brightness: Brightness.light,
         primary: AppColors.mainColor,
         onPrimary: AppColors.white,
@@ -65,6 +65,7 @@ class AppTheme {
         onSecondary: AppColors.black,
         surface: AppColors.surface,
         onSurface: AppColors.onSurface,
+        surfaceTint: AppColors.surfaceTint(),
       ),
       textTheme: textTheme,
       listTileTheme: const ListTileThemeData(
@@ -87,7 +88,7 @@ class AppTheme {
       ));
 
   static ThemeData darkTheme = ThemeData(
-      primaryColor: AppColors.darkMainColor,
+      primaryColor: AppColors.mainColor,
       scaffoldBackgroundColor: AppColors.darkScaffold,
       textTheme: textTheme,
       appBarTheme: AppBarTheme(
@@ -98,20 +99,22 @@ class AppTheme {
               fontWeight: FontWeight.w600),
           backgroundColor: Colors.transparent,
           iconTheme: const IconThemeData(color: AppColors.darkOnSurface)),
-      colorScheme: const ColorScheme.dark(
+      colorScheme: ColorScheme.dark(
         brightness: Brightness.dark,
-        primary: AppColors.darkMainColor,
+        primary: AppColors.mainColor,
         onPrimary: AppColors.white,
         secondary: AppColors.mainColorShaded,
         onSecondary: AppColors.black,
         surface: AppColors.darkSurface,
+        onSurfaceVariant: AppColors.darkSurface,
         onSurface: AppColors.darkOnSurface,
+        surfaceTint: AppColors.darkSurfaceTint(),
       ),
       listTileTheme: const ListTileThemeData(
-        iconColor: AppColors.onSurface,
-        textColor: AppColors.onSurface,
+        iconColor: AppColors.darkOnSurface,
+        textColor: AppColors.darkOnSurface,
         titleTextStyle: TextStyle(
-          color: AppColors.onSurface,
+          color: AppColors.darkOnSurface,
           fontSize: 16,
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theme/app_color.dart';
@@ -17,21 +17,21 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.grey, width: 1),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SvgPicture.asset(imagePath),
-            const SizedBox(
-              height: 5,
+            SvgPicture.asset(
+              imagePath,
+              fit: BoxFit.contain,
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -41,7 +41,6 @@ class CategoryCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: title.length > 20 ? 14 : 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.black,
                 ),
               ),
             ),

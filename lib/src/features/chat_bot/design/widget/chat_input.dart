@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/text_input_field.dart';
 
 import '../../../../core/theme/app_color.dart';
@@ -12,14 +13,8 @@ class ChatInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(
-          top: BorderSide(color: AppColors.grey, width: 1.w),
-        ),
-      ),
+    return SurfaceContainer(
+      borderRadius: 0,
       child: Row(
         children: [
           // Text input field

@@ -14,7 +14,6 @@ class SignUpBodyDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SignUpControllerImp controller = Get.find<SignUpControllerImp>();
-    const Duration animationDuration = Duration(milliseconds: 400);
     return Expanded(
       child: ListView(
         padding: const EdgeInsets.only(bottom: 100),

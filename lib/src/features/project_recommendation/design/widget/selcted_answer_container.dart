@@ -14,7 +14,7 @@ class SelectedAnswerContainer extends StatelessWidget {
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       child: GetBuilder<ProjectRecommendationControllerImp>(builder: (context) {
@@ -22,8 +22,13 @@ class SelectedAnswerContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Skills : ${controller.selectedSkills.join(', ')}',
+            Text.rich(
+              TextSpan(text: 'Skills: ', children: <InlineSpan>[
+                TextSpan(
+                  text: controller.selectedSkills.join(', '),
+                  style: theme.textTheme.bodyMedium?.copyWith(),
+                ),
+              ]),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
               softWrap: true,
@@ -31,8 +36,13 @@ class SelectedAnswerContainer extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            Text(
-              'difficulty :${controller.selectedDifficulty}',
+            Text.rich(
+              TextSpan(text: 'categories: ', children: <InlineSpan>[
+                TextSpan(
+                  text: controller.selectedCategories.join(', '),
+                  style: theme.textTheme.bodyMedium?.copyWith(),
+                ),
+              ]),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
               softWrap: true,
@@ -40,8 +50,13 @@ class SelectedAnswerContainer extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            Text(
-              'categories :${controller.selectedCategories.join(', ')}',
+            Text.rich(
+              TextSpan(text: 'keywords: ', children: <InlineSpan>[
+                TextSpan(
+                  text: controller.selectedKeywords.join(', '),
+                  style: theme.textTheme.bodyMedium?.copyWith(),
+                ),
+              ]),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
               softWrap: true,
@@ -49,8 +64,13 @@ class SelectedAnswerContainer extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            Text(
-              'keywords :${controller.selectedKeywords.join(', ')}',
+            Text.rich(
+              TextSpan(text: 'Difficulty level: ', children: <InlineSpan>[
+                TextSpan(
+                  text: controller.selectedDifficulty,
+                  style: theme.textTheme.bodyMedium?.copyWith(),
+                ),
+              ]),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
               softWrap: true,

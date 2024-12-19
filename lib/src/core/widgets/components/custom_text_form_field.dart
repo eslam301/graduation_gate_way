@@ -148,7 +148,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             maxLines: widget.suffixIcon != null ? 1 : 5,
             decoration: InputDecoration(
               filled: true,
-              fillColor: AppColors.white,
+              fillColor: theme.colorScheme.surfaceTint,
               border: outlineBorder(theme,
                   color: widget.borderColor, radius: widget.radius),
               enabledBorder: outlineBorder(theme,

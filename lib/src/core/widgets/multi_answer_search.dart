@@ -116,7 +116,10 @@ class AnswersMultipleSearch extends StatelessWidget {
     final theme = Theme.of(context);
     return FieldDecoration(
       labelText: 'Select',
+      hintStyle: theme.textTheme.bodyMedium,
+      showClearIcon: true,
       labelStyle: theme.textTheme.bodyMedium,
+      suffixIcon: const Icon(Icons.arrow_drop_down, color: AppColors.grey),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         borderSide: BorderSide(
@@ -136,8 +139,11 @@ class AnswersMultipleSearch extends StatelessWidget {
 
   DropdownItemDecoration _dropdownItemDecoration(BuildContext context) {
     return DropdownItemDecoration(
-      selectedBackgroundColor: Theme.of(context).colorScheme.surface,
-    );
+        selectedBackgroundColor: Theme.of(context).colorScheme.surfaceTint,
+        selectedIcon: const Icon(
+          Icons.check,
+          color: AppColors.mainColor,
+        ));
   }
 
   SearchFieldDecoration _searchDecoration() {

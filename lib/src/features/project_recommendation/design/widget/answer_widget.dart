@@ -20,11 +20,12 @@ class _AnswerWidgetState extends State<AnswerWidget> {
       onTap: () => setState(() => isSelected = !isSelected),
       child: AnimatedContainer(
           duration: const Duration(milliseconds: 400),
-          padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.symmetric(vertical: 10),
           height: 40,
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.mainColor : AppColors.white,
+            color: isSelected
+                ? AppColors.mainColor
+                : Theme.of(context).colorScheme.surfaceTint,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: AppColors.grey, width: 1),
             boxShadow: const [

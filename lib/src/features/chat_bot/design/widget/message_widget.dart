@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 
 import '../../../../core/theme/app_color.dart';
 import '../../data/models/message.dart';
@@ -13,18 +14,10 @@ class MessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Container(
-          padding: const EdgeInsets.all(8),
-          constraints: BoxConstraints(
-            maxWidth: constraints.maxWidth * 0.9,
-          ),
-          decoration: BoxDecoration(
-            color: message.messageType == MessageType.user
-                ? AppColors.mainColor
-                : AppColors.white,
-            border: Border.all(color: AppColors.onSurface),
-            borderRadius: BorderRadius.circular(20),
-          ),
+        return SurfaceContainer(
+          color: message.messageType == MessageType.user
+              ? AppColors.mainColor
+              : Theme.of(context).colorScheme.surfaceTint,
           child: Column(
             crossAxisAlignment: message.messageType == MessageType.user
                 ? CrossAxisAlignment.end
@@ -38,7 +31,7 @@ class MessageWidget extends StatelessWidget {
                 style: TextStyle(
                   color: message.messageType == MessageType.user
                       ? Colors.white
-                      : Colors.black,
+                      : Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               Text(

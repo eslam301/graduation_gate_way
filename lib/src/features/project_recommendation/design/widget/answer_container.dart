@@ -1,56 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 
-import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/multi_answer_search.dart';
 import 'answers_list.dart';
 
 class AnswerContainer extends StatelessWidget {
-  final QuestionModel? questionModel;
-  final int? totalQuestions;
+  final QuestionModel questionModel;
+  final int totalQuestions;
 
-  const AnswerContainer({super.key, this.questionModel, this.totalQuestions});
+  const AnswerContainer(
+      {super.key, required this.questionModel, required this.totalQuestions});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(30),
-      ),
+    return SurfaceContainer(
+      borderRadius: 20,
+      margin: 20,
       child: Column(
         children: [
           Align(
               alignment: Alignment.centerLeft,
-              child: Text(
-                'Question ${questionModel?.index}/${totalQuestions ?? 2}',
-                style: const TextStyle(
-                  color: AppColors.mainColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                ),
-              )),
+              child: Text('Question ${questionModel.index}/$totalQuestions',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: theme.primaryColor,
+                  ))),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              '${questionModel?.index}- ${questionModel?.question}',
-              style: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.w700, color: AppColors.black),
+              '${questionModel.index}- ${questionModel.question}',
+              style: theme.textTheme.bodyMedium,
             ),
-          ).paddingLeft(20),
-          questionModel!.type == 'choice'
+          ),
+          questionModel.type == 'choice'
               ? AnswersListView(
-                  answers: questionModel!.answers,
-                  questionModel: questionModel!,
+                  answers: questionModel.answers,
+                  questionModel: questionModel,
                 )
               : AnswersMultipleSearch(
-                  answers: questionModel!.answers,
+                  answers: questionModel.answers,
                   searchEnabled: true,
                   selectionListAnswerMethod:
-                      questionModel!.selectionListAnswerMethod,
+                      questionModel.selectionListAnswerMethod,
                 ),
         ],
       ),

@@ -21,6 +21,7 @@ class _AnswersListViewState extends State<AnswersListView> {
   Widget build(BuildContext context) {
     // Sample choices
     final List<String> choices = widget.answers;
+    final theme = Theme.of(context);
 
     return Expanded(
       child: Padding(
@@ -45,14 +46,16 @@ class _AnswersListViewState extends State<AnswersListView> {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.mainColor : AppColors.surface,
-                  borderRadius: BorderRadius.circular(isSelected ? 25 : 20),
+                  color: isSelected
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.surface,
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: AppColors.mainColor.withOpacity(0.5),
+                            color: theme.colorScheme.primary.withOpacity(0.3),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           ),
@@ -63,14 +66,12 @@ class _AnswersListViewState extends State<AnswersListView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Choice text
-                    Text(
-                      choices[index],
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: isSelected ? AppColors.white : AppColors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text(choices[index],
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: isSelected
+                              ? theme.colorScheme.onPrimary
+                              : theme.colorScheme.onSurface,
+                        )),
 
                     // Animated Radio Button
                     AnimatedScale(

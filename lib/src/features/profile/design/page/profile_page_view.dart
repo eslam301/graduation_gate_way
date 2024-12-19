@@ -96,7 +96,6 @@ class _ProfilePageViewState extends State<ProfilePageView> {
           'assets/images/user_image.png',
           width: 60,
           height: 60,
-          fit: BoxFit.cover,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20),
@@ -105,14 +104,10 @@ class _ProfilePageViewState extends State<ProfilePageView> {
             children: [
               Text(
                 '${user?.firstname ?? ''} ${user?.lastname ?? ''}', // Full name
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
                 user?.email ?? '', // Email address
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              Text(
-                user?.phoneNumber ?? '', // Phone number
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
@@ -125,6 +120,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
   Widget _buildUserData(
       BuildContext context, List<ProfileListTile> profileListTiles) {
     return ListView.builder(
+      physics: const ScrollPhysics(),
       shrinkWrap: true,
       itemCount: profileListTiles.length,
       itemBuilder: (context, index) => profileListTiles[index],

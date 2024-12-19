@@ -35,7 +35,7 @@ class CustomDrawer extends StatelessWidget {
           }),
     ];
     return Drawer(
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+      clipBehavior: Clip.hardEdge,
       child: ListView(
         padding: EdgeInsets.zero, // Removes the padding above the drawer
         children: [

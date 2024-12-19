@@ -18,11 +18,11 @@ class ButtonWithIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return FilledButton.icon(
       onPressed: onPressed ?? () {},
       style: ButtonStyle(
-        backgroundColor:
-            WidgetStateProperty.all(color ?? Theme.of(context).primaryColor),
+        backgroundColor: WidgetStateProperty.all(color ?? theme.primaryColor),
         minimumSize: WidgetStateProperty.all(const Size(230, 50)),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -32,16 +32,11 @@ class ButtonWithIcon extends StatelessWidget {
       ),
       iconAlignment: iconAlignment,
       icon: Icon(icon),
-      label: Text(
-        text,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
+      label: Text(text,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w700)),
     );
   }
 }

@@ -25,10 +25,7 @@ class HomeLayOut extends StatelessWidget {
           : Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: homeAppBar(),
-              endDrawer: const Material(
-                clipBehavior: Clip.antiAlias,
-                child: CustomDrawer(),
-              ),
+              endDrawer: const CustomDrawer(),
               body: PageView.builder(
                 physics: const BouncingScrollPhysics(),
                 itemCount: pagesList.length,
