@@ -18,6 +18,7 @@ abstract class LoginController extends GetxController {
 }
 
 class LoginControllerImp extends LoginController {
+  late final formKey = GlobalKey<FormState>();
   late TextEditingController userNameController;
   late TextEditingController passwordController;
   late InternetConnectionChecker connection;
@@ -36,29 +37,31 @@ class LoginControllerImp extends LoginController {
 
   @override
   void login() async {
-    loading.value = true; // Show loading animation
     Get.context!.loadable(isLoading: loading.value);
-
-    if (await connection.hasConnection) {
-      try {
-        User user = await apiManger.login(
-          // Uncomment these parameters when implementing
-          userName:
-              userNameController.text.isEmpty ? null : userNameController.text,
-          password:
-              passwordController.text.isEmpty ? null : passwordController.text,
-        );
-        await SharedPref.saveUserData(user);
-        await SharedPref.saveUserId(user.id.toString());
-        Routes.home.offAllPage();
-      } catch (e) {
-        Get.snackbar('Error', 'Login failed: $e');
-      } finally {
+    if (formKey.currentState!.validate()) {
+      if (await connection.hasConnection) {
+        loading.value = true; // Show loading animation
+        try {
+          User user = await apiManger.login(
+            userName: userNameController.text.isEmpty
+                ? null
+                : userNameController.text,
+            password: passwordController.text.isEmpty
+                ? null
+                : passwordController.text,
+          );
+          await SharedPref.saveUserData(user);
+          await SharedPref.saveUserId(user.id.toString());
+          Routes.home.offAllPage();
+        } catch (e) {
+          Get.snackbar('Error', 'Login failed: $e');
+        } finally {
+          loading.value = false; // Hide loading animation
+        }
+      } else {
         loading.value = false; // Hide loading animation
+        Get.snackbar('No Internet', 'Please check your internet connection');
       }
-    } else {
-      loading.value = false; // Hide loading animation
-      Get.snackbar('No Internet', 'Please check your internet connection');
     }
   }
 

@@ -80,15 +80,19 @@ class ApiManager {
     try {
       log('body: $body');
       final response = await client.post(url, body: body, headers: baseHeaders);
+      final responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {
         log('Student registered successfully${response.body}');
         Get.snackbar('Success', 'Student registered successfully');
         return StudentModel.fromJson(jsonDecode(response.body));
       } else if (response.statusCode == 400) {
         log('Failed to register student${response.body}');
-        Get.snackbar('Error', 'Failed to register student${response.body}');
+        Get.snackbar(
+            'Error', 'Failed to register doctor${responseBody['message']}');
       } else {
         handleHttpError(response);
+        Get.snackbar(
+            'Error', 'Failed to register doctor${responseBody['message']}');
         log('Failed to register student${response.body}');
       }
     } catch (e) {
@@ -104,19 +108,25 @@ class ApiManager {
     try {
       log('body: $body');
       final response = await client.post(url, body: body, headers: baseHeaders);
+      final responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {
         log('Doctor registered successfully${response.body}');
-        Get.snackbar('Success', 'Doctor registered successfully');
+        Get.snackbar('Success',
+            'Doctor registered successfully ${responseBody['message']}');
         return DoctorModel.fromJson(jsonDecode(response.body));
       } else if (response.statusCode == 400) {
         log('Failed to register doctor${response.body}');
-        Get.snackbar('Error', 'Failed to register doctor${response.body}');
+        Get.snackbar(
+            'Error', 'Failed to register doctor${responseBody['message']}');
       } else {
         handleHttpError(response);
+        Get.snackbar(
+            'Error', 'Failed to register doctor${responseBody['message']}');
         log('Failed to register doctor${response.body}');
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to register Doctor');
+      log('Failed to register project${e.toString()}');
     }
     throw Exception('Failed to register doctor');
   }
@@ -127,18 +137,23 @@ class ApiManager {
     try {
       log('body: $body');
       final response = await client.post(url, body: body, headers: baseHeaders);
+      final responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'Project registered successfully');
-        log('Project registered successfully${response.body}');
+        log('Project registered successfully${responseBody['message']}');
       } else if (response.statusCode == 400) {
         log('Failed to register project${response.body}');
-        Get.snackbar('Error', 'Failed to register project${response.body}');
+        Get.snackbar(
+            'Error', 'Failed to register project${responseBody['message']}');
       } else {
         handleHttpError(response);
+        Get.snackbar(
+            'Error', 'Failed to register project${responseBody['message']}');
         log('Failed to register project${response.body}');
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to register project');
+      log(e.toString());
       rethrow;
     }
   }
@@ -167,13 +182,18 @@ class ApiManager {
         //print(loginResponse.user.toString());
         return user;
       } else if (response.statusCode == 400) {
-        Get.snackbar('Error', 'Invalid username or password');
+        final responseBody = jsonDecode(response.body);
+        log('Invalid username or password : ${responseBody.toString()}');
+        Get.snackbar('Error', responseBody['message']);
+
         throw Exception('Invalid username or password');
       } else {
         handleHttpError(response);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to login');
+      Get.snackbar('un expected Error', 'Failed to login');
+      log(e.toString());
+
       rethrow;
     }
     // Throw a fallback exception to ensure all paths return a value

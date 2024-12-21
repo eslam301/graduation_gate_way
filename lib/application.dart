@@ -29,6 +29,7 @@ class GraduationGateWay extends StatelessWidget {
             themeMode: ThemeMode.system,
             defaultTransition: Transition.cupertino,
             transitionDuration: const Duration(milliseconds: 300),
+            //home: const Testing(),
             getPages: AppRouter.pagesRoute,
             initialRoute: initialRoute,
             initialBinding: MyBinding(),

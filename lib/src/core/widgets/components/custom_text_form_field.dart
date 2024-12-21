@@ -144,6 +144,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           SizedBox(height: 8.h),
           TextFormField(
             controller: widget.controller,
+            validator: (value) {
+              if (widget.validator != null) {
+                return widget.validator!(value);
+              }
+              return null;
+            },
             keyboardType: widget.textInputType,
             maxLines: widget.suffixIcon != null ? 1 : 5,
             decoration: InputDecoration(
@@ -186,7 +192,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               fontSize: 16.sp,
               fontWeight: FontWeight.w800,
             ),
-            validator: widget.validator,
           ),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/message.dart';
@@ -25,10 +26,11 @@ class ChatBotApiManager {
         headers: baseHeaders,
       );
       if (response.statusCode == 200) {
-        log('Response: ${response.body}');
         return MessageModel.fromJsonApi(jsonDecode(response.body));
       } else {
         log('Error: ${response.statusCode} - ${response.body}');
+        Get.snackbar('Error',
+            'Failed to send message: status code ${response.statusCode}');
         throw Exception('Failed to send message: ${response.statusCode}');
       }
     } catch (e) {

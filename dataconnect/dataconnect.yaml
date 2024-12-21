@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "graduation_gate_way"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "graduation_gate_way-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
