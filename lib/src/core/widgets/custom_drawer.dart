@@ -11,65 +11,54 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<DrawerItem> drawerItems = [
+    final drawerItems = [
       DrawerItem(
-          title: 'Home',
-          icon: const Icon(Icons.home),
-          onTap: () {
-            Routes.home.getBackToPage();
-          }),
+        title: 'Home',
+        icon: Icons.home,
+        onTap: () => Routes.home.getBackToPage(),
+      ),
       DrawerItem(
-          title: 'Profile',
-          icon: const Icon(Icons.person),
-          onTap: () {
-            Routes.profile.toPage();
-          }),
+        title: 'Profile',
+        icon: Icons.person,
+        onTap: () => Routes.profile.toPage(),
+      ),
       DrawerItem(
-          title: 'Settings', icon: const Icon(Icons.settings), onTap: () {}),
-      DrawerItem(
-          title: 'Logout',
-          icon: const Icon(Icons.logout),
-          onTap: () {
-            Routes.login.offAllPage();
-            SharedPref.clearUserId();
-          }),
+        title: 'Logout',
+        icon: Icons.logout,
+        onTap: () {
+          Routes.login.offAllPage();
+          SharedPref.clearUserId();
+        },
+      ),
     ];
+
     return Drawer(
-      clipBehavior: Clip.hardEdge,
       child: ListView(
-        padding: EdgeInsets.zero, // Removes the padding above the drawer
+        padding: EdgeInsets.zero,
         children: [
           SizedBox(
-            height: 0.35.sh,
-            child: const DrawerHeader(
-              curve: Curves.fastOutSlowIn,
-              duration: Duration(milliseconds: 500),
-              decoration: BoxDecoration(
-                color: AppColors.mainColor,
-              ),
+            height: 0.3.sh,
+            child: DrawerHeader(
+              decoration: const BoxDecoration(color: AppColors.mainColor),
               child: Center(
                 child: Text(
                   'Graduation Getaway',
                   textAlign: TextAlign.center,
-                  softWrap: true,
-                  maxLines: 2,
                   style: TextStyle(
                     color: AppColors.white,
                     letterSpacing: 2,
-                    fontSize: 30,
+                    fontSize: 30.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
           ),
-          ...List<Widget>.generate(
-              drawerItems.length,
-              (index) => ListTile(
-                    title: Text(drawerItems[index].title),
-                    leading: drawerItems[index].icon,
-                    onTap: drawerItems[index].onTap,
-                  )),
+          ...drawerItems.map((item) => ListTile(
+                title: Text(item.title),
+                leading: Icon(item.icon),
+                onTap: item.onTap,
+              )),
         ],
       ),
     );
@@ -78,8 +67,8 @@ class CustomDrawer extends StatelessWidget {
 
 class DrawerItem {
   final String title;
-  final Widget icon;
-  final void Function()? onTap;
+  final IconData icon;
+  final VoidCallback? onTap;
 
   const DrawerItem({required this.title, required this.icon, this.onTap});
 }

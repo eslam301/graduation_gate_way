@@ -3,23 +3,12 @@ import 'package:graduation_gate_way/src/core/route/router.dart';
 
 import '../route/routes_name.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
+class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
 
-  @override
-  State<CustomBottomNavigationBar> createState() =>
-      _CustomBottomNavigationBarState();
-}
-
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
-  int currentIndex = 0;
+  final int currentIndex = 0;
 
   void _onTap(int index) {
-    // Triggering animation on change
-    setState(() {
-      currentIndex = index;
-    });
-
     // Execute the respective onTab callback
     _myItemsPath[index].onTab?.call();
   }
@@ -76,15 +65,19 @@ List<MyBottomNavigationBarItem> _myItemsPath = [
       Routes.chat.toPage();
     },
   ),
+  // MyBottomNavigationBarItem(
+  //   iconData: Icons.notifications,
+  //   label: 'Notifications',
+  //   onTab: () {
+  //     // Example functionality
+  //   },
+  // ),
+  // const MyBottomNavigationBarItem(
+  //     iconData: Icons.report, label: 'Report', onTab: null),
   MyBottomNavigationBarItem(
-    iconData: Icons.notifications,
-    label: 'Notifications',
-    onTab: () {
-      // Example functionality
-    },
-  ),
-  const MyBottomNavigationBarItem(
-      iconData: Icons.report, label: 'Report', onTab: null),
-  const MyBottomNavigationBarItem(
-      iconData: Icons.person, label: 'Profile', onTab: null),
+      iconData: Icons.person,
+      label: 'Profile',
+      onTab: () {
+        Routes.profile.toPage();
+      }),
 ];

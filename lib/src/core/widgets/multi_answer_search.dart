@@ -56,7 +56,7 @@ class AnswersMultipleSearch extends StatelessWidget {
       dropdownDecoration: _dropdownDecoration(context),
       dropdownItemDecoration: _dropdownItemDecoration(context),
       searchDecoration: _searchDecoration(),
-      chipDecoration: _chipDecoration(),
+      chipDecoration: _chipDecoration(context),
       items: List.generate(
         answers.length,
         (index) => DropdownItem(
@@ -84,7 +84,7 @@ class AnswersMultipleSearch extends StatelessWidget {
       dropdownDecoration: _dropdownDecoration(context),
       dropdownItemDecoration: _dropdownItemDecoration(context),
       searchDecoration: _searchDecoration(),
-      chipDecoration: _chipDecoration(),
+      chipDecoration: _chipDecoration(context),
       searchEnabled: searchEnabled,
       singleSelect: isSingleSelect,
       validator: (value) {
@@ -115,20 +115,27 @@ class AnswersMultipleSearch extends StatelessWidget {
   FieldDecoration _fieldDecoration({required BuildContext context}) {
     final theme = Theme.of(context);
     return FieldDecoration(
-      hintStyle: theme.textTheme.bodyMedium,
-      padding: const EdgeInsets.all(16),
-      animateSuffixIcon: true,
-      showClearIcon: true,
-      labelStyle: theme.textTheme.bodyMedium,
-      prefixIcon: searchEnabled ? const Icon(Icons.search) : null,
-      border: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        borderSide: BorderSide(
-          color: theme.colorScheme.onSurface,
-          width: 2,
+        hintStyle: theme.textTheme.bodyMedium
+            ?.copyWith(color: theme.colorScheme.onSurface),
+        padding: const EdgeInsets.all(16),
+        animateSuffixIcon: true,
+        showClearIcon: true,
+        labelStyle: theme.textTheme.bodyMedium
+            ?.copyWith(color: theme.colorScheme.onSurface),
+        prefixIcon: searchEnabled
+            ? Icon(Icons.search, color: theme.colorScheme.onSurface)
+            : null,
+        border: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          borderSide: BorderSide(
+            color: theme.colorScheme.onSurface,
+            width: 2,
+          ),
         ),
-      ),
-    );
+        suffixIcon: Icon(
+          Icons.arrow_drop_down,
+          color: theme.colorScheme.onSurface,
+        ));
   }
 
   DropdownDecoration _dropdownDecoration(BuildContext context) {
@@ -150,6 +157,11 @@ class AnswersMultipleSearch extends StatelessWidget {
 
   SearchFieldDecoration _searchDecoration() {
     return const SearchFieldDecoration(
+      searchIcon: Icon(
+        Icons.search,
+        color: AppColors.mainColor,
+        size: 24,
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         borderSide: BorderSide(
@@ -162,16 +174,16 @@ class AnswersMultipleSearch extends StatelessWidget {
           width: 2,
         ),
       ),
-      hintText: 'Search',
     );
   }
 
-  ChipDecoration _chipDecoration() {
-    return const ChipDecoration(
-      backgroundColor: AppColors.grey,
-      borderRadius: BorderRadius.all(Radius.circular(20)),
+  ChipDecoration _chipDecoration(BuildContext context) {
+    final theme = Theme.of(context);
+    return ChipDecoration(
+      backgroundColor: theme.colorScheme.primary,
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
       labelStyle: TextStyle(
-        color: AppColors.white,
+        color: theme.colorScheme.onPrimary,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
