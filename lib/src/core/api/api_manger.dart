@@ -30,7 +30,7 @@ class ApiManager {
       final response = await client.get(
         Uri.parse('$baseUrl/api/Project/$id/students'),
       );
-      //log(response.body);
+      log(response.body);
       if (response.statusCode == 200) {
         final MyProjectModel myProjectModel =
             MyProjectModel.fromJson(jsonDecode(response.body));

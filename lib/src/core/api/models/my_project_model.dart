@@ -3,6 +3,7 @@ import '../../../features/project_registeration/data/models/project_model.dart';
 class MyProjectModel {
   final int? id;
   final String? projectName;
+  final String? doctorName;
   final String? description;
   final String? proposalFileName;
   final List<Student>? students;
@@ -10,6 +11,7 @@ class MyProjectModel {
   MyProjectModel({
     this.id,
     this.projectName,
+    this.doctorName,
     this.description,
     this.proposalFileName,
     this.students,
@@ -19,6 +21,7 @@ class MyProjectModel {
     return MyProjectModel(
       id: json['projectId'],
       projectName: json['projectName'],
+      doctorName: json['doctorName'],
       description: json['projectDescription'],
       proposalFileName: json['proposalName'],
       students: List<Student>.from(
@@ -33,6 +36,7 @@ class MyProjectModel {
     return """
     ' Project id :$id,
      Project projectName: $projectName,
+     Project doctorName: $doctorName,
      Project description: $description,
      Project proposalFileName: $proposalFileName,
      Project students: ${students.toString()},

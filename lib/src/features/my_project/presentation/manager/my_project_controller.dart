@@ -7,7 +7,8 @@ import 'package:graduation_gate_way/src/core/api/models/my_project_model.dart';
 import '../../../../core/api/models/user.dart';
 
 class MyProjectController extends GetxController {
-  Rx<MyProjectModel?> myProject = Rx<MyProjectModel?>(null);
+  late final MyProjectModel myProject;
+
   late final ApiManager apiManager;
   late final User user;
   RxBool isLoading = true.obs;
@@ -19,15 +20,14 @@ class MyProjectController extends GetxController {
       apiManager = Get.find<ApiManager>();
       user = Get.find<User>();
       final int? projectId = user.projectId;
-
-      if (projectId == null || projectId <= 0) {
+      print("Project ID: $projectId");
+      if (projectId == null) {
         throw Exception("Invalid project ID: $projectId");
       }
-
-      getMyProjectById(projectId ?? 1);
+      await getMyProjectById(4);
     } catch (e) {
-      log("Initialization error: $e");
-      errorMessage.value = "no project found";
+      log("Initialization error: $e ");
+      errorMessage.value = "no project found ${e.toString()}";
     } finally {
       isLoading.value = false;
     }
@@ -39,7 +39,7 @@ class MyProjectController extends GetxController {
     isLoading.value = true;
     errorMessage.value = ''; // Reset error message before fetching.
     try {
-      myProject.value = await apiManager.getMyProjectById(id);
+      myProject = await apiManager.getMyProjectById(id);
     } catch (e) {
       log('Failed to fetch project: $e');
       errorMessage.value =

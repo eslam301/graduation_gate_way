@@ -14,8 +14,12 @@ class AppImagePathSvg {
   static const String projectRecommendation =
       'assets/svg/project_recommendation.svg';
   static const String registerProject = 'assets/svg/register_project.svg';
+  static const String reports = 'assets/svg/reports.svg';
+  static const String grades = 'assets/svg/grades.svg';
+  static const String followUp = 'assets/svg/follow_up.svg';
 }
 
 class AppImagePathNetwork {
-  static const String errorImageLink = 'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif';
+  static const String errorImageLink =
+      'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif';
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graduation_gate_way/src/features/home/design/page/home_page_view.dart';
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
 
 import '../../../../core/const/image_pathes.dart';
@@ -8,6 +7,7 @@ import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/loading_page.dart';
 import '../../controller/home_layout_controller.dart';
+import '../page/home_page_student_view.dart';
 import '../widget/home_app_bar.dart';
 
 class HomeLayOut extends StatelessWidget {
@@ -66,4 +66,11 @@ List<Widget> pages(HomeLayoutControllerImp controller) => [
           ),
         ],
       ),
+      CategoryPageView(categoryModelList: [
+        CategoryCardModel(
+          imagePath: AppImagePathSvg.myProject,
+          title: 'Projects',
+          onTap: null,
+        ),
+      ]),
     ];
