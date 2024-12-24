@@ -2,10 +2,10 @@ class RegisterProjectModel {
   int? categoryId;
   int? doctorId;
   int? studentId;
+  String? studentName;
   String? projectName;
   String? description;
   String? proposalFileName;
-  String? studentName;
 
   // Constructor
   RegisterProjectModel({

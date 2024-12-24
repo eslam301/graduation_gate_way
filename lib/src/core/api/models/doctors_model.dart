@@ -4,6 +4,7 @@ class DoctorModel extends User {
   String? fullName;
 
   DoctorModel({
+    this.fullName,
     super.id,
     super.firstname,
     super.lastname,
@@ -27,6 +28,7 @@ class DoctorModel extends User {
       id: json['id'],
       firstname: json['firstname'],
       lastname: json['lastname'],
+      fullName: json['fullName'],
       email: json['email'],
       username: json['username'] ?? json['userName'],
       doctorId: json['dr_id'],

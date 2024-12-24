@@ -1,12 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Add this -->
+    <!--internet permission-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--storage permission for pdf-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="${applicationName}"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/launcher_icon"
         android:label="graduation gate way"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/LaunchTheme">
         <activity
             android:name=".MainActivity"

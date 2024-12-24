@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
+
+import 'core/external/pdf_manger.dart';
 
 class Testing extends StatelessWidget {
   const Testing({super.key});
@@ -14,11 +14,13 @@ class Testing extends StatelessWidget {
       children: [
         const Text('Testing'),
         MainButton(
-          onPressed: () {
-            final ApiManager apiManager = Get.find<ApiManager>();
-            apiManager.getMyProjectById(1);
+          onPressed: () async {
+            PdfManager.savePdfToDownloads(
+              'test.pdf',
+              await PdfManager.generateSamplePdf('test'),
+            );
           },
-          text: 'Login',
+          text: 'press',
         ),
       ],
     ));
