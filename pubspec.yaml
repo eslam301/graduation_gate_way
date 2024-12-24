@@ -63,6 +63,7 @@ dependencies:
   flutter_native_splash: ^2.4.3
   get_it: ^8.0.3
   injectable: ^2.5.0
+  pdf: ^3.11.1
 
 
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:graduation_gate_way/src/features/home/design/widget/category_card.dart';
 
 import '../../../../core/const/image_pathes.dart';
+import '../../../../core/route/routes_name.dart';
 import '../../../../core/widgets/custom_bottom_navigation_bar.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/loading_page.dart';
@@ -27,11 +29,11 @@ class HomeLayOut extends StatelessWidget {
               appBar: homeAppBar(),
               endDrawer: const CustomDrawer(),
               body: PageView.builder(
-                physics: const BouncingScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: pagesList.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: pagesList[index],
+                  child: pagesList[controller.user.role == 'student' ? 0 : 1],
                 ),
               ),
               bottomNavigationBar: const CustomBottomNavigationBar(),
@@ -70,7 +72,22 @@ List<Widget> pages(HomeLayoutControllerImp controller) => [
         CategoryCardModel(
           imagePath: AppImagePathSvg.myProject,
           title: 'Projects',
-          onTap: null,
+          onTap: Routes.doctorProjects.toPage,
         ),
+        CategoryCardModel(
+          imagePath: AppImagePathSvg.reports,
+          title: 'Reports',
+          onTap: Routes.doctorReports.toPage,
+        ),
+        CategoryCardModel(
+          imagePath: AppImagePathSvg.grades,
+          title: 'Grades',
+          onTap: Routes.grades.toPage,
+        )
+        // CategoryCardModel(
+        //   imagePath: AppImagePathSvg.followUp,
+        //   title: 'Follow-up',
+        //   onTap: Routes.doctorFollowUps.toPage,
+        // )
       ]),
     ];

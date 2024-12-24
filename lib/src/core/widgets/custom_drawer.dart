@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:graduation_gate_way/src/core/utils/shared_pref.dart';
 
+import '../api/models/user.dart';
 import '../route/routes_name.dart';
 import '../theme/app_color.dart';
 
@@ -27,6 +29,7 @@ class CustomDrawer extends StatelessWidget {
         icon: Icons.logout,
         onTap: () {
           Routes.login.offAllPage();
+          Get.delete<User>();
           SharedPref.clearUserId();
         },
       ),

@@ -6,9 +6,13 @@ import 'package:graduation_gate_way/src/core/route/routes_name.dart';
 import 'package:graduation_gate_way/src/features/auth/design/page/forget_password_page_view.dart';
 import 'package:graduation_gate_way/src/features/auth/design/page/sign_up_page_view.dart';
 import 'package:graduation_gate_way/src/features/chat_bot/design/page/chat_page_view.dart';
+import 'package:graduation_gate_way/src/features/follow_up/presentation/pages/follow_up_doctor_page_view.dart';
+import 'package:graduation_gate_way/src/features/grades/presentation/pages/grades_page_view.dart';
 import 'package:graduation_gate_way/src/features/home/design/layout/home_layout.dart';
 import 'package:graduation_gate_way/src/features/my_project/presentation/pages/my_project_page_view.dart';
+import 'package:graduation_gate_way/src/features/my_project_doctor/presentation/pages/my_project_doctor_page_view.dart';
 import 'package:graduation_gate_way/src/features/profile/design/page/profile_page_view.dart';
+import 'package:graduation_gate_way/src/features/reports/presentation/pages/reports_page_view.dart';
 
 import '../../features/auth/design/page/login_page_view.dart';
 import '../../features/auth/design/page/otp_page_view.dart';
@@ -67,6 +71,19 @@ class AppRouter {
     getPage(name: Routes.chat, page: () => const ChatPageView()),
     // my project
     getPage(name: Routes.myProject, page: () => const MyProjectPageView()),
+    // doctor pages
+    //projects
+    getPage(
+        name: Routes.doctorProjects,
+        page: () => const MyProjectDoctorPageView()),
+    // reports
+    getPage(name: Routes.doctorReports, page: () => const ReportsPageView()),
+    //grades
+    getPage(name: Routes.grades, page: () => const GradesPageView()),
+    //follow_up
+    getPage(
+        name: Routes.doctorFollowUps,
+        page: () => const FollowUpDoctorPageView()),
   ];
 }
 
@@ -91,6 +108,10 @@ GetPage<dynamic> getPage(
 Future<void> getBack() async => Get.back(
       canPop: true,
       closeOverlays: true,
+    );
+
+Future<void> getToPage(Widget page) async => Get.to(
+      () => page,
     );
 
 extension RouteParse on String {

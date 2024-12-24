@@ -16,7 +16,7 @@ class Routes {
   static const String onBoarding = '/onBoarding';
   static const String home = '/home';
 
-  //pages
+  //pages Student
   // ----> project recommendation
   static const String projectRecommendationTest = '/projectRecommendationTest';
   static const String projectViewDetailsPageView =
@@ -35,4 +35,17 @@ class Routes {
 
   //my project
   static const String myProject = '/myProject';
+
+  //doctor pages
+  //projects
+  static const String doctorProjects = '/doctorProjects';
+
+  //reports
+  static const String doctorReports = '/doctorReports';
+
+  //grades
+  static const String grades = '/Grades';
+
+  //follow ups
+  static const String doctorFollowUps = '/doctorFollowUps';
 }

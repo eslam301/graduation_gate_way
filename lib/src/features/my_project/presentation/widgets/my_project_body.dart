@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/border_container.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 import 'package:graduation_gate_way/src/features/my_project/presentation/widgets/student_card.dart';
 
@@ -13,7 +14,7 @@ class MyProjectBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return SurfaceContainer(
-      margin: 30,
+      margin: 20,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,24 +65,11 @@ class MyProjectBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 6,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
+            BorderContainer(
               child: ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 6,
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   final bool isStudentPresent = myProject.students != null &&
                       index < myProject.students!.length;

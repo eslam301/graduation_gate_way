@@ -19,12 +19,13 @@ class MyProjectController extends GetxController {
     try {
       apiManager = Get.find<ApiManager>();
       user = Get.find<User>();
+      print("user is ${user.toString()}");
       final int? projectId = user.projectId;
       print("Project ID: $projectId");
       if (projectId == null) {
         throw Exception("Invalid project ID: $projectId");
       }
-      await getMyProjectById(4);
+      await getMyProjectById(projectId);
     } catch (e) {
       log("Initialization error: $e ");
       errorMessage.value = "no project found ${e.toString()}";

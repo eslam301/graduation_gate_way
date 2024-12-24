@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_color.dart';
-
 class StudentCard extends StatelessWidget {
   final String name;
   final String idString;
@@ -30,12 +28,11 @@ class StudentCard extends StatelessWidget {
                     text: 'Name: ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
                     ),
                   ),
                   TextSpan(
                     text: name,
-                    style: const TextStyle(color: AppColors.mainColor),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 ],
               ),
@@ -49,12 +46,11 @@ class StudentCard extends StatelessWidget {
                     text: 'ID: ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
                     ),
                   ),
                   TextSpan(
                     text: idString,
-                    style: const TextStyle(color: Colors.deepPurple),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 ],
               ),
