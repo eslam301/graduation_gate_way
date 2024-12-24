@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:graduation_gate_way/src/core/api/api_manger.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
-
-import 'core/widgets/show/show_loading_widget.dart';
 
 class Testing extends StatelessWidget {
   const Testing({super.key});
@@ -9,18 +9,18 @@ class Testing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: LoadableState(
-      isLoading: true,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Testing'),
-          MainButton(
-            onPressed: () {},
-            text: 'Login',
-          ),
-        ],
-      ),
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('Testing'),
+        MainButton(
+          onPressed: () {
+            final ApiManager apiManager = Get.find<ApiManager>();
+            apiManager.getMyProjectById(1);
+          },
+          text: 'Login',
+        ),
+      ],
     ));
   }
 }

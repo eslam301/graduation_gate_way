@@ -32,7 +32,6 @@ class HomeLayoutControllerImp extends HomeLayoutController {
 
   Future<void> _initializeUser() async {
     isLoading.value = true; // Update only reactive variable
-
     try {
       user = await SharedPref.getUserData();
       log("User loaded successfully: ${user.toString()}");
@@ -54,6 +53,7 @@ class HomeLayoutControllerImp extends HomeLayoutController {
   @override
   myProject() {
     // Implement logic here
+    Routes.myProject.toPage();
   }
 
   @override

@@ -90,5 +90,9 @@ class ProjectRecommendationModel {
         links: links ?? '',
         skillsRequired: skillsRequired ?? '',
         title: title ?? '',
+        projectId: '',
+        projectName: '',
+        projectDescription: '',
+        proposalName: '',
       );
 }

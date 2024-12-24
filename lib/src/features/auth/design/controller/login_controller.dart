@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/api_manger.dart';
-import 'package:graduation_gate_way/src/core/extensions/on_widgets.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:graduation_gate_way/src/core/utils/shared_pref.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -37,7 +36,7 @@ class LoginControllerImp extends LoginController {
 
   @override
   void login() async {
-    Get.context!.loadable(isLoading: loading.value);
+    // Get.context!.loadable(isLoading: loading.value);
     if (formKey.currentState!.validate()) {
       if (await connection.hasConnection) {
         loading.value = true; // Show loading animation
@@ -53,6 +52,7 @@ class LoginControllerImp extends LoginController {
           await SharedPref.saveUserData(user);
           await SharedPref.saveUserId(user.id.toString());
           Routes.home.offAllPage();
+          Get.put(user, permanent: true);
         } catch (e) {
           Get.snackbar('Error', 'Login failed: $e');
         } finally {

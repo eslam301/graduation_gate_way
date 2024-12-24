@@ -1,10 +1,19 @@
 import '../../../../core/api/models/projects_recommendations.dart';
 
 class ProjectModel extends ProjectRecommendationModel {
+  final String projectId;
+  final String? projectName;
+  final String? projectDescription;
+  final String? proposalName;
+
   List<Student> students = [];
   List<String> doctorsNames = [];
 
   ProjectModel({
+    required this.projectId,
+    required this.projectName,
+    required this.projectDescription,
+    required this.proposalName,
     required String category,
     required String description,
     required String difficultyLevel,
@@ -34,13 +43,26 @@ class ProjectModel extends ProjectRecommendationModel {
       links: '',
       skillsRequired: '',
       title: '',
+      projectId: '',
+      projectName: '',
+      projectDescription: '',
+      proposalName: '',
     );
   }
 }
 
 class Student {
   String? name;
-  String? id;
+  int? id;
 
   Student({required this.name, required this.id});
+
+  factory Student.fromJson(Map<String, dynamic> json) {
+    return Student(name: json['fullName'], id: json['st_id']);
+  }
+
+  @override
+  String toString() {
+    return 'Student(name: $name, id: $id)';
+  }
 }

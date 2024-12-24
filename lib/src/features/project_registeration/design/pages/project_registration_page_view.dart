@@ -25,6 +25,7 @@ class ProjectRegistrationPageView extends StatelessWidget {
         height: 70,
       ),
       body: ListView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: const EdgeInsets.all(20),
         children: [
           InputSectionStudent(

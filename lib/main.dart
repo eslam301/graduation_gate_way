@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_gate_way/src/core/utils/shared_pref.dart';
 
 import 'application.dart';
 import 'init_main.dart';
 
 void main() async {
+  await ScreenUtil.ensureScreenSize();
   await initMain();
 
   final String? userId = SharedPref.getUserId();

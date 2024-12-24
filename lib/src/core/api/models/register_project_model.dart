@@ -37,7 +37,7 @@ class RegisterProjectModel {
       studentName: json['studentName'],
       categoryId: json['categoryId'] ?? 0,
       doctorId: json['doctorId'] ?? 0,
-      studentId: json['studentId'],
+      studentId: json['st_id'],
     );
   }
 
@@ -61,7 +61,7 @@ class RegisterProjectModel {
       'proposalFileName': proposalFileName,
       'categoryId': categoryId,
       'doctorId': doctorId,
-      'studentId': studentId,
+      'st_id': studentId,
     };
   }
 

@@ -7,6 +7,7 @@ import 'package:graduation_gate_way/src/features/auth/design/page/forget_passwor
 import 'package:graduation_gate_way/src/features/auth/design/page/sign_up_page_view.dart';
 import 'package:graduation_gate_way/src/features/chat_bot/design/page/chat_page_view.dart';
 import 'package:graduation_gate_way/src/features/home/design/layout/home_layout.dart';
+import 'package:graduation_gate_way/src/features/my_project/presentation/pages/my_project_page_view.dart';
 import 'package:graduation_gate_way/src/features/profile/design/page/profile_page_view.dart';
 
 import '../../features/auth/design/page/login_page_view.dart';
@@ -64,6 +65,8 @@ class AppRouter {
     getPage(name: Routes.profile, page: () => const ProfilePageView()),
     // Chat
     getPage(name: Routes.chat, page: () => const ChatPageView()),
+    // my project
+    getPage(name: Routes.myProject, page: () => const MyProjectPageView()),
   ];
 }
 

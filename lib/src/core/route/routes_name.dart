@@ -32,4 +32,7 @@ class Routes {
 
   //chat
   static const String chat = '/chat';
+
+  //my project
+  static const String myProject = '/myProject';
 }

@@ -7,13 +7,14 @@ import 'package:graduation_gate_way/src/core/api/models/register_project_model.d
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../../core/api/api_manger.dart';
+import '../../../../core/api/models/user.dart';
 import '../../data/models/project_model.dart';
 
 abstract class ProjectRegisterController extends GetxController {
   final RxInt currentPageIndex = 0.obs;
 
   final TextEditingController studentNameController = TextEditingController();
-  final TextEditingController studentIdController = TextEditingController();
+  late final TextEditingController studentIdController;
 
   final TextEditingController projectNameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -31,12 +32,17 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
   RegisterProjectModel registerProjectModel = RegisterProjectModel.empty();
   late final ApiManager apiManager;
   late InternetConnectionChecker connection;
+  late User user;
 
   @override
   void onInit() {
     super.onInit();
     apiManager = Get.find<ApiManager>();
     connection = Get.find<InternetConnectionChecker>();
+    user = Get.find<User>();
+    studentIdController = TextEditingController(
+      text: user.studentId.toString(),
+    );
 
     // Initialize projectModel from arguments if provided
     projectModel =
@@ -61,7 +67,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     registerProjectModel = registerProjectModel.copyWith(
       projectName: projectModel.title ?? '',
       description: projectModel.description ?? '',
-      categoryId: 0,
+      categoryId: 1,
     );
   }
 
@@ -77,6 +83,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
       studentId: int.parse(studentIdController.text),
       projectName: projectNameController.text,
       description: descriptionController.text,
+      categoryId: 1,
     );
   }
 

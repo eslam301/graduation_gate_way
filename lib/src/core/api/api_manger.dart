@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../error/error_handel_api.dart';
 import 'models/login_response.dart';
+import 'models/my_project_model.dart';
 import 'models/register_project_model.dart';
 import 'models/track_model.dart';
 import 'models/user.dart';
@@ -23,6 +24,27 @@ class ApiManager {
   static const Map<String, String> baseHeaders = {
     'Content-Type': 'application/json',
   };
+
+  Future<MyProjectModel> getMyProjectById(int id) async {
+    try {
+      final response = await client.get(
+        Uri.parse('$baseUrl/api/Project/$id/students'),
+      );
+      //log(response.body);
+      if (response.statusCode == 200) {
+        final MyProjectModel myProjectModel =
+            MyProjectModel.fromJson(jsonDecode(response.body));
+        log(myProjectModel.toString());
+        return myProjectModel;
+      } else {
+        handleHttpError(response);
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+    return MyProjectModel.emptyIt();
+  }
 
   /// Sends a GET request to fetch a list of doctors.
   Future<List<DoctorModel>> getDoctors() async {
@@ -138,6 +160,8 @@ class ApiManager {
       log('body: $body');
       final response = await client.post(url, body: body, headers: baseHeaders);
       final responseBody = jsonDecode(response.body);
+      log('responseBody: $responseBody');
+      log('responseBody message: ${responseBody['message']}');
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'Project registered successfully');
         log('Project registered successfully${responseBody['message']}');
@@ -171,9 +195,9 @@ class ApiManager {
 
     try {
       final response = await client.post(url, body: body, headers: baseHeaders);
+      final responseBody = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        final responseBody = jsonDecode(response.body);
         final LoginResponse loginResponse =
             LoginResponse.fromJson(responseBody);
         final User user = loginResponse.getUser()!;
@@ -182,7 +206,6 @@ class ApiManager {
         //print(loginResponse.user.toString());
         return user;
       } else if (response.statusCode == 400) {
-        final responseBody = jsonDecode(response.body);
         log('Invalid username or password : ${responseBody.toString()}');
         Get.snackbar('Error', responseBody['message']);
 

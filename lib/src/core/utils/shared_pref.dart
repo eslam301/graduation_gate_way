@@ -19,6 +19,7 @@ class SharedPref {
 
   static Future<bool> saveUserData(User user) async {
     // Use JSON encoding for proper serialization
+    log(json.encode(user.toJson()));
     return await _prefs!.setString('user_data', json.encode(user.toJson()));
   }
 

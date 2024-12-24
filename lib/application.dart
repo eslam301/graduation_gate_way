@@ -18,10 +18,11 @@ class GraduationGateWay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) {
+        designSize: ScreenUtil.defaultSize,
+        // minTextAdapt: true,
+        // splitScreenMode: true,
+        builder: (context, child) {
+          ScreenUtil.init(context);
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,

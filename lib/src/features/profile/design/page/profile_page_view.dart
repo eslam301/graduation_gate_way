@@ -26,38 +26,54 @@ class _ProfilePageViewState extends State<ProfilePageView> {
   }
 
   Future<void> _loadUserData() async {
-    user = await SharedPref.getUserData();
+    User? user = await SharedPref.getUserData();
     profileListTiles = [
       ProfileListTile(
         title: 'First Name',
         iconData: Icons.person,
-        subtitle: user?.firstname ?? '',
+        subtitle: user.firstname ?? '',
       ),
       ProfileListTile(
         title: 'Last Name',
         iconData: Icons.person,
-        subtitle: user?.lastname ?? '',
+        subtitle: user.lastname ?? '',
       ),
       ProfileListTile(
         title: 'Role',
         iconData: Icons.person,
-        subtitle: user?.role ?? '',
+        subtitle: user.role ?? '',
       ),
       ProfileListTile(
         title: 'Username',
         iconData: Icons.person,
-        subtitle: user?.username ?? '',
+        subtitle: user.username ?? '',
       ),
       ProfileListTile(
         title: 'Email',
         iconData: Icons.email_rounded,
-        subtitle: user?.email ?? '',
+        subtitle: user.email ?? '',
       ),
       ProfileListTile(
         title: 'Phone Number',
         iconData: Icons.phone,
-        subtitle: user?.phoneNumber ?? '',
+        subtitle: user.phoneNumber ?? '',
       ),
+      ProfileListTile(
+          title: 'track and project',
+          iconData: Icons.location_on,
+          subtitle: '${user.track}, ${user.project}'),
+      ProfileListTile(
+          title: 'project id and units',
+          iconData: Icons.location_on,
+          subtitle: '${user.projectId}, ${user.countUnits}'),
+      ProfileListTile(
+          title: 'student id',
+          iconData: Icons.location_on,
+          subtitle: '${user.studentId}'),
+      ProfileListTile(
+          title: 'password',
+          iconData: Icons.location_on,
+          subtitle: '${user.password}'),
     ];
     setState(() {
       isLoading = false;
