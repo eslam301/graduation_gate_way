@@ -59,8 +59,14 @@ class PdfManager {
       String fileName, List<int> pdfBytes) async {
     try {
       final selectedDirectory = await FilePicker.platform.getDirectoryPath();
+
       if (selectedDirectory == null) {
         return 'Directory selection was canceled.';
+      }
+
+      // Request storage permissions
+      if (await Permission.storage.request().isDenied) {
+        return 'Storage permission denied.';
       }
 
       final filePath = '$selectedDirectory/$fileName';

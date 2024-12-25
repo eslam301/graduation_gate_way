@@ -85,27 +85,25 @@ class MyProjectBody extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 6,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Text(
-                'Description: ${myProject.description!}',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontSize: 16,
-                      color: Colors.black87,
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.grey),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 6,
+                      offset: Offset(0, 4),
                     ),
-              ),
-            ),
+                  ],
+                ),
+                child: Text(
+                  'Description: ${myProject.description!}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                )),
           ],
         ),
       ),

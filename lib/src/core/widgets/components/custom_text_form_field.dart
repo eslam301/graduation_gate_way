@@ -12,11 +12,13 @@ class CustomTextFormField extends StatefulWidget {
   final Widget? suffixIconWidget;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
+  final int? maxLines;
   final Color? borderColor;
 
   const CustomTextFormField({
     super.key,
     this.controller,
+    this.maxLines,
     this.borderColor = Colors.transparent,
     this.radius = 15,
     this.hintText,
@@ -30,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField.email({
     super.key,
     this.controller,
+    this.maxLines,
     this.radius = 15,
     this.borderColor = Colors.transparent,
     this.hintText = 'Enter your email',
@@ -43,6 +46,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField.user({
     super.key,
     this.controller,
+    this.maxLines,
     this.radius = 15,
     this.hintText = 'Enter user name',
     this.labelText = 'User Name',
@@ -55,6 +59,7 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField.name({
     super.key,
+    this.maxLines,
     this.controller,
     this.radius = 15,
     this.hintText = 'Enter your name',
@@ -69,6 +74,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField.phone({
     super.key,
     this.controller,
+    this.maxLines,
     this.hintText = 'Enter your phone number',
     this.radius = 15,
     this.labelText = 'Phone number',
@@ -83,6 +89,7 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     this.controller,
     this.radius = 15,
+    this.maxLines,
     this.hintText = 'number',
     this.labelText = 'number',
     this.suffixIcon = Icons.perm_identity,
@@ -96,6 +103,7 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     this.controller,
     this.radius = 15,
+    this.maxLines,
     this.hintText = 'Enter your password',
     this.labelText = 'Password',
     this.suffixIcon = Icons.visibility_rounded,
@@ -109,6 +117,7 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     this.controller,
     this.radius = 15,
+    this.maxLines,
     this.hintText = 'Enter your password again',
     this.borderColor = Colors.transparent,
     this.labelText = 'confirm Password',
@@ -139,7 +148,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.labelText!,
+          Text(widget.labelText ?? '',
               style: theme.textTheme.bodyMedium?.copyWith()),
           SizedBox(height: 8.h),
           TextFormField(
@@ -151,7 +160,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               return null;
             },
             keyboardType: widget.textInputType,
-            maxLines: widget.suffixIcon != null ? 1 : 5,
+            maxLines: widget.maxLines ?? 1,
             decoration: InputDecoration(
               filled: true,
               fillColor: theme.colorScheme.surfaceTint,

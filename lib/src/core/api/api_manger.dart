@@ -196,7 +196,6 @@ class ApiManager {
     try {
       final response = await client.post(url, body: body, headers: baseHeaders);
       final responseBody = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         final LoginResponse loginResponse =
             LoginResponse.fromJson(responseBody);
@@ -208,7 +207,6 @@ class ApiManager {
       } else if (response.statusCode == 400) {
         log('Invalid username or password : ${responseBody.toString()}');
         Get.snackbar('Error', responseBody['message']);
-
         throw Exception('Invalid username or password');
       } else {
         handleHttpError(response);
@@ -216,7 +214,6 @@ class ApiManager {
     } catch (e) {
       Get.snackbar('un expected Error', 'Failed to login');
       log(e.toString());
-
       rethrow;
     }
     // Throw a fallback exception to ensure all paths return a value

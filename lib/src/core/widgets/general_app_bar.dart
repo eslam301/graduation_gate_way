@@ -12,41 +12,39 @@ PreferredSize generalAppBar({
 }) {
   return PreferredSize(
     preferredSize: Size.fromHeight(height.h),
-    child: Container(
-      padding: EdgeInsets.all(10.w),
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      decoration: const BoxDecoration(
-        color: AppColors.mainColor,
+    child: AppBar(
+      iconTheme: const IconThemeData(color: AppColors.white, size: 30),
+      backgroundColor: AppColors.mainColor,
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(60),
           bottomRight: Radius.circular(60),
         ),
       ),
-      child: AppBar(
-        iconTheme: const IconThemeData(color: AppColors.white, size: 30),
-        backgroundColor: Colors.transparent,
-        centerTitle: centerTitle,
-        title: title == null
-            ? null
-            : Text(
-                title,
-                style: TextStyle(
-                  fontSize: title.length > 20 ? 18 : 21,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.white,
-                ),
+      elevation: 0,
+      toolbarHeight: height.h,
+      automaticallyImplyLeading: true,
+      centerTitle: centerTitle,
+      title: title == null
+          ? null
+          : Text(
+              title,
+              style: TextStyle(
+                fontSize: title.length > 20 ? 18 : 21,
+                fontWeight: FontWeight.w400,
+                color: AppColors.white,
               ),
-        flexibleSpace: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              if (userName != null) _buildGreeting(userName),
-              if (!centerTitle && subTitle != null) _buildSubtitle(subTitle),
-              const SizedBox(height: 10),
-            ],
-          ),
+            ),
+      flexibleSpace: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            if (userName != null) _buildGreeting(userName),
+            if (!centerTitle && subTitle != null) _buildSubtitle(subTitle),
+            const SizedBox(height: 10),
+          ],
         ),
       ),
     ),

@@ -15,7 +15,7 @@ class ProfilePageView extends StatefulWidget {
 }
 
 class _ProfilePageViewState extends State<ProfilePageView> {
-  User? user;
+  late User user;
   bool isLoading = true;
   List<ProfileListTile> profileListTiles = [];
 
@@ -26,7 +26,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
   }
 
   Future<void> _loadUserData() async {
-    User? user = await SharedPref.getUserData();
+    user = await SharedPref.getUserData();
     profileListTiles = [
       ProfileListTile(
         title: 'First Name',
@@ -119,11 +119,11 @@ class _ProfilePageViewState extends State<ProfilePageView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${user?.firstname ?? ''} ${user?.lastname ?? ''}', // Full name
+                '${user.firstname} ${user.lastname}',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
-                user?.email ?? '', // Email address
+                user.email ?? '', // Email address
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ],

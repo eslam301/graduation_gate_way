@@ -5,6 +5,14 @@ bool isEmpty(String? value) {
   return false;
 }
 
+String? validateEmpty(String? value) {
+  if (isEmpty(value)) {
+    return 'Please enter a value';
+  } else {
+    return null;
+  }
+}
+
 String? validateEmail(String value) {
   String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
   RegExp regex = RegExp(pattern);

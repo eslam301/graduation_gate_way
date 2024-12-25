@@ -9,6 +9,7 @@ class GradesPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       endDrawer: const CustomDrawer(),
       appBar: generalAppBar(
         title: 'Grades',
