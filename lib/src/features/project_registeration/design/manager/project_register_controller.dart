@@ -55,7 +55,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
 
     if (projectModel != ProjectModel.empty()) {
       updateRegisterProjectModelFromRecommended(projectModel: projectModel);
-      projectNameController.text = projectModel.title ?? '';
+      projectNameController.text = projectModel.name ?? '';
       descriptionController.text = projectModel.description ?? '';
     }
   }
@@ -65,7 +65,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
   void updateRegisterProjectModelFromRecommended(
       {required ProjectModel projectModel}) {
     registerProjectModel = registerProjectModel.copyWith(
-      projectName: projectModel.title ?? '',
+      projectName: projectModel.name ?? '',
       description: projectModel.description ?? '',
       categoryId: 1,
     );

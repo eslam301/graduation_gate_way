@@ -6,6 +6,7 @@ import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
 import 'package:graduation_gate_way/src/core/api/models/student_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../features/project_registeration/data/models/project_model.dart';
 import '../error/error_handel_api.dart';
 import 'models/login_response.dart';
 import 'models/my_project_model.dart';
@@ -43,7 +44,29 @@ class ApiManager {
       log(e.toString());
       rethrow;
     }
-    return MyProjectModel.emptyIt();
+    throw MyProjectModel.emptyIt();
+  }
+
+  Future<List<ProjectModel>> getProjectByDoctorId(int id) async {
+    try {
+      final response = await client.get(
+        Uri.parse('$baseUrl/api/Project/by-doctor/$id'),
+      );
+      log(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedData = jsonDecode(response.body);
+        final List<ProjectModel> projectModel =
+            decodedData.map((json) => ProjectModel.fromJson(json)).toList();
+        log(projectModel.toString());
+        return projectModel;
+      } else {
+        handleHttpError(response);
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+    throw ProjectModel.empty();
   }
 
   /// Sends a GET request to fetch a list of doctors.

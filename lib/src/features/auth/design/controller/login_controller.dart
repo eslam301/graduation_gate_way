@@ -51,7 +51,7 @@ class LoginControllerImp extends LoginController {
           );
           await SharedPref.saveUserData(user);
           await SharedPref.saveUserId(user.id.toString());
-          Routes.home.offAllPage();
+          Routes.onBoarding.offAllPage();
           Get.put(user, permanent: true);
         } catch (e) {
           Get.snackbar('Error', 'Login failed: $e');

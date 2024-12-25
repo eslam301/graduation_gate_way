@@ -1,53 +1,54 @@
-import '../../../../core/api/models/projects_recommendations.dart';
+class ProjectModel {
+  int? id;
+  double? rate;
+  String? name;
+  String? description;
+  String? categoryName;
+  String? proposalName;
 
-class ProjectModel extends ProjectRecommendationModel {
-  final String projectId;
-  final String? projectName;
-  final String? projectDescription;
-  final String? proposalName;
+  List<Student>? students = [];
+  List<String>? doctorsNames = [];
 
-  List<Student> students = [];
-  List<String> doctorsNames = [];
+  ProjectModel(
+      {this.id,
+      this.name,
+      this.description,
+      this.categoryName,
+      this.proposalName,
+      this.rate,
+      this.students,
+      this.doctorsNames});
 
-  ProjectModel({
-    required this.projectId,
-    required this.projectName,
-    required this.projectDescription,
-    required this.proposalName,
-    required String category,
-    required String description,
-    required String difficultyLevel,
-    required String keywords,
-    required String imageLink,
-    required String links,
-    required String skillsRequired,
-    required String title,
-  }) : super(
-          category: category,
-          description: description,
-          difficultyLevel: difficultyLevel,
-          keywords: keywords,
-          imageLink: imageLink,
-          links: links,
-          skillsRequired: skillsRequired,
-          title: title,
-        );
+  ProjectModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    description = json['description'];
+    categoryName = json['categoryName'];
+    proposalName = json['proposalFileName'];
+    rate = json['rate'];
+    if (json['students'] != null) {
+      students = <Student>[];
+      json['students'].forEach((v) {
+        students?.add(Student.fromJson(v));
+      });
+    }
+    if (json['doctorsNames'] != null) {
+      doctorsNames = <String>[];
+      json['doctorsNames'].forEach((v) {
+        doctorsNames?.add(v);
+      });
+    }
+  }
 
-  factory ProjectModel.empty() {
-    return ProjectModel(
-      category: '',
-      description: '',
-      difficultyLevel: '',
-      keywords: '',
-      imageLink: '',
-      links: '',
-      skillsRequired: '',
-      title: '',
-      projectId: '',
-      projectName: '',
-      projectDescription: '',
-      proposalName: '',
-    );
+  ProjectModel.empty() {
+    id = null;
+    name = null;
+    description = null;
+    categoryName = null;
+    proposalName = null;
+    rate = null;
+    students = [];
+    doctorsNames = [];
   }
 }
 

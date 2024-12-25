@@ -5,9 +5,12 @@ import 'package:graduation_gate_way/src/core/widgets/general_app_bar.dart';
 
 import '../../../../core/widgets/components/border_container.dart';
 import '../../../my_project/presentation/widgets/student_card.dart';
+import '../../../project_registeration/data/models/project_model.dart';
 
 class MyProjectDoctorDetailsPageView extends StatelessWidget {
-  const MyProjectDoctorDetailsPageView({super.key});
+  final ProjectModel project;
+
+  const MyProjectDoctorDetailsPageView({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,25 @@ class MyProjectDoctorDetailsPageView extends StatelessWidget {
             const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 120),
         child: Column(
           children: [
-            const Text('Project Name'),
+            Text(project.name ?? '',
+                style: Theme.of(context).textTheme.titleMedium),
+            10.verticalSpace,
+            Card(
+              surfaceTintColor: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).primaryColor,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 8.0,
+                ),
+                child: Text(
+                  project.categoryName ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                ),
+              ),
+            ),
             10.verticalSpace,
             BorderContainer(
               child: ListView.builder(
@@ -36,8 +57,8 @@ class MyProjectDoctorDetailsPageView extends StatelessWidget {
               color: Theme.of(context).colorScheme.surface,
               width: double.infinity,
               height: 200,
-              child: const Text(
-                'Project Description',
+              child: Text(
+                project.description ?? '',
               ),
             ),
             10.verticalSpace,

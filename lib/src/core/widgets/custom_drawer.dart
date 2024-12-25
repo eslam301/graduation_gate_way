@@ -29,7 +29,7 @@ class CustomDrawer extends StatelessWidget {
         icon: Icons.logout,
         onTap: () {
           Routes.login.offAllPage();
-          Get.delete<User>();
+          Get.delete<User>(force: true);
           SharedPref.clearUserId();
         },
       ),

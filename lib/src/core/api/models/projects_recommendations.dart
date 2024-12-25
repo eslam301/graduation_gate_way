@@ -1,8 +1,7 @@
 import '../../../features/project_registeration/data/models/project_model.dart';
 
-class ProjectRecommendationModel {
+class ProjectRecommendationModel extends ProjectModel {
   String? category;
-  String? description;
   String? difficultyLevel;
   String? keywords;
   String? imageLink;
@@ -16,13 +15,20 @@ class ProjectRecommendationModel {
 
   ProjectRecommendationModel({
     this.category,
-    this.description,
     this.difficultyLevel,
     this.keywords,
     this.imageLink,
     this.links,
     this.skillsRequired,
     this.title,
+    super.id,
+    super.name,
+    super.categoryName,
+    super.proposalName,
+    super.rate,
+    super.description,
+    super.students,
+    super.doctorsNames,
   }) {
     _initializeLists();
   }
@@ -36,6 +42,16 @@ class ProjectRecommendationModel {
     links = json['links'];
     skillsRequired = json['skills_required'];
     title = json['title'];
+
+    name = json['name'];
+    id = json['id'];
+    categoryName = json['categoryName'];
+    proposalName = json['proposalFileName'];
+    rate = json['rate'];
+    description = json['description'];
+    students = json['students'];
+    doctorsNames = json['doctorsNames'];
+
     _initializeLists();
   }
 
@@ -78,21 +94,8 @@ class ProjectRecommendationModel {
     title: $title,
     skillsRequiredList: $skillsRequiredList,
     keywordsList: $keywordsList
+    categoryList: $categoryList
+    
     """;
   }
-
-  ProjectModel toProjectModel() => ProjectModel(
-        category: category ?? '',
-        description: description ?? '',
-        difficultyLevel: difficultyLevel ?? '',
-        keywords: keywords ?? '',
-        imageLink: imageLink ?? '',
-        links: links ?? '',
-        skillsRequired: skillsRequired ?? '',
-        title: title ?? '',
-        projectId: '',
-        projectName: '',
-        projectDescription: '',
-        proposalName: '',
-      );
 }

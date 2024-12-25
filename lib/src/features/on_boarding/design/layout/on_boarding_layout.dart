@@ -24,14 +24,14 @@ class OnBoardingLayout extends StatelessWidget {
               children: [
                 PageView.builder(
                   controller: controller.pageController,
-                  itemCount: controller.onBoardingList.length,
+                  itemCount: OnBoardingControllerImp.onBoardingList.length,
                   itemBuilder: (context, index) => OnBoardingWidget(
-                    onBoarding: controller.onBoardingList[index],
+                    onBoarding: OnBoardingControllerImp.onBoardingList[index],
                   ),
                   onPageChanged: (index) => controller.swipe(index),
                 ),
                 Positioned(
-                  bottom: 320.h,
+                  bottom: 120.h,
                   child: SmoothPageIndicator(
                     controller: controller.pageController,
                     effect: const ExpandingDotsEffect(
@@ -48,7 +48,7 @@ class OnBoardingLayout extends StatelessWidget {
                       duration: const Duration(seconds: 1),
                       curve: Curves.easeInOut,
                     ),
-                    count: controller.onBoardingList.length,
+                    count: OnBoardingControllerImp.onBoardingList.length,
                   ),
                 ),
                 Positioned(
