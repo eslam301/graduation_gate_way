@@ -68,6 +68,8 @@ dependencies:
   file_picker: ^8.1.6
   permission_handler: ^11.3.1
   intl: ^0.20.1
+  timeline_tile: ^2.0.0
+  fl_chart: ^0.70.0
 
 
 
