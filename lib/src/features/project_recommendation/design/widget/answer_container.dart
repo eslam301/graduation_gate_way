@@ -37,7 +37,7 @@ class AnswerContainer extends StatelessWidget {
                   answers: questionModel.answers,
                   questionModel: questionModel,
                 )
-              : AnswersMultipleSearch(
+              : MultiDropDownWidget(
                   answers: questionModel.answers,
                   searchEnabled: true,
                   selectionListAnswerMethod:

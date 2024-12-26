@@ -3,18 +3,19 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 
 import '../theme/app_color.dart';
 
-class AnswersMultipleSearch extends StatelessWidget {
+class MultiDropDownWidget extends StatelessWidget {
   // Properties
-  final List<String> answers;
   final bool searchEnabled;
   final bool isSingleSelect;
+  final String hintText;
+  final List<String> answers;
   final void Function(List<String>)? selectionListAnswerMethod;
   final void Function(List<Object?>)? selectionListAnswerMethodObject;
   final Future<List<DropdownItem<Object>>> Function()? fetchAnswersFuture;
 
   final bool isFuturesEnabled;
 
-  const AnswersMultipleSearch({
+  const MultiDropDownWidget({
     super.key,
     this.answers = const [],
     this.selectionListAnswerMethod,
@@ -22,6 +23,7 @@ class AnswersMultipleSearch extends StatelessWidget {
     this.searchEnabled = false,
     this.isSingleSelect = false,
     this.isFuturesEnabled = false, // Enable futures when needed
+    this.hintText = 'Select',
     this.fetchAnswersFuture,
   });
 
@@ -115,6 +117,7 @@ class AnswersMultipleSearch extends StatelessWidget {
   FieldDecoration _fieldDecoration({required BuildContext context}) {
     final theme = Theme.of(context);
     return FieldDecoration(
+        hintText: hintText,
         hintStyle: theme.textTheme.bodyMedium
             ?.copyWith(color: theme.colorScheme.onSurface),
         padding: const EdgeInsets.all(16),

@@ -239,7 +239,6 @@ class ApiManager {
       log(e.toString());
       rethrow;
     }
-    // Throw a fallback exception to ensure all paths return a value
     throw Exception('Unexpected error during login');
   }
 

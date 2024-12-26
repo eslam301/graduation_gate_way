@@ -55,7 +55,7 @@ class SignUpBodyAsStudent extends StatelessWidget {
           CustomTextFormField.confirmPassword(
             controller: controller.confirmPasswordController,
           ),
-          AnswersMultipleSearch(
+          MultiDropDownWidget(
             isSingleSelect: true,
             isFuturesEnabled: true,
             searchEnabled: true,

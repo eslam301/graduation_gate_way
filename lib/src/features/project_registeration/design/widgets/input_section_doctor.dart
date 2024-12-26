@@ -26,7 +26,7 @@ class InputSectionDoctor extends StatelessWidget {
             'Doctor',
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          AnswersMultipleSearch(
+          MultiDropDownWidget(
             isSingleSelect: true,
             isFuturesEnabled: true,
             searchEnabled: true,
