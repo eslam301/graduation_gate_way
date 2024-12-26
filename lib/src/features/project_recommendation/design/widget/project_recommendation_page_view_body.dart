@@ -71,9 +71,7 @@ class ProjectRecommendationPageViewBody extends StatelessWidget {
                 width: 130,
                 child: Obx(() {
                   return ButtonWithIcon(
-                    color: controller.isLastPage()
-                        ? AppColors.mainColorShaded
-                        : AppColors.mainColor,
+                    color: AppColors.mainColor,
                     onPressed: () {
                       controller.isLastPage()
                           ? controller.submit()

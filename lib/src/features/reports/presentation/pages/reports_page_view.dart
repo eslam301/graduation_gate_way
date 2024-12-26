@@ -17,11 +17,9 @@ class ReportsPageView extends StatelessWidget {
     ReportController controller = Get.put(ReportController());
     return Scaffold(
         endDrawer: const CustomDrawer(),
-        appBar: generalAppBar(
-          title: 'Reports',
-        ),
+        appBar: generalAppBar(title: 'Reports'),
         body: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics: const BouncingScrollPhysics(),
           padding:
               const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 120),

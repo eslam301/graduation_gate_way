@@ -122,8 +122,8 @@ class ApiManager {
   Future<StudentModel> signUpStudent({required StudentModel student}) async {
     final url = Uri.parse('$baseUrl/api/Student');
     final body = jsonEncode(student.toJsonBody());
+    log(body.toString());
     try {
-      log('body: $body');
       final response = await client.post(url, body: body, headers: baseHeaders);
       final responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {
