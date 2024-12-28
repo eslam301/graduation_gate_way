@@ -18,11 +18,12 @@ class RecommendedResultContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Container(
       //height: 300,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(color: AppColors.grey, width: 1),
       ),
@@ -46,22 +47,15 @@ class RecommendedResultContainer extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(
-            project.title!,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              color: AppColors.black,
-            ),
-          ),
+          Text(project.prediction ?? '',
+              textAlign: TextAlign.center, style: theme.textTheme.bodyMedium),
           const SizedBox(
             width: 10,
           ),
           Text(
-            "Difficulty: ${project.difficultyLevel!}",
+            "Difficulty: ${project.difficultyLevel ?? 'un known'}",
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 14,
+            style: theme.textTheme.bodySmall?.copyWith(
               color: AppColors.grey,
             ),
           ),

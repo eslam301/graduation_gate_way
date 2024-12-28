@@ -19,9 +19,9 @@ class MyProjectController extends GetxController {
     try {
       apiManager = Get.find<ApiManager>();
       user = Get.find<User>();
-      print("user is ${user.toString()}");
+      //print("user is ${user.toString()}");
       final int? projectId = user.projectId;
-      print("Project ID: $projectId");
+      //print("Project ID: $projectId");
       if (projectId == null) {
         throw Exception("Invalid project ID: $projectId");
       }

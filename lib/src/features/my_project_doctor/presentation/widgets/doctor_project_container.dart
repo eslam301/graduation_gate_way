@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../../../core/route/router.dart';
 import '../../../../core/widgets/components/main_button.dart';
 import '../../../../core/widgets/components/surface_container.dart';
 import '../../../my_project/presentation/widgets/student_card.dart';
 import '../../../project_registeration/data/models/project_model.dart';
-import '../pages/my_project_doctor_details_page_view.dart';
+import '../manager/my_projects_doctor_controller.dart';
 
 class DoctorProjectContainer extends StatelessWidget {
   final ProjectModel project;
@@ -15,11 +15,12 @@ class DoctorProjectContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<MyProjectDoctorController>();
     return GestureDetector(
       onTap: () {
-        getToPage(MyProjectDoctorDetailsPageView(
+        controller.viewDetails(
           project: project,
-        ));
+        );
       },
       child: SurfaceContainer(
         margin: 10,
@@ -43,16 +44,17 @@ class DoctorProjectContainer extends StatelessWidget {
             ),
             // Section for student list
             ListView.builder(
-              itemCount: 4,
+              itemCount: project.students?.length ?? 0,
               shrinkWrap: true, // Adjust to content height
               physics: const NeverScrollableScrollPhysics(),
               // Disable scrolling inside
               itemBuilder: (context, studentIndex) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
                   child: StudentCard(
-                    name: 'Student Name',
-                    idString: 'ID Number',
+                    name: project.students?[studentIndex].name ?? '',
+                    idString:
+                        project.students?[studentIndex].id.toString() ?? '',
                   ),
                 );
               },
@@ -62,9 +64,9 @@ class DoctorProjectContainer extends StatelessWidget {
                 width: 150,
                 child: MainButton(
                     onPressed: () {
-                      getToPage(MyProjectDoctorDetailsPageView(
+                      controller.viewDetails(
                         project: project,
-                      ));
+                      );
                     },
                     text: 'View'))
           ],

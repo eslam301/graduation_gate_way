@@ -8,7 +8,7 @@ import '../../../../../core/error/error_handel_api.dart';
 
 class ProjectRecommendationApi {
   static const String projectRecommendationBaseUrl =
-      'https://fadyyosrey.pythonanywhere.com';
+      'https://repo-production-7c34.up.railway.app/predict';
 
   final http.Client client;
 
@@ -21,23 +21,18 @@ class ProjectRecommendationApi {
   Future<List<ProjectRecommendationModel>> sendUserAnswerProjectRecommendation({
     required Map<String, dynamic> userAnswers,
   }) async {
-    final url = Uri.parse('$projectRecommendationBaseUrl/recommend');
+    final url = Uri.parse(projectRecommendationBaseUrl);
     final body = jsonEncode(userAnswers);
+    //print(body);
     try {
       final response = await client.post(url, body: body, headers: baseHeaders);
-      // if (kDebugMode) {
-      //   print('Raw response: ${response.body}');
-      // }
 
       if (response.statusCode == 200) {
         // Clean up the JSON response
         final sanitizedResponseBody = response.body.replaceAll('NaN', 'null');
-        final List<ProjectRecommendationModel> recommendations =
-            (jsonDecode(sanitizedResponseBody) as List)
-                .map((recommendation) =>
-                    ProjectRecommendationModel.fromJson(recommendation))
-                .toList();
-        // Parse sanitized JSON
+        final List<ProjectRecommendationModel> recommendations = [
+          ProjectRecommendationModel.fromJson(jsonDecode(sanitizedResponseBody))
+        ];
         return recommendations;
       } else {
         handleHttpError(response);

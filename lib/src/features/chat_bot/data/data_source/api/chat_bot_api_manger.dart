@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../../models/message.dart';
 
 class ChatBotApiManager {
-  static const url = 'https://fadyyosrey.pythonanywhere.com/chat';
+  static const url = 'https://repo-production-7c34.up.railway.app/chat';
   final http.Client client;
   static const Map<String, String> baseHeaders = {
     'Content-Type': 'application/json',

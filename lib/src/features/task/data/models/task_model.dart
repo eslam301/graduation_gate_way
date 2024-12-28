@@ -1,31 +1,49 @@
 class TaskModel {
-  final int id;
-  final bool isDone;
-  final String title;
-  final String description;
-  final DateTime date;
+  final int? id;
+  final bool? isDone;
+  final String? title;
+  final String? description;
+  final int? numWeekAdd;
+  final int? numWeekDeadline;
+  final int? numWeekFinish;
 
   TaskModel({
-    required this.id,
-    required this.isDone,
-    required this.title,
-    required this.description,
-    required this.date,
+    this.id,
+    this.isDone,
+    this.title,
+    this.description,
+    this.numWeekAdd,
+    this.numWeekDeadline,
+    this.numWeekFinish,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) {
     return TaskModel(
       id: json['id'],
-      isDone: json['isDone'],
-      title: json['title'],
+      title: json['task_name'],
       description: json['description'],
-      date:
-          json['date'] != null ? DateTime.parse(json['date']) : DateTime.now(),
+      isDone: json['isDone'],
+      numWeekAdd: json['numWeekAdd'],
+      numWeekDeadline: json['numWeekDeadline'],
+      numWeekFinish: json['numWeekfinish'],
     );
   }
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'task_name': title,
+        'description': description,
+        'isDone': isDone,
+        'numWeekAdd': numWeekAdd,
+        'numWeekDeadline': numWeekDeadline,
+        'numWeekfinish': numWeekFinish,
+      };
+
   TaskModel copyWith({
     int? id,
+    int? numWeekAdd,
+    int? numWeekDeadline,
+    int? numWeekFinish,
     bool? isDone,
     String? title,
     String? description,
@@ -36,7 +54,9 @@ class TaskModel {
       isDone: isDone ?? this.isDone,
       title: title ?? this.title,
       description: description ?? this.description,
-      date: date != null ? DateTime.parse(date) : this.date,
+      numWeekAdd: numWeekAdd ?? this.numWeekAdd,
+      numWeekDeadline: numWeekDeadline ?? this.numWeekDeadline,
+      numWeekFinish: numWeekFinish ?? this.numWeekFinish,
     );
   }
 }

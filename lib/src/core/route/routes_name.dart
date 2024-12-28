@@ -39,6 +39,7 @@ class Routes {
   //doctor pages
   //projects
   static const String doctorProjects = '/doctorProjects';
+  static const String doctorProjectsDetails = '/doctorProjectsDetails';
 
   //reports
   static const String doctorReports = '/doctorReports';
@@ -48,4 +49,7 @@ class Routes {
 
   //follow ups
   static const String doctorFollowUps = '/doctorFollowUps';
+
+  // tasks
+  static const String tasks = '/tasks';
 }

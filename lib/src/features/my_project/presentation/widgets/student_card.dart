@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class StudentCard extends StatelessWidget {
-  final String name;
-  final String idString;
+  final String? name;
+  final String? idString;
 
-  const StudentCard({super.key, required this.name, required this.idString});
+  const StudentCard({super.key, this.name, this.idString});
 
   @override
   Widget build(BuildContext context) {

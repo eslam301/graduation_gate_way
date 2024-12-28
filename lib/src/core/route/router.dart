@@ -13,6 +13,7 @@ import 'package:graduation_gate_way/src/features/my_project/presentation/pages/m
 import 'package:graduation_gate_way/src/features/my_project_doctor/presentation/pages/my_project_doctor_page_view.dart';
 import 'package:graduation_gate_way/src/features/profile/design/page/profile_page_view.dart';
 import 'package:graduation_gate_way/src/features/reports/presentation/pages/reports_page_view.dart';
+import 'package:graduation_gate_way/src/features/task/presentation/pages/task_page_view.dart';
 
 import '../../features/auth/design/page/login_page_view.dart';
 import '../../features/auth/design/page/otp_page_view.dart';
@@ -84,6 +85,8 @@ class AppRouter {
     getPage(
         name: Routes.doctorFollowUps,
         page: () => const FollowUpDoctorPageView()),
+    //tasks
+    getPage(name: Routes.tasks, page: () => const TaskPageView()),
   ];
 }
 
@@ -111,6 +114,11 @@ Future<void> getBack() async => Get.back(
     );
 
 Future<void> getToPage(Widget page) async => Get.to(
+      preventDuplicates: true,
+      routeName: page.toString(),
+      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 300),
+      transition: Platform.isIOS ? Transition.cupertino : Transition.fadeIn,
       () => page,
     );
 

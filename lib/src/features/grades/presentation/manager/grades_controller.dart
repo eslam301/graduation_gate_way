@@ -5,9 +5,4 @@ import '../../../project_registeration/data/models/project_model.dart';
 class GradesController extends GetxController {
   List grades = [];
   ProjectModel selectedProject = ProjectModel();
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
 }

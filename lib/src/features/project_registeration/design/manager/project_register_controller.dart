@@ -11,8 +11,6 @@ import '../../../../core/api/models/user.dart';
 import '../../data/models/project_model.dart';
 
 abstract class ProjectRegisterController extends GetxController {
-  final RxInt currentPageIndex = 0.obs;
-
   final TextEditingController studentNameController = TextEditingController();
   late final TextEditingController studentIdController;
 
@@ -47,8 +45,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     // Initialize projectModel from arguments if provided
     projectModel =
         Get.arguments != null && Get.arguments.containsKey('projectModel')
-            ? (Get.arguments['projectModel']?.toProjectModel() ??
-                (throw Exception("Invalid ProjectModel data")))
+            ? (Get.arguments['projectModel'])
             : ProjectModel.empty();
 
     log('projectModel: $projectModel');
@@ -67,7 +64,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     registerProjectModel = registerProjectModel.copyWith(
       projectName: projectModel.name ?? '',
       description: projectModel.description ?? '',
-      categoryId: 1,
+      categoryId: projectModel.categoryId ?? 1,
     );
   }
 
@@ -101,8 +98,6 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
       Get.snackbar('error', "No internet connection");
     }
   }
-
-  bool isLastPage() => currentPageIndex.value == 1;
 
   @override
   void onClose() {

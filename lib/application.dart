@@ -6,7 +6,6 @@ import 'package:graduation_gate_way/src/core/binding/app_binding.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
 import 'package:graduation_gate_way/src/core/route/routes_name.dart';
 import 'package:graduation_gate_way/src/core/theme/app_theme.dart';
-import 'package:graduation_gate_way/src/testing.dart';
 
 class GraduationGateWay extends StatelessWidget {
   final String? userId;
@@ -31,9 +30,9 @@ class GraduationGateWay extends StatelessWidget {
             themeMode: ThemeMode.system,
             defaultTransition: Transition.cupertino,
             transitionDuration: const Duration(milliseconds: 300),
-            home: const Testing(),
+            //home: const Testing(),
             getPages: AppRouter.pagesRoute,
-            //initialRoute: initialRoute,
+            initialRoute: initialRoute,
             initialBinding: MyBinding(),
           );
         });

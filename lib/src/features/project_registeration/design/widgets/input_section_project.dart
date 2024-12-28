@@ -20,13 +20,16 @@ class InputSectionProject extends StatelessWidget {
             controller: controller.projectNameController,
             labelText: 'Project Name',
             borderColor: Colors.black,
+            textInputType: TextInputType.name,
             radius: 20,
             suffixIcon: Icons.add,
           ),
           CustomTextFormField(
             controller: controller.descriptionController,
+            textInputType: TextInputType.multiline,
             labelText: 'Project description',
             borderColor: Colors.black,
+            maxLines: 5,
             radius: 20,
           )
         ],

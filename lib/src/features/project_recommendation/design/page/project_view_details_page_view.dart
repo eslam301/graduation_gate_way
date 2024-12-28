@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 
+import '../../../../core/const/image_pathes.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/components/button_with_icon.dart';
 import '../../../../core/widgets/custom_drawer.dart';
@@ -32,13 +34,7 @@ class ProjectViewDetailsPageView extends StatelessWidget {
           top: 20,
           bottom: 120,
         ),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(30),
-            //border: Border.all(color: AppColors.grey, width: 1),
-          ),
+        child: SurfaceContainer(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -72,7 +68,7 @@ class ProjectViewDetailsPageView extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: ButtonWithIcon(
-                  color: AppColors.mainColorShaded,
+                  color: theme.colorScheme.primary,
                   onPressed: () => controller.registerProject(),
                   // Define your action
                   text: 'Register Project',
@@ -94,7 +90,7 @@ class ProjectViewDetailsPageView extends StatelessWidget {
         border: Border.all(color: AppColors.grey, width: 1.w),
       ),
       child: CachedNetworkImage(
-        imageUrl: imageUrl ?? '',
+        imageUrl: imageUrl ?? AppImagePathNetwork.errorImageLink,
         fit: BoxFit.cover,
         placeholder: (context, url) => SizedBox(
             height: 200.h,
@@ -111,14 +107,12 @@ class ProjectViewDetailsPageView extends StatelessWidget {
         text: '$label ',
         style: theme.textTheme.bodyLarge?.copyWith(
           fontWeight: FontWeight.w600,
-          fontSize: 18.sp,
         ),
         children: [
           TextSpan(
             text: value ?? 'N/A',
             style: theme.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w400,
-              fontSize: 16.sp,
             ),
           ),
         ],
@@ -133,18 +127,18 @@ class ProjectViewDetailsPageView extends StatelessWidget {
           'Difficulty Level: ',
           style: theme.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w600,
-            fontSize: 18.sp,
           ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           decoration: BoxDecoration(
-            color: AppColors.mainColor,
+            color: theme.colorScheme.primary,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
             difficultyLevel ?? 'Unknown',
-            style: TextStyle(color: AppColors.white, fontSize: 14.sp),
+            style:
+                TextStyle(color: theme.colorScheme.onPrimary, fontSize: 14.sp),
           ),
         ),
       ],
@@ -153,12 +147,7 @@ class ProjectViewDetailsPageView extends StatelessWidget {
 
   Widget _buildChipList(String label, List<String>? items, ThemeData theme) {
     if (items == null || items.isEmpty) {
-      return Text('$label N/A',
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-            color: AppColors.black,
-          ));
+      return Text('$label N/A');
     }
     return Wrap(
       spacing: 8,
@@ -167,22 +156,18 @@ class ProjectViewDetailsPageView extends StatelessWidget {
       children: [
         Text(
           '$label ',
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-            color: AppColors.black,
-          ),
         ),
         ...items.map(
           (item) => Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             decoration: BoxDecoration(
-              color: AppColors.mainColor,
+              color: theme.colorScheme.primary,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Text(
               item,
-              style: const TextStyle(color: AppColors.white, fontSize: 16),
+              style:
+                  TextStyle(color: theme.colorScheme.onPrimary, fontSize: 16),
             ),
           ),
         ),

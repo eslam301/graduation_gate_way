@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
 import 'package:graduation_gate_way/src/core/api/models/student_model.dart';
+import 'package:graduation_gate_way/src/features/task/data/models/task_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../features/project_registeration/data/models/project_model.dart';
@@ -67,6 +68,49 @@ class ApiManager {
       rethrow;
     }
     throw ProjectModel.empty();
+  }
+
+//tasks
+  Future<List<TaskModel>> getTasksByProjectId(int id) async {
+    try {
+      final response = await client.get(
+        Uri.parse('$baseUrl/api/Task/ByProject/$id'),
+      );
+      log(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedData = jsonDecode(response.body);
+        final List<TaskModel> tasksModel =
+            decodedData.map((json) => TaskModel.fromJson(json)).toList();
+        log(tasksModel.toString());
+        return tasksModel;
+      } else {
+        handleHttpError(response);
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+    throw TaskModel();
+  }
+
+  Future<bool> updateTask(TaskModel task) async {
+    log(task.toJson().toString());
+    try {
+      final response = await client.put(
+        Uri.parse('$baseUrl/api/Task/${task.id}'),
+        body: jsonEncode(task.toJson()),
+        headers: baseHeaders,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        handleHttpError(response);
+        return false;
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
   }
 
   /// Sends a GET request to fetch a list of doctors.

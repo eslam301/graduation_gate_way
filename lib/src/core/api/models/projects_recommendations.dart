@@ -8,6 +8,7 @@ class ProjectRecommendationModel extends ProjectModel {
   String? links;
   String? skillsRequired;
   String? title;
+  String? prediction;
 
   List<String>? skillsRequiredList;
   List<String>? keywordsList;
@@ -21,6 +22,7 @@ class ProjectRecommendationModel extends ProjectModel {
     this.links,
     this.skillsRequired,
     this.title,
+    this.prediction,
     super.id,
     super.name,
     super.categoryName,
@@ -42,7 +44,7 @@ class ProjectRecommendationModel extends ProjectModel {
     links = json['links'];
     skillsRequired = json['skills_required'];
     title = json['title'];
-
+    prediction = json['prediction'];
     name = json['name'];
     id = json['id'];
     categoryName = json['categoryName'];
@@ -51,7 +53,6 @@ class ProjectRecommendationModel extends ProjectModel {
     description = json['description'];
     students = json['students'];
     doctorsNames = json['doctorsNames'];
-
     _initializeLists();
   }
 

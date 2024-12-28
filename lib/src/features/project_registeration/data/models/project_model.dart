@@ -1,5 +1,6 @@
 class ProjectModel {
   int? id;
+  int? categoryId;
   double? rate;
   String? name;
   String? description;
@@ -14,6 +15,7 @@ class ProjectModel {
       this.name,
       this.description,
       this.categoryName,
+      this.categoryId,
       this.proposalName,
       this.rate,
       this.students,
@@ -24,6 +26,7 @@ class ProjectModel {
     name = json['name'];
     description = json['description'];
     categoryName = json['categoryName'];
+    categoryId = json['categoryId'];
     proposalName = json['proposalFileName'];
     rate = json['rate'];
     if (json['students'] != null) {

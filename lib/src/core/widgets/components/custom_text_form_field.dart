@@ -92,7 +92,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.hintText = 'number',
     this.labelText = 'number',
-    this.suffixIcon = Icons.perm_identity,
+    this.suffixIcon = Icons.numbers,
     this.borderColor = Colors.transparent,
     this.suffixIconWidget,
     this.validator,

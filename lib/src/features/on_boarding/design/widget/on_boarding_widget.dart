@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:graduation_gate_way/src/features/on_boarding/model/onboarding_entity.dart';
 
@@ -11,6 +11,7 @@ class OnBoardingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -19,14 +20,7 @@ class OnBoardingWidget extends StatelessWidget {
           const SizedBox(
             height: 60,
           ),
-          Text(
-            onBoarding.title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: AppColors.black,
-            ),
-          ),
+          Text(onBoarding.title, style: theme.textTheme.titleLarge),
           Text(
             onBoarding.description,
             textAlign: TextAlign.center,
