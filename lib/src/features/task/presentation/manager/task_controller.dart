@@ -11,8 +11,14 @@ import '../../domain/use_cases/update_task.dart';
 
 class TaskController extends GetxController {
   TextEditingController finishedWeekController = TextEditingController();
+  TextEditingController taskTitleController = TextEditingController();
+  TextEditingController taskDescriptionController = TextEditingController();
+  TextEditingController numWeekAddedController = TextEditingController();
+  TextEditingController numWeekDeadLineController = TextEditingController();
 
-  List<TaskModel> tasks = [];
+  late final List<TaskModel> tasks;
+  final projectId =
+      Get.arguments['projectId'] ?? ''; // Ensure a default value to avoid null
   RxBool isLoading = false.obs;
   RxString error = ''.obs;
 
@@ -65,6 +71,7 @@ class TaskController extends GetxController {
             MainButton(
                 onPressed: () {
                   updateTaskk(task, isDone.value);
+                  Get.back(); // Close the BottomSheet after updating
                 },
                 text: 'Update')
           ]));
@@ -75,12 +82,65 @@ class TaskController extends GetxController {
   Future<void> onInit() async {
     try {
       isLoading.value = true;
-      tasks = await getTasksByProjectId(2);
+      tasks = await getTasksByProjectId(projectId);
     } catch (e) {
       error.value = e.toString();
     } finally {
       isLoading.value = false;
     }
     super.onInit();
+  }
+
+  void addTask() {
+    postTask(TaskModel(
+      projectId: projectId,
+      title: taskTitleController.text,
+      description: taskDescriptionController.text,
+      numWeekAdd: int.tryParse(numWeekAddedController.text),
+      numWeekDeadline: int.tryParse(numWeekDeadLineController.text),
+    ));
+  }
+
+  void openAddTaskSheet() {
+    showModalBottomSheet(
+        enableDrag: true,
+        showDragHandle: true,
+        isScrollControlled: true,
+        context: Get.context!,
+        builder: (context) {
+          return SurfaceContainer(
+            child: Column(children: [
+              CustomTextFormField(
+                controller: taskTitleController,
+                validator: (value) => validateEmpty(value),
+                labelText: 'title',
+                suffixIcon: Icons.title,
+              ),
+              CustomTextFormField.number(
+                controller: numWeekAddedController,
+                validator: (value) => validateEmpty(value),
+                labelText: 'week added',
+              ),
+              CustomTextFormField.number(
+                controller: numWeekDeadLineController,
+                validator: (value) => validateEmpty(value),
+                labelText: 'week deadline',
+              ),
+              CustomTextFormField(
+                controller: taskDescriptionController,
+                textInputType: TextInputType.multiline,
+                validator: (value) => validateEmpty(value),
+                labelText: 'Description',
+                maxLines: 5,
+              ),
+              MainButton(
+                  onPressed: () {
+                    addTask();
+                    Get.back(); // Close the BottomSheet after adding
+                  },
+                  text: 'Add')
+            ]),
+          );
+        });
   }
 }

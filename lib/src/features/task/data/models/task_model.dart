@@ -1,14 +1,16 @@
 class TaskModel {
   final int? id;
-  final bool? isDone;
-  final String? title;
-  final String? description;
   final int? numWeekAdd;
   final int? numWeekDeadline;
   final int? numWeekFinish;
+  final int? projectId;
+  final bool? isDone;
+  final String? title;
+  final String? description;
 
   TaskModel({
     this.id,
+    this.projectId,
     this.isDone,
     this.title,
     this.description,
@@ -20,6 +22,7 @@ class TaskModel {
   factory TaskModel.fromJson(Map<String, dynamic> json) {
     return TaskModel(
       id: json['id'],
+      projectId: json['project_id'],
       title: json['task_name'],
       description: json['description'],
       isDone: json['isDone'],
@@ -31,6 +34,7 @@ class TaskModel {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'project_id': projectId,
         'task_name': title,
         'description': description,
         'isDone': isDone,

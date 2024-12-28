@@ -4,6 +4,7 @@ import 'package:graduation_gate_way/src/core/widgets/general_app_bar.dart';
 
 import '../../../../core/widgets/custom_drawer.dart';
 import '../manager/task_controller.dart';
+import '../widgets/add_task_button.dart';
 import '../widgets/task_body.dart';
 
 class TaskPageView extends StatelessWidget {
@@ -13,6 +14,8 @@ class TaskPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     final TaskController controller = Get.put(TaskController());
     return Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
+        floatingActionButton: AddTaskButton(controller: controller),
         endDrawer: const CustomDrawer(),
         appBar: generalAppBar(title: 'tasks'),
         body: Obx(() {

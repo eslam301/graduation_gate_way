@@ -69,7 +69,9 @@ class MyProjectDoctorDetailsPageView extends StatelessWidget {
             10.verticalSpace,
             MainButton(
                 onPressed: () {
-                  controller.tasks();
+                  controller.tasks(
+                    projectId: project?.id ?? 0,
+                  );
                 },
                 text: 'Tasks')
           ],

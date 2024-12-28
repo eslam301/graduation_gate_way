@@ -113,6 +113,26 @@ class ApiManager {
     }
   }
 
+  Future<bool> postTask(TaskModel task) async {
+    log(task.toJson().toString());
+    try {
+      final response = await client.post(
+        Uri.parse('$baseUrl/api/Task'),
+        body: jsonEncode(task.toJson()),
+        headers: baseHeaders,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        handleHttpError(response);
+        return false;
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
   /// Sends a GET request to fetch a list of doctors.
   Future<List<DoctorModel>> getDoctors() async {
     final url = Uri.parse('$baseUrl/api/Doctors');

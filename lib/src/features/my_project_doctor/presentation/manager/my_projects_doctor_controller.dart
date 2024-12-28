@@ -35,7 +35,9 @@ class MyProjectDoctorController extends GetxController {
     super.onInit();
   }
 
-  tasks() {
-    Routes.tasks.toPage();
+  tasks({required int projectId}) {
+    Routes.tasks.toPage(
+      arguments: {'projectId': projectId},
+    );
   }
 }
