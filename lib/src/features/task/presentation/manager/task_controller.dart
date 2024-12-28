@@ -16,14 +16,14 @@ class TaskController extends GetxController {
   TextEditingController numWeekAddedController = TextEditingController();
   TextEditingController numWeekDeadLineController = TextEditingController();
 
-  late final List<TaskModel> tasks;
+  late List<TaskModel> tasks = [];
   final projectId =
       Get.arguments['projectId'] ?? ''; // Ensure a default value to avoid null
   RxBool isLoading = false.obs;
   RxString error = ''.obs;
 
   updateTaskk(TaskModel task, bool isDone) async {
-    print("task is ${task.toString()}");
+    //print("task is ${task.toString()}");
 
     final TaskModel updatedTask = task.copyWith(
       numWeekFinish: int.tryParse(finishedWeekController.text),

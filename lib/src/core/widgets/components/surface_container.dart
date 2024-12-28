@@ -6,6 +6,8 @@ class SurfaceContainer extends StatelessWidget {
   final double borderRadius;
   final double margin;
   final double padding;
+  final double? height;
+  final double? width;
 
   const SurfaceContainer(
       {super.key,
@@ -13,12 +15,16 @@ class SurfaceContainer extends StatelessWidget {
       this.color,
       this.borderRadius = 20,
       this.margin = 0,
-      this.padding = 15});
+      this.padding = 15,
+      this.height,
+      this.width});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
+      height: height,
+      width: width,
       margin: EdgeInsets.all(margin),
       decoration: BoxDecoration(
         color: color ?? theme.colorScheme.surface,

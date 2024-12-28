@@ -72,7 +72,7 @@ class StudentModel extends User {
     data['lastname'] = lastname;
     data['email'] = email;
     data['username'] = username;
-    data['passwordHash'] = password;
+    data['password'] = password;
     data['countUnits'] = countUnits;
     data['track_id'] = trackId;
     data['role'] = 'student';

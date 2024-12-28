@@ -5,6 +5,7 @@ import 'package:graduation_gate_way/src/features/chat_bot/data/data_source/api/c
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../../features/image_caption/data/caption.dart';
 import '../../features/project_recommendation/data/data_source/api/project_recommendation_api.dart';
 
 //
@@ -69,6 +70,7 @@ Future<void> initGetItGetx() async {
   Get.put(ApiManager(client: Get.find<http.Client>()), permanent: true);
   Get.put(ProjectRecommendationApi(client: Get.find<http.Client>()),
       permanent: true);
+  Get.put(ApiCaption(client: Get.find<http.Client>()), permanent: true);
   //features
   //splash
   //Get.put(SplashControllerImp(), permanent: true);

@@ -9,6 +9,7 @@ import 'package:graduation_gate_way/src/features/chat_bot/design/page/chat_page_
 import 'package:graduation_gate_way/src/features/follow_up/presentation/pages/follow_up_doctor_page_view.dart';
 import 'package:graduation_gate_way/src/features/grades/presentation/pages/grades_page_view.dart';
 import 'package:graduation_gate_way/src/features/home/design/layout/home_layout.dart';
+import 'package:graduation_gate_way/src/features/image_caption/design/page/caption_page_view.dart';
 import 'package:graduation_gate_way/src/features/my_project/presentation/pages/my_project_page_view.dart';
 import 'package:graduation_gate_way/src/features/my_project_doctor/presentation/pages/my_project_doctor_page_view.dart';
 import 'package:graduation_gate_way/src/features/profile/design/page/profile_page_view.dart';
@@ -87,6 +88,8 @@ class AppRouter {
         page: () => const FollowUpDoctorPageView()),
     //tasks
     getPage(name: Routes.tasks, page: () => const TaskPageView()),
+    //caption
+    getPage(name: Routes.captionPage, page: () => const CaptionPageView()),
   ];
 }
 

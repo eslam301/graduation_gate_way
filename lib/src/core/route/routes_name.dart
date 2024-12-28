@@ -52,4 +52,7 @@ class Routes {
 
   // tasks
   static const String tasks = '/tasks';
+
+  //caption
+  static const String captionPage = '/captionPage';
 }

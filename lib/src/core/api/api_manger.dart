@@ -26,6 +26,9 @@ class ApiManager {
   static const Map<String, String> baseHeaders = {
     'Content-Type': 'application/json',
   };
+  static const Map<String, String> formHeaders = {
+    'Content-Type': 'multipart/form-data',
+  };
 
   Future<MyProjectModel> getMyProjectById(int id) async {
     try {
@@ -243,9 +246,10 @@ class ApiManager {
   registerProject(RegisterProjectModel project) async {
     final url = Uri.parse('$baseUrl/api/Project/add-project');
     final body = jsonEncode(project.toJsonBody());
+
     try {
       log('body: $body');
-      final response = await client.post(url, body: body, headers: baseHeaders);
+      final response = await client.post(url, body: body, headers: formHeaders);
       final responseBody = jsonDecode(response.body);
       log('responseBody: $responseBody');
       log('responseBody message: ${responseBody['message']}');

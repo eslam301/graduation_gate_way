@@ -66,6 +66,11 @@ List<Widget> pages(HomeLayoutControllerImp controller) => [
               controller.projectRecommendation();
             },
           ),
+          CategoryCardModel(
+            imagePath: AppImagePathSvg.followUp,
+            title: 'caption',
+            onTap: Routes.captionPage.toPage,
+          )
         ],
       ),
       CategoryPageView(categoryModelList: [
@@ -84,10 +89,5 @@ List<Widget> pages(HomeLayoutControllerImp controller) => [
           title: 'Grades',
           onTap: Routes.grades.toPage,
         )
-        // CategoryCardModel(
-        //   imagePath: AppImagePathSvg.followUp,
-        //   title: 'Follow-up',
-        //   onTap: Routes.doctorFollowUps.toPage,
-        // )
       ]),
     ];
