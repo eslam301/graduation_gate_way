@@ -63,7 +63,7 @@ class SignUpBodyAsStudent extends StatelessWidget {
               int? id = int.parse(value[0].toString());
               controller.setSelectedTrackId(id);
             },
-            fetchAnswersFuture: () async {
+            fetchItemsFuture: () async {
               List<TrackModel> tracks = await controller.getTracks();
               log('tracks ${tracks.toString()}');
               return tracks

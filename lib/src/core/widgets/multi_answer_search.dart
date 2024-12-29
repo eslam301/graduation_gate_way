@@ -8,23 +8,23 @@ class MultiDropDownWidget extends StatelessWidget {
   final bool searchEnabled;
   final bool isSingleSelect;
   final String hintText;
-  final List<String> answers;
-  final void Function(List<String>)? selectionListAnswerMethod;
+  final List<String> items;
+  final void Function(List<String>)? selectionListItemMethod;
   final void Function(List<Object?>)? selectionListAnswerMethodObject;
-  final Future<List<DropdownItem<Object>>> Function()? fetchAnswersFuture;
+  final Future<List<DropdownItem<Object>>> Function()? fetchItemsFuture;
 
   final bool isFuturesEnabled;
 
   const MultiDropDownWidget({
     super.key,
-    this.answers = const [],
-    this.selectionListAnswerMethod,
+    this.items = const [],
+    this.selectionListItemMethod,
     this.selectionListAnswerMethodObject, // Pass a future fetcher if enabled
     this.searchEnabled = false,
     this.isSingleSelect = false,
     this.isFuturesEnabled = false, // Enable futures when needed
     this.hintText = 'Select',
-    this.fetchAnswersFuture,
+    this.fetchItemsFuture,
   });
 
   @override
@@ -41,8 +41,8 @@ class MultiDropDownWidget extends StatelessWidget {
   Widget _buildStandardDropdown(context) {
     return MultiDropdown(
       onSelectionChange: (value) {
-        if (selectionListAnswerMethod != null) {
-          selectionListAnswerMethod!(value);
+        if (selectionListItemMethod != null) {
+          selectionListItemMethod!(value);
         }
       },
       searchEnabled: searchEnabled,
@@ -60,10 +60,10 @@ class MultiDropDownWidget extends StatelessWidget {
       searchDecoration: _searchDecoration(),
       chipDecoration: _chipDecoration(context),
       items: List.generate(
-        answers.length,
+        items.length,
         (index) => DropdownItem(
-          value: answers[index],
-          label: answers[index],
+          value: items[index],
+          label: items[index],
         ),
       ),
     );
@@ -75,7 +75,7 @@ class MultiDropDownWidget extends StatelessWidget {
       future: () async {
         // Use the provided future or default logic.
         final List<DropdownItem<Object>> items =
-            await (fetchAnswersFuture?.call() ?? _defaultFuture());
+            await (fetchItemsFuture?.call() ?? _defaultFuture());
         return items;
       },
       onSelectionChange: (value) {
@@ -105,10 +105,10 @@ class MultiDropDownWidget extends StatelessWidget {
     // Example delay - replace with actual async fetching logic.
     await Future.delayed(const Duration(seconds: 2));
     return List.generate(
-      answers.length,
+      items.length,
       (index) => DropdownItem(
-        value: answers[index],
-        label: answers[index],
+        value: items[index],
+        label: items[index],
       ),
     );
   }

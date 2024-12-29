@@ -73,6 +73,28 @@ class ApiManager {
     throw ProjectModel.empty();
   }
 
+  Future<void> updateStudentGrade(int studentId, String grade) async {
+    try {
+      final response = await client.post(
+        Uri.parse('$baseUrl/api/Student/update-grade'),
+        headers: baseHeaders,
+        body: jsonEncode({
+          'grade': grade,
+          "st_id": studentId,
+        }),
+      );
+      if (response.statusCode == 200) {
+        Get.snackbar('success', 'grade updated successfully');
+        return;
+      } else {
+        handleHttpError(response);
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
 //tasks
   Future<List<TaskModel>> getTasksByProjectId(int id) async {
     try {

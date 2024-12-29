@@ -56,17 +56,19 @@ class ProjectModel {
 }
 
 class Student {
-  String? name;
-  int? id;
+  final String? name;
+  final String? grade;
+  final int? id;
 
-  Student({required this.name, required this.id});
+  Student({this.name, this.id, this.grade});
 
   factory Student.fromJson(Map<String, dynamic> json) {
-    return Student(name: json['fullName'], id: json['st_id']);
+    return Student(
+        name: json['fullName'], id: json['st_id'], grade: json['grade']);
   }
 
   @override
   String toString() {
-    return 'Student(name: $name, id: $id)';
+    return 'Student(name: $name, id: $id , grade: $grade)';
   }
 }

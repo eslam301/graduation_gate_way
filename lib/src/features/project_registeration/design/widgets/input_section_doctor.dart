@@ -43,7 +43,7 @@ class InputSectionDoctor extends StatelessWidget {
                 log('Invalid doctor ID');
               }
             },
-            fetchAnswersFuture: () async {
+            fetchItemsFuture: () async {
               List<DoctorModel> doctors = await controller.getDoctors();
               return doctors
                   .map((e) => DropdownItem(

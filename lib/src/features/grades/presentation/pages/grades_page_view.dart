@@ -11,15 +11,13 @@ class GradesPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GradesController controller = Get.put(GradesController());
+    Get.put(GradesController());
     return Scaffold(
       endDrawer: const CustomDrawer(),
       appBar: generalAppBar(
         title: 'Grades',
       ),
-      body: GradesBody(
-        controller: controller,
-      ),
+      body: const GradesBody(),
     );
   }
 }

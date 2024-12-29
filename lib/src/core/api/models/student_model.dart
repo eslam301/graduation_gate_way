@@ -1,7 +1,10 @@
 import 'package:graduation_gate_way/src/core/api/models/user.dart';
 
 class StudentModel extends User {
+  String? grade;
+
   StudentModel({
+    this.grade,
     super.id,
     super.studentId,
     super.firstname,
@@ -23,6 +26,7 @@ class StudentModel extends User {
   @override
   factory StudentModel.fromJson(Map<String, dynamic> json) {
     return StudentModel(
+      grade: json['grade'],
       firstname: json['firstname'],
       lastname: json['lastname'],
       studentId: json['st_ID'],
@@ -46,6 +50,7 @@ class StudentModel extends User {
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['grade'] = grade;
     data['id'] = id;
     data['st_ID'] = studentId;
     data['firstname'] = firstname;
@@ -67,6 +72,7 @@ class StudentModel extends User {
 
   Map<String, dynamic> toJsonBody() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['grade'] = grade;
     data['st_ID'] = studentId;
     data['firstname'] = firstname;
     data['lastname'] = lastname;
