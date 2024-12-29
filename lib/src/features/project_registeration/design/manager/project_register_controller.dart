@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/api/models/doctors_model.dart';
@@ -31,6 +33,9 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
   late final ApiManager apiManager;
   late InternetConnectionChecker connection;
   late User user;
+
+  // Reactive Variables
+  final Rx<File> file = File('').obs;
 
   @override
   void onInit() {
@@ -75,11 +80,15 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
   }
 
   void addProjectData() {
+    log('Proposal File Name: ${proposalFileNameController.text}');
+    log('Selected File Path: ${file.value.path}');
+
     registerProjectModel = registerProjectModel.copyWith(
       studentName: studentNameController.text,
       studentId: int.parse(studentIdController.text),
       projectName: projectNameController.text,
       description: descriptionController.text,
+      proposalFileName: proposalFileNameController.text,
       categoryId: 1,
     );
   }
@@ -89,14 +98,68 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     if (await connection.hasConnection) {
       try {
         addProjectData();
+        if (file.value.path.isEmpty || !await file.value.exists()) {
+          log("Error: File path is empty or file does not exist.");
+          Get.snackbar('Error',
+              'No file selected or the file does not exist. Please try again.');
+          return;
+        }
+
+        // Final validation for file length
+        try {
+          final length = await file.value.length();
+          log("File length: $length bytes");
+        } catch (e) {
+          log("Error reading file length: $e");
+          Get.snackbar(
+              'Error', 'Failed to read the selected file. Please try again.');
+          return;
+        }
+
+        registerProjectModel = registerProjectModel.copyWith(
+          file: file.value,
+        );
         await apiManager.registerProject(registerProjectModel);
         log("Project registration submitted successfully: $registerProjectModel");
       } catch (e) {
         log("Error submitting project details: $e");
+        Get.snackbar('Error', 'Failed to submit project details');
       }
     } else {
-      Get.snackbar('error', "No internet connection");
+      Get.snackbar('Error', "No internet connection");
     }
+  }
+
+  void selectFile() {
+    FilePicker filePicker = FilePicker.platform;
+    filePicker.pickFiles(
+        type: FileType.custom, allowedExtensions: ['pdf']).then((result) {
+      if (result != null && result.files.single.path != null) {
+        final selectedFile = File(result.files.single.path!);
+        if (!selectedFile.existsSync()) {
+          log('Error: Selected file does not exist at the specified path.');
+          Get.snackbar('Error', 'Selected file not found. Please try again.');
+          return;
+        }
+
+        try {
+          final length = selectedFile.lengthSync();
+          log('File selected: ${selectedFile.path}, Size: $length bytes');
+          file.value = selectedFile;
+          proposalFileNameController.text = result.files.single.name;
+          log('File successfully selected: ${file.value.path}');
+        } catch (e) {
+          log('Error reading selected file: $e');
+          Get.snackbar(
+              'Error', 'Failed to read the selected file. Please try again.');
+        }
+      } else {
+        log('No file selected');
+      }
+    }).catchError((error) {
+      log('Error picking file: $error');
+      Get.snackbar('Error', 'Error picking file: $error');
+    });
   }
 
   @override

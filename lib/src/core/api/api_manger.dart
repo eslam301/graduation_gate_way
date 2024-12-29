@@ -287,32 +287,61 @@ class ApiManager {
     throw Exception('Failed to register doctor');
   }
 
-  registerProject(RegisterProjectModel project) async {
-    final url = Uri.parse('$baseUrl/api/Project/add-project');
-    final body = jsonEncode(project.toJsonBody());
+  Future<void> registerProject(RegisterProjectModel project) async {
+    final url = Uri.parse('$baseUrl/api/Project/create');
+    final request = http.MultipartRequest('POST', url);
+    request.headers.addAll(formHeaders);
+    request.fields['Name'] = project.projectName ?? '';
+    request.fields['Description'] = project.description ?? '';
+    request.fields['CategoryId'] = (project.categoryId ?? 0).toString();
+    request.fields['DoctorId'] = (project.doctorId ?? 0).toString();
+    request.fields['St_id'] = (project.studentId ?? 0).toString();
 
     try {
-      log('body: $body');
-      final response = await client.post(url, body: body, headers: formHeaders);
+      if (project.proposalFileName != null &&
+          project.proposalFileName!.isNotEmpty) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'ProposalFile',
+          project.file?.path ?? '',
+        ));
+      }
+    } catch (e) {
+      log('Error adding file: $e');
+      Get.snackbar('Error', 'Failed to attach file');
+      rethrow;
+    }
+
+    log('-------------------------');
+    log('request: $request');
+    log(request.files.map((e) => e.toString()).toString());
+    log('-------------------------');
+
+    try {
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
       final responseBody = jsonDecode(response.body);
       log('responseBody: $responseBody');
-      log('responseBody message: ${responseBody['message']}');
+
       if (response.statusCode == 200) {
         Get.snackbar('Success', 'Project registered successfully');
-        log('Project registered successfully${responseBody['message']}');
+        log('Project registered successfully: ${responseBody['message']}');
       } else if (response.statusCode == 400) {
-        log('Failed to register project${response.body}');
+        log('Failed to register project: ${response.body}');
         Get.snackbar(
-            'Error', 'Failed to register project${responseBody['message']}');
+          'Error',
+          'Failed to register project: ${responseBody['message']}',
+        );
       } else {
-        handleHttpError(response);
+        log('Unexpected status code: ${response.statusCode}');
+        log('Response body: ${response.body}');
         Get.snackbar(
-            'Error', 'Failed to register project${responseBody['message']}');
-        log('Failed to register project${response.body}');
+          'Error',
+          'Unexpected error occurred. Please try again later.',
+        );
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to register project');
-      log(e.toString());
+      log('Exception: $e');
       rethrow;
     }
   }

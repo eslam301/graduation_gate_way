@@ -5,6 +5,7 @@ import '../../../../core/widgets/components/main_button.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/general_app_bar.dart';
 import '../manager/project_register_controller.dart';
+import '../widgets/file_section.dart';
 import '../widgets/input_section_doctor.dart';
 import '../widgets/input_section_project.dart';
 import '../widgets/input_section_student.dart';
@@ -34,6 +35,8 @@ class ProjectRegistrationPageView extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const InputSectionDoctor(),
+          const SizedBox(height: 20),
+          const FileSection(),
           const SizedBox(height: 20),
           const InputSectionProject(),
           Padding(
