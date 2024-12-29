@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/route/router.dart';
+import 'package:graduation_gate_way/src/core/widgets/components/custom_text_form_field.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 
@@ -13,6 +14,7 @@ import '../../../project_registeration/data/models/project_model.dart';
 import '../../data/data_sources/get_project_by_dr_id.dart';
 
 class GradesController extends GetxController {
+  TextEditingController rateController = TextEditingController();
   List<ProjectModel> projects = [];
   RxList grades = [].obs;
   ProjectModel selectedProject = ProjectModel();
@@ -37,6 +39,15 @@ class GradesController extends GetxController {
     ApiManager apiManager = Get.find<ApiManager>();
     projects = await apiManager.getProjectByDoctorId(user.id!);
     return projects;
+  }
+
+  void rate() {
+    ApiManager apiManager = Get.find<ApiManager>();
+    log('(${selectedProject.id} ,${rateController.text})');
+    apiManager.rateProject(
+      selectedProject.id!,
+      double.parse(rateController.text),
+    );
   }
 
   @override
@@ -91,6 +102,42 @@ class GradesController extends GetxController {
                 getBack();
               },
               text: 'Save',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void showRate() {
+    showModalBottomSheet(
+      context: Get.context!,
+      builder: (context) => SurfaceContainer(
+        padding: 20,
+        child: Column(
+          children: [
+            Text(
+              'Rate these project',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 20.0),
+            CustomTextFormField.number(
+              controller: rateController,
+              labelText: 'Rate',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your rate';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20.0),
+            MainButton(
+              onPressed: () {
+                rate();
+                Get.back();
+              },
+              text: 'submit',
             ),
           ],
         ),

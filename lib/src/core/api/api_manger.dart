@@ -95,6 +95,28 @@ class ApiManager {
     }
   }
 
+  Future<void> rateProject(int projectId, double rate) async {
+    try {
+      final response = await client.put(
+        Uri.parse('$baseUrl/api/Project/rate'),
+        headers: baseHeaders,
+        body: jsonEncode({
+          'projectId': projectId,
+          'rate': rate,
+        }),
+      );
+      if (response.statusCode == 200) {
+        Get.snackbar('success', 'rate updated successfully');
+        return;
+      } else {
+        handleHttpError(response);
+      }
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
 //tasks
   Future<List<TaskModel>> getTasksByProjectId(int id) async {
     try {
