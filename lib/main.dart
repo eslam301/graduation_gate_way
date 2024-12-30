@@ -12,9 +12,7 @@ void main() async {
 
   final String? userId = SharedPref.getUserId();
 
-  runApp(GraduationGateWay(
-    userId: userId,
-  ));
+  runApp(GraduationGateWay(userId: userId));
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.transparent,
     // Makes the navigation bar transparent

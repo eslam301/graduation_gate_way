@@ -28,7 +28,7 @@ class DoctorModel extends User {
       id: json['id'],
       firstname: json['firstname'],
       lastname: json['lastname'],
-      fullName: json['fullName'],
+      fullName: json['fullname'],
       email: json['email'],
       username: json['username'] ?? json['userName'],
       doctorId: json['dr_id'],

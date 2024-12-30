@@ -182,7 +182,7 @@ class ApiManager {
 
   /// Sends a GET request to fetch a list of doctors.
   Future<List<DoctorModel>> getDoctors() async {
-    final url = Uri.parse('$baseUrl/api/Doctors');
+    final url = Uri.parse('$baseUrl/api/Doctors/Names_Ids');
     try {
       // Send HTTP GET request
       final response = await client.get(url, headers: baseHeaders);
