@@ -117,7 +117,7 @@ class ApiManager {
     }
   }
 
-//tasks
+  //tasks
   Future<List<TaskModel>> getTasksByProjectId(int id) async {
     try {
       final response = await client.get(
@@ -294,8 +294,8 @@ class ApiManager {
     request.fields['Name'] = project.projectName ?? '';
     request.fields['Description'] = project.description ?? '';
     request.fields['CategoryId'] = (project.categoryId ?? 0).toString();
-    request.fields['DoctorId'] = (project.doctorId ?? 0).toString();
-    request.fields['St_id'] = (project.studentId ?? 0).toString();
+    request.fields['Doctor_id'] = (project.doctorId ?? 0).toString();
+    request.fields['StudentId'] = (project.studentId ?? 0).toString();
 
     try {
       if (project.proposalFileName != null &&

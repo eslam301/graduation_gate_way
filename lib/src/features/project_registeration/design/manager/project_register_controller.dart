@@ -98,6 +98,7 @@ class ProjectRegisterControllerImp extends ProjectRegisterController {
     if (await connection.hasConnection) {
       try {
         addProjectData();
+        log('registerProjectModel: ${registerProjectModel.toString()}');
         if (file.value.path.isEmpty || !await file.value.exists()) {
           log("Error: File path is empty or file does not exist.");
           Get.snackbar('Error',

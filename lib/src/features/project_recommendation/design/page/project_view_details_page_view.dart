@@ -1,14 +1,17 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/surface_container.dart';
 
-import '../../../../core/const/image_pathes.dart';
+import '../../../../core/functions/functions.dart';
 import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/components/button_with_icon.dart';
 import '../../../../core/widgets/custom_drawer.dart';
 import '../../../../core/widgets/general_app_bar.dart';
+import '../../../chat_bot/design/widget/auto_style_text.dart';
 import '../controller/project_page_view_details_controller.dart';
 
 class ProjectViewDetailsPageView extends StatelessWidget {
@@ -47,23 +50,23 @@ class ProjectViewDetailsPageView extends StatelessWidget {
               _buildTextRow(
                   'Description:', controller.project.description, theme),
               const SizedBox(height: 10),
-              _buildChipList(
-                'Skills Required:',
-                controller.project.skillsRequiredList,
-                theme,
-              ),
+              // _buildChipList(
+              //   'Skills Required:',
+              //   controller.project.skillsRequiredList,
+              //   theme,
+              // ),
               const SizedBox(height: 10),
-              _buildChipList(
-                'Category:',
-                controller.project.categoryList,
-                theme,
-              ),
+              // _buildChipList(
+              //   'Category:',
+              //   controller.project.categoryList,
+              //   theme,
+              // ),
               const SizedBox(height: 10),
-              _buildChipList(
-                'keywords:',
-                controller.project.keywordsList,
-                theme,
-              ),
+              // _buildChipList(
+              //   'keywords:',
+              //   controller.project.keywordsList,
+              //   theme,
+              // ),
               const SizedBox(height: 20),
               Align(
                 alignment: Alignment.center,
@@ -89,34 +92,36 @@ class ProjectViewDetailsPageView extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.r),
         border: Border.all(color: AppColors.grey, width: 1.w),
       ),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl ?? AppImagePathNetwork.errorImageLink,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => SizedBox(
-            height: 200.h,
-            width: double.infinity,
-            child: const Center(child: CircularProgressIndicator())),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
+      child: !isNetworkImage(imageUrl!)
+          ? Image.file(
+              File(imageUrl),
+              fit: BoxFit.cover,
+              height: 220,
+              width: double.infinity,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.error);
+              },
+            )
+          : CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+              height: 220,
+              placeholder: (context, url) => const SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Center(child: CircularProgressIndicator())),
+              errorWidget: (context, url, error) => const SizedBox(
+                  height: 100,
+                  width: double.infinity,
+                  child: Center(child: Icon(Icons.error))),
+            ),
     );
   }
 
   Widget _buildTextRow(String label, String? value, ThemeData theme) {
-    return Text.rich(
-      TextSpan(
-        text: '$label ',
-        style: theme.textTheme.bodyLarge?.copyWith(
-          fontWeight: FontWeight.w600,
-        ),
-        children: [
-          TextSpan(
-            text: value ?? 'N/A',
-            style: theme.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
+    return AutoStyleText(
+      '$label $value',
+      style: const TextStyle(fontWeight: FontWeight.w400),
     );
   }
 
@@ -145,33 +150,33 @@ class ProjectViewDetailsPageView extends StatelessWidget {
     );
   }
 
-  Widget _buildChipList(String label, List<String>? items, ThemeData theme) {
-    if (items == null || items.isEmpty) {
-      return Text('$label N/A');
-    }
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        Text(
-          '$label ',
-        ),
-        ...items.map(
-          (item) => Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.primary,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Text(
-              item,
-              style:
-                  TextStyle(color: theme.colorScheme.onPrimary, fontSize: 16),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+// Widget _buildChipList(String label, List<String>? items, ThemeData theme) {
+//   if (items == null || items.isEmpty) {
+//     return Text('$label N/A');
+//   }
+//   return Wrap(
+//     spacing: 8,
+//     runSpacing: 8,
+//     crossAxisAlignment: WrapCrossAlignment.center,
+//     children: [
+//       Text(
+//         '$label ',
+//       ),
+//       ...items.map(
+//         (item) => Container(
+//           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+//           decoration: BoxDecoration(
+//             color: theme.colorScheme.primary,
+//             borderRadius: BorderRadius.circular(10),
+//           ),
+//           child: Text(
+//             item,
+//             style:
+//                 TextStyle(color: theme.colorScheme.onPrimary, fontSize: 16),
+//           ),
+//         ),
+//       ),
+//     ],
+//   );
+// }
 }

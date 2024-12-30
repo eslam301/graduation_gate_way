@@ -17,39 +17,49 @@ class CaptionPageView extends StatelessWidget {
         appBar: generalAppBar(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Caption'),
-              GetBuilder<CaptionController>(builder: (context) {
-                return SurfaceContainer(
+          child: GetBuilder<CaptionController>(builder: (context) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Caption'),
+                SurfaceContainer(
                     height: 300,
                     child: controller.file == null
                         ? Container()
                         : Image.file(
                             controller.file!,
                             fit: BoxFit.fill,
-                          ));
-              }),
-              const SizedBox(height: 20),
-              MainButton(
-                  onPressed: () {
-                    controller.pickImage();
-                  },
-                  text: 'pick'),
-              const SizedBox(height: 20),
-              GetBuilder<CaptionController>(builder: (context) {
-                return SurfaceContainer(
-                    child: Text('prediction is  ${controller.caption}'));
-              }),
-              const SizedBox(height: 20),
-              MainButton(
-                  onPressed: () {
-                    controller.submit();
-                  },
-                  text: 'submit'),
-            ],
-          ),
+                          )),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MainButton(
+                        onPressed: () {
+                          controller.pickImage();
+                        },
+                        text: 'pick'),
+                    const SizedBox(width: 20),
+                    controller.file == null
+                        ? Container()
+                        : MainButton(
+                            onPressed: () {
+                              controller.submit();
+                            },
+                            text: 'submit')
+                  ],
+                ),
+                const SizedBox(height: 20),
+                controller.file == null
+                    ? Container()
+                    : Text(controller.file!.path.split('/').last),
+                const SizedBox(height: 20),
+                controller.isLoading
+                    ? const CircularProgressIndicator()
+                    : Container(),
+              ],
+            );
+          }),
         ));
   }
 }

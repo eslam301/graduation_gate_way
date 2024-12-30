@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:graduation_gate_way/src/core/widgets/components/main_button.dart';
 
 import 'features/image_caption/data/caption.dart';
+import 'features/image_caption/data/model/caption_model.dart';
 
 class Testing extends StatelessWidget {
   const Testing({super.key});
@@ -25,10 +26,10 @@ class Testing extends StatelessWidget {
                     await FilePicker.platform.pickFiles();
                 if (result != null) {
                   file = File(result.files.single.path!);
-                  Responseclass response = await api.getCaption(
+                  CaptionModel response = await api.getCaption(
                     image: file,
                   );
-                  log(response.data);
+                  log(response.data.toString());
                 } else {
                   // User canceled the picker
                 }
