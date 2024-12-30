@@ -15,7 +15,7 @@ class ProjectPageViewDetailsControllerImp
   @override
   void onInit() {
     project = Get.arguments;
-    //print('project is ${project.toString()}');
+    print('project is ${project.toString()}');
     super.onInit();
   }
 

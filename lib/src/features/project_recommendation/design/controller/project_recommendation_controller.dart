@@ -162,10 +162,10 @@ class ProjectRecommendationControllerImp
   }
 
   void _updateUserAnswers() {
-    userAnswers['skills'] = selectedSkills.join(',');
-    userAnswers['categories'] = selectedCategories.join(',');
+    userAnswers['skills_required'] = selectedSkills.join(',');
+    userAnswers['category'] = selectedCategories.join(',');
     userAnswers['keywords'] = selectedKeywords.join(',');
-    userAnswers['difficulty'] = selectedDifficulty;
+    userAnswers['difficulty_level'] = selectedDifficulty;
   }
 
   void _handleError(dynamic error) {
